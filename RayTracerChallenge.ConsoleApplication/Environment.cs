@@ -4,7 +4,7 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public class Environment
     {
-        public Tupple Gravity { get; set; }
-        public Tupple Wind { get; set; }
+        public Tuple Gravity { get; set; }
+        public Tuple Wind { get; set; }
     }
 }

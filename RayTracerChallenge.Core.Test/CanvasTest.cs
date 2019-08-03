@@ -13,7 +13,7 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
             var width = 10;
             var height = 20;
-            var defaultColor = Tupple.Color(0f, 0f, 0f);
+            var defaultColor = Tuple.Color(0f, 0f, 0f);
 
             // Act
             var canvas = new Canvas(width, height);
@@ -36,7 +36,7 @@ namespace RayTracerChallenge.Core.Test
             var height = 20;
             var x = 2;
             var y = 3;
-            var redColor = Tupple.Color(1f, 0f, 0f);
+            var redColor = Tuple.Color(1f, 0f, 0f);
             var canvas = new Canvas(width, height);
 
             // Act
@@ -68,7 +68,7 @@ namespace RayTracerChallenge.Core.Test
              *  10 20
              *  255
              */
-            var expectedHeader = $"{ppmIdentifier}{newLine}{width} {height}{newLine}{Tupple.MaximumColorValue}";
+            var expectedHeader = $"{ppmIdentifier}{newLine}{width} {height}{newLine}{Tuple.MaximumColorValue}";
             Assert.StartsWith(expectedHeader, ppmString);
         }
 
@@ -81,9 +81,9 @@ namespace RayTracerChallenge.Core.Test
             var width = 5;
             var height = 3;
             var canvas = new Canvas(width, height);
-            var color1 = Tupple.Color(1.5f, 0f, 0f);
-            var color2 = Tupple.Color(0f, .5f, 0f);
-            var color3 = Tupple.Color(-.5f, 0f, 1f);
+            var color1 = Tuple.Color(1.5f, 0f, 0f);
+            var color2 = Tuple.Color(0f, .5f, 0f);
+            var color3 = Tuple.Color(-.5f, 0f, 1f);
 
             // Act
             canvas.WritePixel(0, 0, color1);
@@ -126,7 +126,7 @@ namespace RayTracerChallenge.Core.Test
             var width = 10;
             var height = 2;
             var canvas = new Canvas(width, height);
-            var color = Tupple.Color(1f, .8f, .6f);
+            var color = Tuple.Color(1f, .8f, .6f);
 
             // Act
             for (var x = 0; x < width; x++)
@@ -163,7 +163,7 @@ namespace RayTracerChallenge.Core.Test
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                canvas.WritePixel(width + 1, height - 1, Tupple.Color(1f, 1f, 1f));
+                canvas.WritePixel(width + 1, height - 1, Tuple.Color(1f, 1f, 1f));
             });
 
             // Assert
@@ -182,7 +182,7 @@ namespace RayTracerChallenge.Core.Test
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                canvas.WritePixel(width - 1, height + 1, Tupple.Color(1f, 1f, 1f));
+                canvas.WritePixel(width - 1, height + 1, Tuple.Color(1f, 1f, 1f));
             });
 
             // Assert

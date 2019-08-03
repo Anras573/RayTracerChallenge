@@ -4,14 +4,14 @@ using Xunit;
 
 namespace RayTracerChallenge.Core.Test
 {
-    [Trait("Category", "Tupple")]
-    public class TuppleTest
+    [Trait("Category", "Tuple")]
+    public class TupleTest
     {
         private ApproximateComparer DefaultComparer => new ApproximateComparer(.000001f);
 
         [Fact]
         [Trait("Category", "Vector")]
-        public void GivenTuppleWithVectorValue_WhenCallingConstructor_ThenVectorIsCreated()
+        public void GivenTupleWithVectorValue_WhenCallingConstructor_ThenVectorIsCreated()
         {
             // Arrange
             var x = 4f;
@@ -19,18 +19,18 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
 
             // Act
-            var vector = new Tupple(x, y, z, Tupple.VectorIndicator);
+            var vector = new Tuple(x, y, z, Tuple.VectorIndicator);
 
             // Assert
             Assert.Equal(x, vector.X);
             Assert.Equal(y, vector.Y);
             Assert.Equal(z, vector.Z);
-            Assert.Equal(Tupple.VectorIndicator, vector.W);
+            Assert.Equal(Tuple.VectorIndicator, vector.W);
         }
 
         [Fact]
         [Trait("Category", "Point")]
-        public void GivenTuppleWithPointValue_WhenCallingConstructor_ThenPointIsCreated()
+        public void GivenTupleWithPointValue_WhenCallingConstructor_ThenPointIsCreated()
         {
             // Arrange
             var x = 4f;
@@ -38,18 +38,18 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
 
             // Act
-            var point = Tupple.Point(x, y, z);
+            var point = Tuple.Point(x, y, z);
 
             // Assert
             Assert.Equal(x, point.X);
             Assert.Equal(y, point.Y);
             Assert.Equal(z, point.Z);
-            Assert.Equal(Tupple.PointIndicator, point.W);
+            Assert.Equal(Tuple.PointIndicator, point.W);
         }
 
         [Fact]
         [Trait("Category", "Point")]
-        public void GivenTupple_WhenCallingTupplePoint_ThenPointIsReturned()
+        public void GivenTuple_WhenCallingTuplePoint_ThenPointIsReturned()
         {
             // Arrange
             var x = 4f;
@@ -57,18 +57,18 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
             
             // Act
-            var point = Tupple.Point(x, y, z);
+            var point = Tuple.Point(x, y, z);
 
             // Assert
             Assert.Equal(x, point.X);
             Assert.Equal(y, point.Y);
             Assert.Equal(z, point.Z);
-            Assert.Equal(Tupple.PointIndicator, point.W);
+            Assert.Equal(Tuple.PointIndicator, point.W);
         }
 
         [Fact]
         [Trait("Category", "Vector")]
-        public void GivenTupple_WhenCallingTuppleVector_ThenVectorIsReturned()
+        public void GivenTuple_WhenCallingTupleVector_ThenVectorIsReturned()
         {
             // Arrange
             var x = 4f;
@@ -76,13 +76,13 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
 
             // Act
-            var vector = Tupple.Vector(x, y, z);
+            var vector = Tuple.Vector(x, y, z);
 
             // Assert
             Assert.Equal(x, vector.X);
             Assert.Equal(y, vector.Y);
             Assert.Equal(z, vector.Z);
-            Assert.Equal(Tupple.VectorIndicator, vector.W);
+            Assert.Equal(Tuple.VectorIndicator, vector.W);
         }
 
         [Fact]
@@ -94,8 +94,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var firstPoint = Tupple.Point(x, y, z);
-            var secondPoint = Tupple.Point(x, y, z);
+            var firstPoint = Tuple.Point(x, y, z);
+            var secondPoint = Tuple.Point(x, y, z);
 
             // Act
             var isEqual = firstPoint.Equals(secondPoint);
@@ -113,8 +113,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var firstVector = Tupple.Vector(x, y, z);
-            var secondVector = Tupple.Vector(x, y, z);
+            var firstVector = Tuple.Vector(x, y, z);
+            var secondVector = Tuple.Vector(x, y, z);
 
             // Act
             var isEqual = firstVector.Equals(secondVector);
@@ -129,8 +129,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoNonIdenticalPoints_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var firstPoint = Tupple.Point(4f, -4f, 3f);
-            var secondPoint = Tupple.Point(-4f, 4f, -3f);
+            var firstPoint = Tuple.Point(4f, -4f, 3f);
+            var secondPoint = Tuple.Point(-4f, 4f, -3f);
 
             // Act
             var isEqual = firstPoint.Equals(secondPoint);
@@ -145,8 +145,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoNonIdenticalVectors_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var firstVector = Tupple.Vector(4f, -4f, 3f);
-            var secondVector = Tupple.Vector(-4f, 4f, -3f);
+            var firstVector = Tuple.Vector(4f, -4f, 3f);
+            var secondVector = Tuple.Vector(-4f, 4f, -3f);
 
             // Act
             var isEqual = firstVector.Equals(secondVector);
@@ -165,8 +165,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var vector = Tupple.Vector(x, y, z);
-            var point = Tupple.Point(x, y, z);
+            var vector = Tuple.Vector(x, y, z);
+            var point = Tuple.Point(x, y, z);
 
             // Act
             var isEqual = vector.Equals(point);
@@ -182,8 +182,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenNonIdenticalPointAndVector_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(4f, -4f, 3f);
-            var point = Tupple.Point(-4f, 4f, -3f);
+            var vector = Tuple.Vector(4f, -4f, 3f);
+            var point = Tuple.Point(-4f, 4f, -3f);
 
             // Act
             var isEqual = vector.Equals(point);
@@ -199,17 +199,17 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenAddingThemTogether_ThenAPointIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(3f, -2f, 5f);
-            var point = Tupple.Point(-2f, 3f, 1f);
+            var vector = Tuple.Vector(3f, -2f, 5f);
+            var point = Tuple.Point(-2f, 3f, 1f);
 
             // Act
-            var tupple = vector + point;
+            var tuple = vector + point;
 
             // Assert
-            Assert.Equal(1f, tupple.X);
-            Assert.Equal(1f, tupple.Y);
-            Assert.Equal(6f, tupple.Z);
-            Assert.Equal(Tupple.PointIndicator, tupple.W);
+            Assert.Equal(1f, tuple.X);
+            Assert.Equal(1f, tuple.Y);
+            Assert.Equal(6f, tuple.Z);
+            Assert.Equal(Tuple.PointIndicator, tuple.W);
         }
 
         [Fact]
@@ -218,8 +218,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenAddingThemTogether_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tupple.Vector(3f, -2f, 5f);
-            var secondVector = Tupple.Vector(-2f, 3f, 1f);
+            var firstVector = Tuple.Vector(3f, -2f, 5f);
+            var secondVector = Tuple.Vector(-2f, 3f, 1f);
 
             // Act
             var newVector = firstVector + secondVector;
@@ -228,7 +228,7 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(1f, newVector.X);
             Assert.Equal(1f, newVector.Y);
             Assert.Equal(6f, newVector.Z);
-            Assert.Equal(Tupple.VectorIndicator, newVector.W);
+            Assert.Equal(Tuple.VectorIndicator, newVector.W);
         }
 
         [Fact]
@@ -238,8 +238,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoPoints_WhenAddingThemTogether_ThenAnArithmeticExceptionIsThrown()
         {
             // Arrange
-            var firstPoint = Tupple.Point(3f, -2f, 5f);
-            var secondPoint = Tupple.Point(-2f, 3f, 1f);
+            var firstPoint = Tuple.Point(3f, -2f, 5f);
+            var secondPoint = Tuple.Point(-2f, 3f, 1f);
 
             // Act
             ArithmeticException ex = Assert.Throws<ArithmeticException>(() => firstPoint + secondPoint);
@@ -254,17 +254,17 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoPoints_WhenSubstracingThem_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstPoint = Tupple.Point(3f, 2f, 1f);
-            var secondPoint = Tupple.Point(5f, 6f, 7f);
+            var firstPoint = Tuple.Point(3f, 2f, 1f);
+            var secondPoint = Tuple.Point(5f, 6f, 7f);
 
             // Act
-            var tupple = firstPoint - secondPoint;
+            var tuple = firstPoint - secondPoint;
 
             // Assert
-            Assert.Equal(-2f, tupple.X);
-            Assert.Equal(-4f, tupple.Y);
-            Assert.Equal(-6f, tupple.Z);
-            Assert.Equal(Tupple.VectorIndicator, tupple.W);
+            Assert.Equal(-2f, tuple.X);
+            Assert.Equal(-4f, tuple.Y);
+            Assert.Equal(-6f, tuple.Z);
+            Assert.Equal(Tuple.VectorIndicator, tuple.W);
         }
 
         [Fact]
@@ -273,17 +273,17 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenSubstracingThem_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tupple.Vector(3f, 2f, 1f);
-            var secondVector = Tupple.Vector(5f, 6f, 7f);
+            var firstVector = Tuple.Vector(3f, 2f, 1f);
+            var secondVector = Tuple.Vector(5f, 6f, 7f);
 
             // Act
-            var tupple = firstVector - secondVector;
+            var tuple = firstVector - secondVector;
 
             // Assert
-            Assert.Equal(-2f, tupple.X);
-            Assert.Equal(-4f, tupple.Y);
-            Assert.Equal(-6f, tupple.Z);
-            Assert.Equal(Tupple.VectorIndicator, tupple.W);
+            Assert.Equal(-2f, tuple.X);
+            Assert.Equal(-4f, tuple.Y);
+            Assert.Equal(-6f, tuple.Z);
+            Assert.Equal(Tuple.VectorIndicator, tuple.W);
         }
 
         [Fact]
@@ -293,17 +293,17 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenSubstracingVectorFromPoint_ThenAPointIsReturned()
         {
             // Arrange
-            var point = Tupple.Point(3f, 2f, 1f);
-            var vector = Tupple.Vector(5f, 6f, 7f);
+            var point = Tuple.Point(3f, 2f, 1f);
+            var vector = Tuple.Vector(5f, 6f, 7f);
 
             // Act
-            var tupple = point - vector;
+            var tuple = point - vector;
 
             // Assert
-            Assert.Equal(-2f, tupple.X);
-            Assert.Equal(-4f, tupple.Y);
-            Assert.Equal(-6f, tupple.Z);
-            Assert.Equal(Tupple.PointIndicator, tupple.W);
+            Assert.Equal(-2f, tuple.X);
+            Assert.Equal(-4f, tuple.Y);
+            Assert.Equal(-6f, tuple.Z);
+            Assert.Equal(Tuple.PointIndicator, tuple.W);
         }
 
         [Fact]
@@ -314,8 +314,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenSubstracingPointFromVector_ThenAnArithmeticExceptionIsThrown()
         {
             // Arrange
-            var vector = Tupple.Vector(3f, 2f, 1f);
-            var point = Tupple.Point(5f, 6f, 7f);
+            var vector = Tuple.Vector(3f, 2f, 1f);
+            var point = Tuple.Point(5f, 6f, 7f);
 
             // Act
             ArithmeticException ex = Assert.Throws<ArithmeticException>(() => vector - point);
@@ -326,73 +326,73 @@ namespace RayTracerChallenge.Core.Test
 
         [Fact]
         [Trait("Category", "Negation")]
-        public void GivenATupple_WhenNegating_ThenANewTuppleIsReturned()
+        public void GivenATuple_WhenNegating_ThenANewTupleIsReturned()
         {
             // Arrange
-            var tupple = new Tupple(1f, -2f, 3f, -4f);
+            var tuple = new Tuple(1f, -2f, 3f, -4f);
 
             // Act
-            var negatedTupple = !tupple;
+            var negatedTuple = !tuple;
 
             // Assert
-            Assert.Equal(-1f, negatedTupple.X);
-            Assert.Equal(2f, negatedTupple.Y);
-            Assert.Equal(-3f, negatedTupple.Z);
-            Assert.Equal(4f, negatedTupple.W);
+            Assert.Equal(-1f, negatedTuple.X);
+            Assert.Equal(2f, negatedTuple.Y);
+            Assert.Equal(-3f, negatedTuple.Z);
+            Assert.Equal(4f, negatedTuple.W);
         }
 
         [Fact]
         [Trait("Category", "Multiplication")]
-        public void GivenATupple_WhenMultiplyingWithAScalar_ThenABiggerTuppleIsReturned()
+        public void GivenATuple_WhenMultiplyingWithAScalar_ThenABiggerTupleIsReturned()
         {
             // Arrange
-            var tupple = new Tupple(1f, -2f, 3f, -4f);
+            var tuple = new Tuple(1f, -2f, 3f, -4f);
             var scalar = 3.5f;
 
             // Act
-            var scalarTupple = tupple * scalar;
+            var scalarTuple = tuple * scalar;
 
             // Assert
-            Assert.Equal(3.5f, scalarTupple.X);
-            Assert.Equal(-7f, scalarTupple.Y);
-            Assert.Equal(10.5f, scalarTupple.Z);
-            Assert.Equal(-14f, scalarTupple.W);
+            Assert.Equal(3.5f, scalarTuple.X);
+            Assert.Equal(-7f, scalarTuple.Y);
+            Assert.Equal(10.5f, scalarTuple.Z);
+            Assert.Equal(-14f, scalarTuple.W);
         }
 
         [Fact]
         [Trait("Category", "Multiplication")]
-        public void GivenATupple_WhenMultiplyingWithAFraction_ThenASmallerTuppleIsReturned()
+        public void GivenATuple_WhenMultiplyingWithAFraction_ThenASmallerTupleIsReturned()
         {
             // Arrange
-            var tupple = new Tupple(1f, -2f, 3f, -4f);
+            var tuple = new Tuple(1f, -2f, 3f, -4f);
             var fraction = .5f;
 
             // Act
-            var fractionTupple = tupple * fraction;
+            var fractionTuple = tuple * fraction;
 
             // Assert
-            Assert.Equal(.5f, fractionTupple.X);
-            Assert.Equal(-1f, fractionTupple.Y);
-            Assert.Equal(1.5f, fractionTupple.Z);
-            Assert.Equal(-2f, fractionTupple.W);
+            Assert.Equal(.5f, fractionTuple.X);
+            Assert.Equal(-1f, fractionTuple.Y);
+            Assert.Equal(1.5f, fractionTuple.Z);
+            Assert.Equal(-2f, fractionTuple.W);
         }
 
         [Fact]
         [Trait("Category", "Division")]
-        public void GivenATupple_WhenDividing_ThenANewTuppleIsReturned()
+        public void GivenATuple_WhenDividing_ThenANewTupleIsReturned()
         {
             // Arrange
-            var tupple = new Tupple(1f, -2f, 3f, -4f);
+            var tuple = new Tuple(1f, -2f, 3f, -4f);
             var division = 2f;
 
             // Act
-            var fractionTupple = tupple / division;
+            var fractionTuple = tuple / division;
 
             // Assert
-            Assert.Equal(.5f, fractionTupple.X);
-            Assert.Equal(-1f, fractionTupple.Y);
-            Assert.Equal(1.5f, fractionTupple.Z);
-            Assert.Equal(-2f, fractionTupple.W);
+            Assert.Equal(.5f, fractionTuple.X);
+            Assert.Equal(-1f, fractionTuple.Y);
+            Assert.Equal(1.5f, fractionTuple.Z);
+            Assert.Equal(-2f, fractionTuple.W);
         }
 
         [Fact]
@@ -402,7 +402,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPoint_WhenGettingMagnitude_ThenAnArithmeticExceptionIsThrown()
         {
             // Arrange
-            var point = Tupple.Point(1f, -2f, 3f);
+            var point = Tuple.Point(1f, -2f, 3f);
 
             // Act
             ArithmeticException ex = Assert.Throws<ArithmeticException>(() => point.Magnitude());
@@ -417,9 +417,9 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorWithAValueOf1InXOrYOrZ_WhenGettingMagnitude_Then1IsReturned()
         {
             // Arrange
-            var xVector = Tupple.Vector(1f, 0f, 0f);
-            var yVector = Tupple.Vector(0f, 1f, 0f);
-            var zVector = Tupple.Vector(0f, 0f, 1f);
+            var xVector = Tuple.Vector(1f, 0f, 0f);
+            var yVector = Tuple.Vector(0f, 1f, 0f);
+            var zVector = Tuple.Vector(0f, 0f, 1f);
 
             // Act
             var xMagnitude = xVector.Magnitude();
@@ -438,7 +438,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPositiveVector_WhenGettingMagnitude_ThenAPositiveMagnitudeIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(1f, 2f, 3f);
+            var vector = Tuple.Vector(1f, 2f, 3f);
 
             // Act
             var magnitude = vector.Magnitude();
@@ -453,7 +453,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenANegativeVector_WhenGettingMagnitude_ThenAPositiveMagnitudeIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(-1f, -2f, -3f);
+            var vector = Tuple.Vector(-1f, -2f, -3f);
 
             // Act
             var magnitude = vector.Magnitude();
@@ -468,7 +468,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVector_WhenNormalizing_ThenANewVectorIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(4f, 0f, 0f);
+            var vector = Tuple.Vector(4f, 0f, 0f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -485,7 +485,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAnotherVector_WhenNormalizing_ThenANewVectorIsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(1f, 2f, 3f);
+            var vector = Tuple.Vector(1f, 2f, 3f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -507,7 +507,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenANormalizedVector_WhenGettingMagnitude_Then1IsReturned()
         {
             // Arrange
-            var vector = Tupple.Vector(1f, 2f, 3f);
+            var vector = Tuple.Vector(1f, 2f, 3f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -523,11 +523,11 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenGettingDotProduct_ThenDotProductIsReturned()
         {
             // Arrange
-            var firstVector = Tupple.Vector(1f, 2f, 3f);
-            var secondVector = Tupple.Vector(2f, 3f, 4f);
+            var firstVector = Tuple.Vector(1f, 2f, 3f);
+            var secondVector = Tuple.Vector(2f, 3f, 4f);
 
             // Act
-            var dotProduct = Tupple.Dot(firstVector, secondVector);
+            var dotProduct = Tuple.Dot(firstVector, secondVector);
 
             // Assert
             Assert.Equal(20f, dotProduct);
@@ -541,12 +541,12 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenGettingDotProduct_ThenAnArithmeticExceptionIsThrown()
         {
             // Arrange
-            var vector = Tupple.Vector(1f, 2f, 3f);
-            var point = Tupple.Point(1f, 2f, 3f);
+            var vector = Tuple.Vector(1f, 2f, 3f);
+            var point = Tuple.Point(1f, 2f, 3f);
 
             // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tupple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tupple.Dot(point, vector));
+            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
+            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
 
             // Assert
             Assert.Equal("This operation can only be used on Vectors!", ex.Message);
@@ -559,12 +559,12 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenGettingCrossProduct_ThenANewVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tupple.Vector(1f, 2f, 3f);
-            var secondVector = Tupple.Vector(2f, 3f, 4f);
+            var firstVector = Tuple.Vector(1f, 2f, 3f);
+            var secondVector = Tuple.Vector(2f, 3f, 4f);
 
             // Act
-            var crossVector = Tupple.Cross(firstVector, secondVector);
-            var reversedCrossVector = Tupple.Cross(secondVector, firstVector);
+            var crossVector = Tuple.Cross(firstVector, secondVector);
+            var reversedCrossVector = Tuple.Cross(secondVector, firstVector);
 
             // Assert
             Assert.Equal(-1f, crossVector.X);
@@ -583,12 +583,12 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenGettingCrossProduct_ThenAnArithmeticExceptionIsThrown()
         {
             // Arrange
-            var vector = Tupple.Vector(1f, 2f, 3f);
-            var point = Tupple.Point(2f, 3f, 4f);
+            var vector = Tuple.Vector(1f, 2f, 3f);
+            var point = Tuple.Point(2f, 3f, 4f);
 
             // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tupple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tupple.Dot(point, vector));
+            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
+            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
 
             // Assert
             Assert.Equal("This operation can only be used on Vectors!", ex.Message);
@@ -598,7 +598,7 @@ namespace RayTracerChallenge.Core.Test
         [Fact]
         [Trait("Category", "Color")]
         [Trait("Category", "Vector")]
-        public void GivenTupple_WhenCallingTuppleColor_ThenVectorIsReturned()
+        public void GivenTuple_WhenCallingTupleColor_ThenVectorIsReturned()
         {
             // Arrange
             var x = -.5f;
@@ -606,13 +606,13 @@ namespace RayTracerChallenge.Core.Test
             var z = 1.7f;
 
             // Act
-            var color = Tupple.Color(x, y, z);
+            var color = Tuple.Color(x, y, z);
 
             // Assert
             Assert.Equal(x, color.X);
             Assert.Equal(y, color.Y);
             Assert.Equal(z, color.Z);
-            Assert.Equal(Tupple.VectorIndicator, color.W);
+            Assert.Equal(Tuple.VectorIndicator, color.W);
         }
 
         [Fact]
@@ -621,8 +621,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenAddingThemTogether_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tupple.Color(.9f, .6f, .75f);
-            var secondColor = Tupple.Color(.7f, .1f, .25f);
+            var firstColor = Tuple.Color(.9f, .6f, .75f);
+            var secondColor = Tuple.Color(.7f, .1f, .25f);
 
             // Act
             var color = firstColor + secondColor;
@@ -631,7 +631,7 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(1.6f, color.X, DefaultComparer);
             Assert.Equal(.7f, color.Y, DefaultComparer);
             Assert.Equal(1f, color.Z, DefaultComparer);
-            Assert.Equal(Tupple.VectorIndicator, color.W);
+            Assert.Equal(Tuple.VectorIndicator, color.W);
         }
 
         [Fact]
@@ -640,8 +640,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenSubstractingThem_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tupple.Color(.9f, .6f, .75f);
-            var secondColor = Tupple.Color(.7f, .1f, .25f);
+            var firstColor = Tuple.Color(.9f, .6f, .75f);
+            var secondColor = Tuple.Color(.7f, .1f, .25f);
 
             // Act
             var color = firstColor - secondColor;
@@ -650,7 +650,7 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(.2f, color.X, DefaultComparer);
             Assert.Equal(.5f, color.Y, DefaultComparer);
             Assert.Equal(.5f, color.Z, DefaultComparer);
-            Assert.Equal(Tupple.VectorIndicator, color.W);
+            Assert.Equal(Tuple.VectorIndicator, color.W);
         }
 
         [Fact]
@@ -659,7 +659,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAColor_WhenMultiplyingWithAScalar_ThenANewColorIsReturned()
         {
             // Arrange
-            var color = Tupple.Color(.2f, .3f, .4f);
+            var color = Tuple.Color(.2f, .3f, .4f);
             var scalar = 2f;
 
             // Act
@@ -669,7 +669,7 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(.4f, newColor.X);
             Assert.Equal(.6f, newColor.Y);
             Assert.Equal(.8f, newColor.Z);
-            Assert.Equal(Tupple.VectorIndicator, newColor.W);
+            Assert.Equal(Tuple.VectorIndicator, newColor.W);
         }
 
         [Fact]
@@ -678,17 +678,17 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenMultiplyingThem_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tupple.Color(1f, .2f, .4f);
-            var secondColor = Tupple.Color(.9f, 1f, .1f);
+            var firstColor = Tuple.Color(1f, .2f, .4f);
+            var secondColor = Tuple.Color(.9f, 1f, .1f);
 
             // Act
-            var newColor = Tupple.HadamardProduct(firstColor, secondColor);
+            var newColor = Tuple.HadamardProduct(firstColor, secondColor);
 
             // Assert
             Assert.Equal(.9f, newColor.X);
             Assert.Equal(.2f, newColor.Y);
             Assert.Equal(.04f, newColor.Z, DefaultComparer);
-            Assert.Equal(Tupple.VectorIndicator, newColor.W);
+            Assert.Equal(Tuple.VectorIndicator, newColor.W);
         }
     }
 }

@@ -388,14 +388,14 @@ namespace RayTracerChallenge.Core.Test
 
         [Fact]
         [Trait("Category", "Multiplication")]
-        [Trait("Category", "Tupple")]
-        public void GivenAMatrixAndATupple_WhenMultiplying_ThenATuppleIsReturned()
+        [Trait("Category", "Tuple")]
+        public void GivenAMatrixAndATuple_WhenMultiplying_ThenATupleIsReturned()
         {
             // Arrange
             var rows = 4;
             var columns = 4;
             var matrix = new Matrix(rows, columns);
-            var tupple = new Tupple(1, 2, 3, 1);
+            var tuple = new Tuple(1, 2, 3, 1);
 
             matrix[0, 0] = 1;
             matrix[0, 1] = 2;
@@ -415,29 +415,29 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 3] = 1;
 
             // Act
-            var newTupple = matrix * tupple;
+            var newTuple = matrix * tuple;
 
             // Assert
-            var expectedTupple = new Tupple(18, 24, 33, 1);
-            Assert.True(newTupple.Equals(expectedTupple));
+            var expectedTuple = new Tuple(18, 24, 33, 1);
+            Assert.True(newTuple.Equals(expectedTuple));
         }
 
         [Fact]
         [Trait("Category", "Multiplication")]
-        [Trait("Category", "Tupple")]
+        [Trait("Category", "Tuple")]
         [Trait("Category", "Exception")]
-        public void GivenA5x5MatrixAndATupple_WhenMultiplying_ThenArithmeticExceptionIsThrown()
+        public void GivenA5x5MatrixAndATuple_WhenMultiplying_ThenArithmeticExceptionIsThrown()
         {
             // Arrange
             var rows = 5;
             var columns = 5;
             var matrix = new Matrix(rows, columns);
-            var tupple = new Tupple(1, 2, 3, 1);
+            var tuple = new Tuple(1, 2, 3, 1);
 
             // Act
             ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
             {
-                var value = matrix * tupple;
+                var value = matrix * tuple;
             });
 
             // Assert
@@ -480,18 +480,18 @@ namespace RayTracerChallenge.Core.Test
 
         [Fact]
         [Trait("Category", "Multiplication")]
-        [Trait("Category", "Tupple")]
+        [Trait("Category", "Tuple")]
         [Trait("Category", "Identity Matrix")]
-        public void GivenTupple_WhenMultiplyingWithIdentityMatrix_ThenOriginalTuppleIsReturned()
+        public void GivenTuple_WhenMultiplyingWithIdentityMatrix_ThenOriginalTupleIsReturned()
         {
             // Arrange
-            var tupple = new Tupple(1, 2, 3, 4);
+            var tuple = new Tuple(1, 2, 3, 4);
 
             // Act
-            var newTupple = tupple * Matrix.IdentityMatrix();
+            var newTuple = tuple * Matrix.IdentityMatrix();
 
             // Assert
-            Assert.True(tupple.Equals(newTupple));
+            Assert.True(tuple.Equals(newTuple));
         }
 
         [Fact]
