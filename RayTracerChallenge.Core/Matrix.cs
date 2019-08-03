@@ -113,39 +113,39 @@ namespace RayTracerChallenge.Core
             return matrix;
         }
 
-        public static Tupple operator *(Matrix matrix, Tupple tupple)
+        public static Tuple operator *(Matrix matrix, Tuple tuple)
         {
             if (matrix.Rows != 4 || matrix.Columns != 4)
             {
                 throw new ArithmeticException("This operation only supports 4x4 Matrices!");
             }
 
-            var x = matrix[0, 0] * tupple.X +
-                    matrix[0, 1] * tupple.Y +
-                    matrix[0, 2] * tupple.Z +
-                    matrix[0, 3] * tupple.W;
+            var x = matrix[0, 0] * tuple.X +
+                    matrix[0, 1] * tuple.Y +
+                    matrix[0, 2] * tuple.Z +
+                    matrix[0, 3] * tuple.W;
 
-            var y = matrix[1, 0] * tupple.X +
-                    matrix[1, 1] * tupple.Y +
-                    matrix[1, 2] * tupple.Z +
-                    matrix[1, 3] * tupple.W;
+            var y = matrix[1, 0] * tuple.X +
+                    matrix[1, 1] * tuple.Y +
+                    matrix[1, 2] * tuple.Z +
+                    matrix[1, 3] * tuple.W;
 
-            var z = matrix[2, 0] * tupple.X +
-                    matrix[2, 1] * tupple.Y +
-                    matrix[2, 2] * tupple.Z +
-                    matrix[2, 3] * tupple.W;
+            var z = matrix[2, 0] * tuple.X +
+                    matrix[2, 1] * tuple.Y +
+                    matrix[2, 2] * tuple.Z +
+                    matrix[2, 3] * tuple.W;
 
-            var w = matrix[3, 0] * tupple.X +
-                    matrix[3, 1] * tupple.Y +
-                    matrix[3, 2] * tupple.Z +
-                    matrix[3, 3] * tupple.W;
+            var w = matrix[3, 0] * tuple.X +
+                    matrix[3, 1] * tuple.Y +
+                    matrix[3, 2] * tuple.Z +
+                    matrix[3, 3] * tuple.W;
 
-            return new Tupple(x, y, z, w);
+            return new Tuple(x, y, z, w);
         }
 
-        public static Tupple operator *(Tupple tupple, Matrix matrix)
+        public static Tuple operator *(Tuple tuple, Matrix matrix)
         {
-            return matrix * tupple;
+            return matrix * tuple;
         }
 
         public static Matrix IdentityMatrix()

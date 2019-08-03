@@ -2,7 +2,7 @@
 
 namespace RayTracerChallenge.Core
 {
-    public struct Tupple
+    public struct Tuple
     {
         public float X;
         public float Y;
@@ -13,7 +13,7 @@ namespace RayTracerChallenge.Core
         public static float PointIndicator = 1f;
         public static int MaximumColorValue = 255;
 
-        public Tupple(float x, float y, float z, float w)
+        public Tuple(float x, float y, float z, float w)
         {
             X = x;
             Y = y;
@@ -21,67 +21,67 @@ namespace RayTracerChallenge.Core
             W = w;
         }
 
-        public static Tupple Point(float x, float y, float z)
+        public static Tuple Point(float x, float y, float z)
         {
-            return new Tupple(x, y, z, PointIndicator);
+            return new Tuple(x, y, z, PointIndicator);
         }
 
-        public static Tupple Vector(float x, float y, float z)
+        public static Tuple Vector(float x, float y, float z)
         {
-            return new Tupple(x, y, z, VectorIndicator);
+            return new Tuple(x, y, z, VectorIndicator);
         }
 
-        public static Tupple Color(float x, float y, float z)
+        public static Tuple Color(float x, float y, float z)
         {
-            return new Tupple(x, y, z, VectorIndicator);
+            return new Tuple(x, y, z, VectorIndicator);
         }
 
-        public bool Equals(Tupple tupple)
+        public bool Equals(Tuple tuple)
         {
-            return MathF.Abs(X - tupple.X) < float.Epsilon
-                && MathF.Abs(Y - tupple.Y) < float.Epsilon
-                && MathF.Abs(Z - tupple.Z) < float.Epsilon
-                && MathF.Abs(W - tupple.W) < float.Epsilon;
+            return MathF.Abs(X - tuple.X) < float.Epsilon
+                && MathF.Abs(Y - tuple.Y) < float.Epsilon
+                && MathF.Abs(Z - tuple.Z) < float.Epsilon
+                && MathF.Abs(W - tuple.W) < float.Epsilon;
         }
 
-        public static Tupple operator +(Tupple left, Tupple right)
+        public static Tuple operator +(Tuple left, Tuple right)
         {
             if (left.W == PointIndicator && right.W == PointIndicator)
             {
                 throw new ArithmeticException("You can't add two Points together!");
             }
 
-            return new Tupple(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+            return new Tuple(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
         }
 
-        public static Tupple operator -(Tupple left, Tupple right)
+        public static Tuple operator -(Tuple left, Tuple right)
         {
             if (left.W == VectorIndicator && right.W == PointIndicator)
             {
                 throw new ArithmeticException("You can't substract a Vector from a Point!");
             }
 
-            return new Tupple(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
+            return new Tuple(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
         }
 
-        public static Tupple operator !(Tupple t)
+        public static Tuple operator !(Tuple t)
         {
-            return new Tupple(-t.X, -t.Y, -t.Z, -t.W);
+            return new Tuple(-t.X, -t.Y, -t.Z, -t.W);
         }
 
-        public static Tupple operator *(Tupple t, float val)
+        public static Tuple operator *(Tuple t, float val)
         {
-            return new Tupple(t.X * val, t.Y * val, t.Z * val, t.W * val);
+            return new Tuple(t.X * val, t.Y * val, t.Z * val, t.W * val);
         }
 
-        public static Tupple operator *(Tupple left, Tupple right)
+        public static Tuple operator *(Tuple left, Tuple right)
         {
             return HadamardProduct(left, right);
         }
 
-        public static Tupple operator /(Tupple t, float val)
+        public static Tuple operator /(Tuple t, float val)
         {
-            return new Tupple(t.X / val, t.Y / val, t.Z / val, t.W / val);
+            return new Tuple(t.X / val, t.Y / val, t.Z / val, t.W / val);
         }
 
         public float Magnitude()
@@ -94,7 +94,7 @@ namespace RayTracerChallenge.Core
             return MathF.Sqrt(X * X + Y * Y + Z * Z);
         }
 
-        public Tupple Normalize()
+        public Tuple Normalize()
         {
             if (W != VectorIndicator)
             {
@@ -103,10 +103,10 @@ namespace RayTracerChallenge.Core
 
             var magnitude = 1f / Magnitude();
 
-            return new Tupple(X * magnitude, Y * magnitude, Z * magnitude, W * magnitude);
+            return new Tuple(X * magnitude, Y * magnitude, Z * magnitude, W * magnitude);
         }
 
-        public static float Dot (Tupple left, Tupple right)
+        public static float Dot (Tuple left, Tuple right)
         {
             if (left.W != VectorIndicator || right.W != VectorIndicator)
             {
@@ -119,7 +119,7 @@ namespace RayTracerChallenge.Core
                    left.W * right.W;
         }
 
-        public static Tupple Cross(Tupple left, Tupple right)
+        public static Tuple Cross(Tuple left, Tuple right)
         {
             if (left.W != VectorIndicator || right.W != VectorIndicator)
             {
@@ -131,14 +131,14 @@ namespace RayTracerChallenge.Core
                           left.X * right.Y - left.Y * right.X);
         }
 
-        public static Tupple HadamardProduct(Tupple colorLeft, Tupple colorRight)
+        public static Tuple HadamardProduct(Tuple colorLeft, Tuple colorRight)
         {
             return Color(colorLeft.X * colorRight.X,
                          colorLeft.Y * colorRight.Y,
                          colorLeft.Z * colorRight.Z);
         }
 
-        public static Tupple SchurProduct(Tupple colorLeft, Tupple colorRight)
+        public static Tuple SchurProduct(Tuple colorLeft, Tuple colorRight)
         {
             return HadamardProduct(colorLeft, colorRight);
         }
