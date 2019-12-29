@@ -167,7 +167,8 @@ namespace RayTracerChallenge.Core.Test
             });
 
             // Assert
-            Assert.Equal($"x can't be greater than {width - 1}\r\nParameter name: x", ex.Message);
+            Assert.Equal("x", ex.ParamName);
+            Assert.Equal($"x can't be greater than {width - 1}{Environment.NewLine}Parameter name: x", ex.Message);
         }
 
         [Fact]
@@ -186,7 +187,8 @@ namespace RayTracerChallenge.Core.Test
             });
 
             // Assert
-            Assert.Equal($"y can't be greater than {height - 1}\r\nParameter name: y", ex.Message);
+            Assert.Equal("y", ex.ParamName);
+            Assert.Equal($"y can't be greater than {height - 1}{Environment.NewLine}Parameter name: y", ex.Message);
         }
     }
 }
