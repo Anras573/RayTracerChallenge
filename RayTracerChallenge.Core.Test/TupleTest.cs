@@ -318,10 +318,10 @@ namespace RayTracerChallenge.Core.Test
             var point = Tuple.Point(5f, 6f, 7f);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() => vector - point);
+            void func() { var result = vector - point; }
 
             // Assert
-            Assert.Equal("You can't substract a Vector from a Point!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -405,10 +405,10 @@ namespace RayTracerChallenge.Core.Test
             var point = Tuple.Point(1f, -2f, 3f);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() => point.Magnitude());
+            void func() { var result = point.Magnitude(); }
 
             // Assert
-            Assert.Equal("This operation can only be used on a Vector!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -545,12 +545,12 @@ namespace RayTracerChallenge.Core.Test
             var point = Tuple.Point(1f, 2f, 3f);
 
             // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
+            void func() { var result = Tuple.Dot(vector, point); }
+            void func2() { var result = Tuple.Dot(point, vector); }
 
             // Assert
-            Assert.Equal("This operation can only be used on Vectors!", ex.Message);
-            Assert.Equal("This operation can only be used on Vectors!", ex2.Message);
+            Assert.Throws<ArithmeticException>(func);
+            Assert.Throws<ArithmeticException>(func2);
         }
 
         [Fact]
@@ -587,12 +587,12 @@ namespace RayTracerChallenge.Core.Test
             var point = Tuple.Point(2f, 3f, 4f);
 
             // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
+            void func() { var result = Tuple.Cross(vector, point); }
+            void func2() { var result = Tuple.Cross(point, vector); }
 
             // Assert
-            Assert.Equal("This operation can only be used on Vectors!", ex.Message);
-            Assert.Equal("This operation can only be used on Vectors!", ex2.Message);
+            Assert.Throws<ArithmeticException>(func);
+            Assert.Throws<ArithmeticException>(func2);
         }
 
         [Fact]

@@ -199,10 +199,10 @@ namespace RayTracerChallenge.Core.Test
             var matrix = new Matrix(rows, columns);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() => matrix[rows + 1, 0] = 1f);
+            void func() { matrix[rows + 1, 0] = 1f; }
 
             // Assert
-            Assert.Equal($"row can't be greater than {rows - 1}\r\nParameter name: row", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
 
         [Fact]
@@ -215,10 +215,10 @@ namespace RayTracerChallenge.Core.Test
             var matrix = new Matrix(rows, columns);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() => matrix[0, columns + 1] = 1f);
+            void func() { matrix[0, columns + 1] = 1f; }
 
             // Assert
-            Assert.Equal($"column can't be greater than {columns - 1}\r\nParameter name: column", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
 
         [Fact]
@@ -231,13 +231,10 @@ namespace RayTracerChallenge.Core.Test
             var matrix = new Matrix(rows, columns);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var value = matrix[rows + 1, 0];
-            });
+            void func() { var value = matrix[rows + 1, 0]; }
 
             // Assert
-            Assert.Equal($"row can't be greater than {rows - 1}\r\nParameter name: row", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
 
         [Fact]
@@ -250,13 +247,10 @@ namespace RayTracerChallenge.Core.Test
             var matrix = new Matrix(rows, columns);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var value = matrix[0, columns + 1];
-            });
+            void func() { var value = matrix[0, columns + 1]; }
 
             // Assert
-            Assert.Equal($"column can't be greater than {columns - 1}\r\nParameter name: column", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
 
         [Fact]
@@ -270,13 +264,10 @@ namespace RayTracerChallenge.Core.Test
             var secondMatrix = new Matrix(4, columns);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
-            {
-                var value = firstMatrix * secondMatrix;
-            });
+            void func() { var value = firstMatrix * secondMatrix; }
 
             // Assert
-            Assert.Equal("Both matrices should have the same number of rows!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -290,13 +281,10 @@ namespace RayTracerChallenge.Core.Test
             var secondMatrix = new Matrix(rows, 4);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
-            {
-                var value = firstMatrix * secondMatrix;
-            });
+            void func() { var value = firstMatrix * secondMatrix; }
 
             // Assert
-            Assert.Equal("Both matrices should have the same number of columns!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -311,13 +299,10 @@ namespace RayTracerChallenge.Core.Test
             var secondMatrix = new Matrix(rows, columns);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
-            {
-                var value = firstMatrix * secondMatrix;
-            });
+            void func() { var value = firstMatrix * secondMatrix; }
 
             // Assert
-            Assert.Equal("This operation only supports 4x4 Matrices!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -435,13 +420,10 @@ namespace RayTracerChallenge.Core.Test
             var tuple = new Tuple(1, 2, 3, 1);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
-            {
-                var value = matrix * tuple;
-            });
+            void func() { var value = matrix * tuple; }
 
             // Assert
-            Assert.Equal("This operation only supports 4x4 Matrices!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
         }
 
         [Fact]
@@ -1031,13 +1013,10 @@ namespace RayTracerChallenge.Core.Test
             var determinant = Matrix.Determinant(matrix);
 
             // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
-            {
-                var value = Matrix.Inverse(matrix);
-            });
+            void func() { var value = Matrix.Inverse(matrix); }
 
             // Assert
-            Assert.Equal("This matrix is not invertible!", ex.Message);
+            Assert.Throws<ArithmeticException>(func);
             Assert.Equal(0f, determinant);
         }
 

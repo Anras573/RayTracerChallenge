@@ -196,7 +196,6 @@ namespace RayTracerChallenge.Core
         {
             var subMatrix = new Matrix(matrix.Rows - 1, matrix.Columns - 1);
             var currentRow = 0;
-            
 
             for (var row = 0; row < matrix.Rows; row++)
             {

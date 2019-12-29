@@ -9,43 +9,45 @@ namespace RayTracerChallenge.ConsoleApplication
     {
         public static void Main(string[] args)
         {
-            //var filename = "projectile.ppm";
+            var filename = "projectile.ppm";
 
-            //var projectile = new Projectile {
-            //    Position = Tuple.Point(0f, 1f, 0f),
-            //    Velocity = Tuple.Vector(1f, 1.8f, 0f).Normalize() * 11.25f
-            //};
+            var projectile = new Projectile
+            {
+                Position = Tuple.Point(0f, 1f, 0f),
+                Velocity = Tuple.Vector(1f, 1.8f, 0f).Normalize() * 11.25f
+            };
 
-            //var environment = new Environment {
-            //    Gravity = Tuple.Vector(0f, -.1f, 0f),
-            //    Wind = Tuple.Vector(-.01f, 0f, 0f)
-            //};
+            var environment = new Environment
+            {
+                Gravity = Tuple.Vector(0f, -.1f, 0f),
+                Wind = Tuple.Vector(-.01f, 0f, 0f)
+            };
 
-            //var canvas = new Canvas(900, 550);
+            var canvas = new Canvas(900, 550);
 
-            //var numberOfTicks = 0;
+            var numberOfTicks = 0;
 
-            //Console.WriteLine("Shooting bullet!");
-            //Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
-            //DrawProjectile(projectile, canvas);
+            Console.WriteLine("Shooting bullet!");
+            Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
+            DrawProjectile(projectile, canvas);
 
-            //while (projectile.Position.Y >= 0f)
-            //{
-            //    projectile = Tick(environment, projectile);
-            //    Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
-            //    numberOfTicks++;
-            //    DrawProjectile(projectile, canvas);
-            //}
+            while (projectile.Position.Y >= 0f)
+            {
+                projectile = Tick(environment, projectile);
+                Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
+                numberOfTicks++;
+                DrawProjectile(projectile, canvas);
+            }
 
-            //Console.WriteLine("Bullet hit the ground!");
-            //Console.WriteLine($"It took {numberOfTicks} ticks to hit the ground!");
-            //DrawProjectile(projectile, canvas);
+            Console.WriteLine("Bullet hit the ground!");
+            Console.WriteLine($"It took {numberOfTicks} ticks to hit the ground!");
+            DrawProjectile(projectile, canvas);
 
-            //var imageAsString = canvas.ToPpm();
-            //File.WriteAllText(filename, imageAsString);
+            var imageAsString = canvas.ToPpm();
+            File.WriteAllText(filename, imageAsString);
 
-            //Console.WriteLine($"Image saved as {filename}");
-            //Console.ReadKey();
+            Console.WriteLine($"Image saved as {filename}");
+            Console.ReadKey();
 
             Console.WriteLine("Generating 4x4 Matrix: ");
             var matrix = new Matrix(4, 4);

@@ -161,13 +161,10 @@ namespace RayTracerChallenge.Core.Test
             var canvas = new Canvas(width, height);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                canvas.WritePixel(width + 1, height - 1, Tuple.Color(1f, 1f, 1f));
-            });
+            void func() { canvas.WritePixel(width + 1, height - 1, Tuple.Color(1f, 1f, 1f)); }
 
             // Assert
-            Assert.Equal($"x can't be greater than {width - 1}\r\nParameter name: x", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
 
         [Fact]
@@ -180,13 +177,10 @@ namespace RayTracerChallenge.Core.Test
             var canvas = new Canvas(width, height);
 
             // Act
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                canvas.WritePixel(width - 1, height + 1, Tuple.Color(1f, 1f, 1f));
-            });
+            void func() { canvas.WritePixel(width - 1, height + 1, Tuple.Color(1f, 1f, 1f)); }
 
             // Assert
-            Assert.Equal($"y can't be greater than {height - 1}\r\nParameter name: y", ex.Message);
+            Assert.Throws<ArgumentOutOfRangeException>(func);
         }
     }
 }
