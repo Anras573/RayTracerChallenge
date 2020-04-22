@@ -203,7 +203,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("row", ex.ParamName);
-            Assert.Equal($"row can't be greater than {rows - 1}{Environment.NewLine}Parameter name: row", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("row", $"row can't be greater than {rows - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
             
         }
 
@@ -221,7 +222,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("column", ex.ParamName);
-            Assert.Equal($"column can't be greater than {columns - 1}{Environment.NewLine}Parameter name: column", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("column", $"column can't be greater than {columns - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
         }
 
         [Fact]
@@ -241,7 +243,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("row", ex.ParamName);
-            Assert.Equal($"row can't be greater than {rows - 1}{Environment.NewLine}Parameter name: row", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("row", $"row can't be greater than {rows - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
         }
 
         [Fact]
@@ -261,7 +264,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("column", ex.ParamName);
-            Assert.Equal($"column can't be greater than {columns - 1}{Environment.NewLine}Parameter name: column", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("column", $"column can't be greater than {columns - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
         }
 
         [Fact]

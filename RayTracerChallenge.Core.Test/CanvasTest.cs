@@ -168,7 +168,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("x", ex.ParamName);
-            Assert.Equal($"x can't be greater than {width - 1}{Environment.NewLine}Parameter name: x", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("x", $"x can't be greater than {width - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
         }
 
         [Fact]
@@ -188,7 +189,8 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal("y", ex.ParamName);
-            Assert.Equal($"y can't be greater than {height - 1}{Environment.NewLine}Parameter name: y", ex.Message);
+            var expectedException = new ArgumentOutOfRangeException("y", $"y can't be greater than {height - 1}");
+            Assert.Equal(expectedException.Message, ex.Message);
         }
     }
 }
