@@ -1,110 +1,62 @@
-﻿using RayTracerChallenge.Core;
+﻿using RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile;
+using RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix;
+using RayTracerChallenge.ConsoleApplication.Utilities;
 using System;
-using System.IO;
-using Tuple = RayTracerChallenge.Core.Tuple;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RayTracerChallenge.ConsoleApplication
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var filename = "projectile.ppm";
-
-            var projectile = new Projectile
+            var actions = new List<Action>
             {
-                Position = Tuple.Point(0f, 1f, 0f),
-                Velocity = Tuple.Vector(1f, 1.8f, 0f).Normalize() * 11.25f
+                DrawProjectile,
+                PrintMatrix
             };
 
-            var environment = new Environment
+            ListOptions(actions);
+        }
+
+        private static void ListOptions(List<Action> actions)
+        {
+            Console.WriteLine("Choose option to run, or enter exit to exit program.");
+
+            foreach (var (i, action) in actions.AsIndexable())
             {
-                Gravity = Tuple.Vector(0f, -.1f, 0f),
-                Wind = Tuple.Vector(-.01f, 0f, 0f)
-            };
-
-            var canvas = new Canvas(900, 550);
-
-            var numberOfTicks = 0;
-
-            Console.WriteLine("Shooting bullet!");
-            Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
-            DrawProjectile(projectile, canvas);
-
-            while (projectile.Position.Y >= 0f)
-            {
-                projectile = Tick(environment, projectile);
-                Console.WriteLine($"Bullets position: X: {projectile.Position.X} Y: {projectile.Position.Y} Z: {projectile.Position.Z}");
-                numberOfTicks++;
-                DrawProjectile(projectile, canvas);
+                Console.WriteLine($"{i} - {action.Method.Name}");
             }
 
-            Console.WriteLine("Bullet hit the ground!");
-            Console.WriteLine($"It took {numberOfTicks} ticks to hit the ground!");
-            DrawProjectile(projectile, canvas);
+            var input = Console.ReadLine().Trim();
 
-            var imageAsString = canvas.ToPpm();
-            File.WriteAllText(filename, imageAsString);
-
-            Console.WriteLine($"Image saved as {filename}");
-            Console.ReadKey();
-
-            Console.WriteLine("Generating 4x4 Matrix: ");
-            var matrix = new Matrix(4, 4);
-            matrix[0, 0] = -6f;
-            matrix[0, 1] = 1f;
-            matrix[0, 2] = 1f;
-            matrix[0, 3] = 6f;
-            matrix[1, 0] = -8f;
-            matrix[1, 1] = 5f;
-            matrix[1, 2] = 8f;
-            matrix[1, 3] = 6f;
-            matrix[2, 0] = -1f;
-            matrix[2, 1] = 0f;
-            matrix[2, 2] = 8f;
-            matrix[2, 3] = 2f;
-            matrix[3, 0] = -7f;
-            matrix[3, 1] = 1f;
-            matrix[3, 2] = -1f;
-            matrix[3, 3] = 1f;
-
-            Console.WriteLine(matrix);
-
-            Console.WriteLine("Generating subMatrix:");
-            var submatrix = Matrix.Submatrix(matrix, 2, 1);
-
-            Console.WriteLine(submatrix);
-            Console.ReadKey();
-        }
-
-        private static Projectile Tick(Environment environment, Projectile projectile)
-        {
-            var position = projectile.Position + projectile.Velocity;
-            var velocity = projectile.Velocity + environment.Gravity + environment.Wind;
-            return new Projectile
+            if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
             {
-                Position = position,
-                Velocity = velocity
-            };
+                System.Environment.Exit(0);
+            }
+
+            if (int.TryParse(input, out var choice))
+            {
+                var action = actions.ElementAtOrDefault(choice);
+
+                if (action != null)
+                {
+                    action.Invoke();
+                }
+            }
+
+            ListOptions(actions);
         }
 
-        private static void DrawProjectile(Projectile projectile, Canvas canvas)
+        private static void PrintMatrix()
         {
-            var projectileColor = Tuple.Color(.2f, .4f, .6f);
-            var y = canvas.Height - projectile.Position.Y;
-            var x = projectile.Position.X;
-
-            x = ClampValue(x, canvas.Width - 1);
-            y = ClampValue(y, canvas.Height - 1);
-
-            canvas.WritePixel((int)x, (int)y, projectileColor);
+            PrintMatrixService.Run();
         }
 
-        private static float ClampValue(float value, float max, float min = 0f)
+        private static void DrawProjectile()
         {
-            if (value > max) return max;
-            if (value < min) return min;
-            return value;
+            DrawProjectileService.Run();
         }
     }
 }
