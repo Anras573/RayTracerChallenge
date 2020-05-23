@@ -1,4 +1,5 @@
-﻿using RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile;
+﻿using RayTracerChallenge.ConsoleApplication.Actions.AnalogClock;
+using RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile;
 using RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using System;
@@ -9,22 +10,23 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public static class Program
     {
+        private static readonly List<Action> _actions = new List<Action>
+        {
+            DrawProjectile,
+            PrintMatrix,
+            DrawAnalogClock
+        };
+
         public static void Main()
         {
-            var actions = new List<Action>
-            {
-                DrawProjectile,
-                PrintMatrix
-            };
-
-            ListOptions(actions);
+            ListOptions();
         }
 
-        private static void ListOptions(List<Action> actions)
+        private static void ListOptions()
         {
             Console.WriteLine("Choose option to run, or enter exit to exit program.");
 
-            foreach (var (i, action) in actions.AsIndexable())
+            foreach (var (i, action) in _actions.AsIndexable())
             {
                 Console.WriteLine($"{i} - {action.Method.Name}");
             }
@@ -38,7 +40,7 @@ namespace RayTracerChallenge.ConsoleApplication
 
             if (int.TryParse(input, out var choice))
             {
-                var action = actions.ElementAtOrDefault(choice);
+                var action = _actions.ElementAtOrDefault(choice);
 
                 if (action != null)
                 {
@@ -46,7 +48,7 @@ namespace RayTracerChallenge.ConsoleApplication
                 }
             }
 
-            ListOptions(actions);
+            ListOptions();
         }
 
         private static void PrintMatrix()
@@ -57,6 +59,11 @@ namespace RayTracerChallenge.ConsoleApplication
         private static void DrawProjectile()
         {
             DrawProjectileService.Run();
+        }
+
+        private static void DrawAnalogClock()
+        {
+            AnalogClockService.Run();
         }
     }
 }

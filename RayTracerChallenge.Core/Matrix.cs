@@ -120,7 +120,7 @@ namespace RayTracerChallenge.Core
                 throw new ArithmeticException("This operation only supports 4x4 Matrices!");
             }
 
-            var x = matrix[0, 0] * tuple.X +
+             var x = matrix[0, 0] * tuple.X +
                     matrix[0, 1] * tuple.Y +
                     matrix[0, 2] * tuple.Z +
                     matrix[0, 3] * tuple.W;
@@ -261,6 +261,87 @@ namespace RayTracerChallenge.Core
             }
 
             return inversedMatrix;
+        }
+
+        public static Matrix Translate(float x, float y, float z)
+        {
+            var matrix = IdentityMatrix();
+
+            matrix[0, 3] = x;
+            matrix[1, 3] = y;
+            matrix[2, 3] = z;
+
+            return matrix;
+        }
+
+        public static Matrix Scale(float x, float y, float z)
+        {
+            var matrix = IdentityMatrix();
+
+            matrix[0, 0] = x;
+            matrix[1, 1] = y;
+            matrix[2, 2] = z;
+
+            return matrix;
+        }
+
+        public static Matrix RotateX(double r)
+        {
+            var matrix = IdentityMatrix();
+
+            var cos = Math.Cos(r);
+            var sin = Math.Sin(r);
+
+            matrix[1, 1] = (float)cos;
+            matrix[1, 2] = (float)-sin;
+            matrix[2, 1] = (float)sin;
+            matrix[2, 2] = (float)cos;
+
+            return matrix;
+        }
+
+        public static Matrix RotateY(float r)
+        {
+            var matrix = IdentityMatrix();
+
+            var cos = MathF.Cos(r);
+            var sin = MathF.Sin(r);
+
+            matrix[0, 0] = cos;
+            matrix[0, 2] = sin;
+            matrix[2, 0] = -sin;
+            matrix[2, 2] = cos;
+
+            return matrix;
+        }
+
+        public static Matrix RotateZ(float r)
+        {
+            var matrix = IdentityMatrix();
+
+            var cos = MathF.Cos(r);
+            var sin = MathF.Sin(r);
+
+            matrix[0, 0] = cos;
+            matrix[0, 1] = -sin;
+            matrix[1, 0] = sin;
+            matrix[1, 1] = cos;
+
+            return matrix;
+        }
+
+        public static Matrix Shear(float xy, float xz, float yx, float yz, float zx, float zy)
+        {
+            var matrix = IdentityMatrix();
+
+            matrix[0, 1] = xy;
+            matrix[0, 2] = xz;
+            matrix[1, 0] = yx;
+            matrix[1, 2] = yz;
+            matrix[2, 0] = zx;
+            matrix[2, 1] = zy;
+
+            return matrix;
         }
 
         public override string ToString()

@@ -1115,5 +1115,404 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(firstMatrix[3, 2], firstMatrixRecreated[3, 2], DefaultComparer);
             Assert.Equal(firstMatrix[3, 3], firstMatrixRecreated[3, 3], DefaultComparer);
         }
+
+        [Fact]
+        [Trait("Category", "Translation")]
+        [Trait("Category", "Multiplication")]
+        [Trait("Category", "Point")]
+        public void GivenAPoint_WhenMultiplyingByATranslationMatrix_ThenTranslatedPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Translate(5, -3, 2);
+            var point = Tuple.Point(-3, 4, 5);
+
+            // Act
+            var translatedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(2, 1, 7);
+
+            Assert.True(expectedPoint.Equals(translatedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Translation")]
+        [Trait("Category", "Inverse")]
+        [Trait("Category", "Multiplication")]
+        [Trait("Category", "Point")]
+        public void GivenAPoint_WhenMultiplyingByTheInverseOfATranslationMatrix_ThenTranslatedPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Translate(5, -3, 2);
+            var inverse = Matrix.Inverse(transform);
+            var point = Tuple.Point(-3, 4, 5);
+
+            // Act
+            var translatedPoint = inverse * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(-8, 7, 3);
+
+            Assert.True(expectedPoint.Equals(translatedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Translation")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAVector_WhenMultiplyingByTheInverseOfATranslationMatrix_ThenTranslationDoesNotAffectVectors()
+        {
+            // Arrange
+            var transform = Matrix.Translate(5, -3, 2);
+            var vector = Tuple.Vector(-3, 4, 5);
+
+            // Act
+            var translatedVector = transform * vector;
+
+            // Asserts            
+            Assert.True(vector.Equals(translatedVector));
+        }
+
+        [Fact]
+        [Trait("Category", "Scaling")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenApplyingAScalingMatrix_ThenAScaledPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Scale(2, 3, 4);
+            var point = Tuple.Point(-4, 6, 8);
+
+            // Act
+            var scaledPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(-8, 18, 32);
+
+            Assert.True(expectedPoint.Equals(scaledPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Scaling")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAVector_WhenApplyingAScalingMatrix_ThenAScaledVectorIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Scale(2, 3, 4);
+            var vector = Tuple.Vector(-4, 6, 8);
+
+            // Act
+            var scaledVector = transform * vector;
+
+            // Asserts
+            var expectedVector = Tuple.Vector(-8, 18, 32);
+
+            Assert.True(expectedVector.Equals(scaledVector));
+        }
+
+        [Fact]
+        [Trait("Category", "Translation")]
+        [Trait("Category", "Inverse")]
+        [Trait("Category", "Multiplication")]
+        [Trait("Category", "Point")]
+        public void GivenAVector_WhenMultiplyingByTheInverseOfAScalingMatrix_ThenScaledVectorIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Scale(2, 3, 4);
+            var inverse = Matrix.Inverse(transform);
+            var vector = Tuple.Vector(-4, 6, 8);
+
+            // Act
+            var scaledVector = inverse * vector;
+
+            // Asserts
+            var expectedVector = Tuple.Vector(-2, 2, 2);
+
+            Assert.True(expectedVector.Equals(scaledVector));
+        }
+
+        [Fact]
+        [Trait("Category", "Scaling")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Reflection")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenApplyingANegativeScalingMatrix_ThenAReflectedPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Scale(-1, 1, 1);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var scaledPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(-2, 3, 4);
+
+            Assert.True(expectedPoint.Equals(scaledPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenRotatingAroundTheXAxis_ThenRotatedPointIsReturned()
+        {
+            // Arrange
+            var point = Tuple.Point(0, 1, 0);
+
+            var halfQuarterRotation = Matrix.RotateX(MathF.PI / 4f);
+            var quarterRotation = Matrix.RotateX(MathF.PI / 2f);
+
+            // Act
+            var halfQuarterPoint = halfQuarterRotation * point;
+            var quarterPoint = quarterRotation * point;
+
+            // Asserts
+            var expectedHalfQuarterPoint = Tuple.Point(0, MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2);
+            var expectedQuarterPoint = Tuple.Point(0, 0, 1);
+
+            Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
+            Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Inverse")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenRotatingAroundTheInvertedXAxis_ThenRotatedPointIsReturned()
+        {
+            // Arrange
+            var point = Tuple.Point(0, 1, 0);
+
+            var halfQuarterRotation = Matrix.RotateX(MathF.PI / 4);
+            var invertedHalfQuarterRotation = Matrix.Inverse(halfQuarterRotation);
+
+            // Act
+            var halfQuarterPoint = invertedHalfQuarterRotation * point;
+
+            // Asserts
+            var expectedHalfQuarterPoint = Tuple.Point(0, MathF.Sqrt(2) / 2, -(MathF.Sqrt(2) / 2));
+
+            Assert.Equal(expectedHalfQuarterPoint.X, halfQuarterPoint.X, DefaultComparer);
+            Assert.Equal(expectedHalfQuarterPoint.Y, halfQuarterPoint.Y, DefaultComparer);
+            Assert.Equal(expectedHalfQuarterPoint.Z, halfQuarterPoint.Z, DefaultComparer);
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenRotatingAroundTheYAxis_ThenRotatedPointIsReturned()
+        {
+            // Arrange
+            var point = Tuple.Point(0, 0, 1);
+
+            var halfQuarterRotation = Matrix.RotateY(MathF.PI / 4f);
+            var quarterRotation = Matrix.RotateY(MathF.PI / 2f);
+
+            // Act
+            var halfQuarterPoint = halfQuarterRotation * point;
+            var quarterPoint = quarterRotation * point;
+
+            // Asserts
+            var expectedHalfQuarterPoint = Tuple.Point(MathF.Sqrt(2) / 2, 0, MathF.Sqrt(2) / 2);
+            var expectedQuarterPoint = Tuple.Point(1, 0, 0);
+
+            Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
+            Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAPoint_WhenRotatingAroundTheZAxis_ThenRotatedPointIsReturned()
+        {
+            // Arrange
+            var point = Tuple.Point(0, 1, 0);
+
+            var halfQuarterRotation = Matrix.RotateZ(MathF.PI / 4f);
+            var quarterRotation = Matrix.RotateZ(MathF.PI / 2f);
+
+            // Act
+            var halfQuarterPoint = halfQuarterRotation * point;
+            var quarterPoint = quarterRotation * point;
+
+            // Asserts
+            var expectedHalfQuarterPoint = Tuple.Point(-MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2, 0);
+            var expectedQuarterPoint = Tuple.Point(-1, 0, 0);
+
+            Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
+            Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenXMovesInProportionToY_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(1, 0, 0, 0, 0, 0);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(5, 3, 4);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenXMovesInProportionToZ_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(0, 1, 0, 0, 0, 0);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(6, 3, 4);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenYMovesInProportionToX_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(0, 0, 1, 0, 0, 0);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(2, 5, 4);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenYMovesInProportionToZ_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(0, 0, 0, 1, 0, 0);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(2, 7, 4);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenZMovesInProportionToX_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(0, 0, 0, 0, 1, 0);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(2, 3, 6);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Shear")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenAShearingTransformation_WhenZMovesInProportionToY_ThenAPointIsReturned()
+        {
+            // Arrange
+            var transform = Matrix.Shear(0, 0, 0, 0, 0, 1);
+            var point = Tuple.Point(2, 3, 4);
+
+            // Act
+            var transformedPoint = transform * point;
+
+            // Asserts
+            var expectedPoint = Tuple.Point(2, 3, 7);
+
+            Assert.True(expectedPoint.Equals(transformedPoint));
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Scale")]
+        [Trait("Category", "Translate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenIndividualTransformations_WhenAppliedInSequense_ThenAPointIsReturned()
+        {
+            // Arrange
+            var p = Tuple.Point(1, 0, 1);
+            var a = Matrix.RotateX(MathF.PI / 2);
+            var b = Matrix.Scale(5, 5, 5);
+            var c = Matrix.Translate(10, 5, 7);
+
+            // Act
+            var p2 = a * p;
+            var p3 = b * p2;
+            var p4 = c * p3;
+
+            // Asserts
+            var expectedP2 = Tuple.Point(1, -1, 0);
+            var expectedP3 = Tuple.Point(5, -5, 0);
+            var expectedP4 = Tuple.Point(15, 0, 7);
+
+            Assert.True(expectedP2.Equals(p2, 0));
+            Assert.True(expectedP3.Equals(p3, 0));
+            Assert.True(expectedP4.Equals(p4));
+        }
+
+        [Fact]
+        [Trait("Category", "Rotate")]
+        [Trait("Category", "Scale")]
+        [Trait("Category", "Translate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Multiplication")]
+        public void GivenChainedTransformations_WhenAppliedInReverseOrder_ThenAPointIsReturned()
+        {
+            // Arrange
+            var p = Tuple.Point(1, 0, 1);
+            var a = Matrix.RotateX(MathF.PI / 2);
+            var b = Matrix.Scale(5, 5, 5);
+            var c = Matrix.Translate(10, 5, 7);
+
+            // Act
+            var t = c * b * a;
+            var tp = t * p;
+
+            // Asserts
+            var expectedTp = Tuple.Point(15, 0, 7);
+
+            Assert.True(expectedTp.Equals(tp));
+        }
     }
 }

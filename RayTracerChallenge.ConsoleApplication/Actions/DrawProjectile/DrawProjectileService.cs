@@ -67,14 +67,13 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
 
         private static void DrawOnCanvas(Projectile projectile, Canvas canvas)
         {
-            var projectileColor = Tuple.Color(.2f, .4f, .6f);
             var y = canvas.Height - projectile.Position.Y;
             var x = projectile.Position.X;
 
             x = x.Clamp(canvas.Width - 1);
             y = y.Clamp(canvas.Height - 1);
 
-            canvas.WritePixel((int)x, (int)y, projectileColor);
+            canvas.WritePixel((int)x, (int)y, Color.Blue);
         }
     }
 }

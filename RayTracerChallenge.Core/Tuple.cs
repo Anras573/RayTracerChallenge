@@ -44,6 +44,14 @@ namespace RayTracerChallenge.Core
                 && MathF.Abs(W - tuple.W) < float.Epsilon;
         }
 
+        public bool Equals(Tuple tuple, int precision)
+        {
+            return Math.Round(X, precision) == Math.Round(tuple.X, precision) &&
+                   Math.Round(Y, precision) == Math.Round(tuple.Y, precision) &&
+                   Math.Round(Z, precision) == Math.Round(tuple.Z, precision) &&
+                   Math.Round(W, precision) == Math.Round(tuple.W, precision);
+        }
+
         public static Tuple operator +(Tuple left, Tuple right)
         {
             if (left.W == PointIndicator && right.W == PointIndicator)
