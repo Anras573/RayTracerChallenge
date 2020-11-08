@@ -1,13 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayTracerChallenge.Core", "RayTracerChallenge.Core\RayTracerChallenge.Core.csproj", "{0FC5BD3F-4789-4CFA-9BE6-94CB5E1B25D2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayTracerChallenge.Core.Test", "RayTracerChallenge.Core.Test\RayTracerChallenge.Core.Test.csproj", "{DA38E0F9-E605-4A49-91BC-E03411FD0D56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayTracerChallenge.ConsoleApplication", "RayTracerChallenge.ConsoleApplication\RayTracerChallenge.ConsoleApplication.csproj", "{0F05F937-F3BA-4DC8-868A-868F97A6E925}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayTracerChallenge.ConsoleApplication", "RayTracerChallenge.ConsoleApplication\RayTracerChallenge.ConsoleApplication.csproj", "{0F05F937-F3BA-4DC8-868A-868F97A6E925}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4AE8454F-1E29-4F36-BB7E-EC933ECFF77C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F3D94809-3395-4B52-9500-1216F9B2D0D9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +37,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3D94809-3395-4B52-9500-1216F9B2D0D9} = {4AE8454F-1E29-4F36-BB7E-EC933ECFF77C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79E54087-CAF9-470C-BC54-D76BB220E029}
