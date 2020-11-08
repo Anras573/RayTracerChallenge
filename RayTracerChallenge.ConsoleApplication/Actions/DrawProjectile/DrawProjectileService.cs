@@ -2,7 +2,6 @@
 using RayTracerChallenge.Core;
 using System;
 using System.IO;
-using Tuple = RayTracerChallenge.Core.Tuple;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
 {
@@ -16,14 +15,14 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
 
             var projectile = new Projectile
             {
-                Position = Tuple.Point(0f, 1f, 0f),
-                Velocity = Tuple.Vector(1f, 1.8f, 0f).Normalize() * 11.25f
+                Position = new Point(0f, 1f, 0f),
+                Velocity = new Vector(1f, 1.8f, 0f).Normalize() * 11.25f
             };
 
             var environment = new Environment
             {
-                Gravity = Tuple.Vector(0f, -.1f, 0f),
-                Wind = Tuple.Vector(-.01f, 0f, 0f)
+                Gravity = new Vector(0f, -.1f, 0f),
+                Wind = new Vector(-.01f, 0f, 0f)
             };
 
             var canvas = new Canvas(900, 550);
@@ -73,7 +72,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
             x = x.Clamp(canvas.Width - 1);
             y = y.Clamp(canvas.Height - 1);
 
-            canvas.WritePixel((int)x, (int)y, Color.Blue);
+            canvas.WritePixel((int)x, (int)y, Colors.Blue);
         }
     }
 }

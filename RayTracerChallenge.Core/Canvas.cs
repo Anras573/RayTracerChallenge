@@ -8,7 +8,7 @@ namespace RayTracerChallenge.Core
         private const string PpmIdentifier = "P3";
         private const int MaximumPpmLineLength = 70;
 
-        public Tuple[] Pixels { get; }
+        public Color[] Pixels { get; }
         public int Width { get; }
         public int Height { get; }
 
@@ -16,14 +16,14 @@ namespace RayTracerChallenge.Core
         {
             Width = width;
             Height = height;
-            Pixels = new Tuple[Width * Height];
+            Pixels = new Color[Width * Height];
             for (var i = 0; i < Pixels.Length; i++)
             {
-                Pixels[i] = Tuple.Color(0f, 0f, 0f);
+                Pixels[i] = new Color(0f, 0f, 0f);
             }
         }
 
-        public void WritePixel(int x, int y, Tuple color)
+        public void WritePixel(int x, int y, Color color)
         {
             if (x >= Width)
             {
@@ -56,13 +56,13 @@ namespace RayTracerChallenge.Core
             //Create ppm header
             stringBuilder.AppendLine(PpmIdentifier);
             stringBuilder.AppendLine($"{Width} {Height}");
-            stringBuilder.AppendLine($"{Tuple.MaximumColorValue}");
+            stringBuilder.AppendLine($"{Color.MaximumColorValue}");
 
             foreach (var pixel in Pixels)
             {
-                r = (int)MathF.Ceiling(ClampColor(pixel.X) * Tuple.MaximumColorValue);
-                g = (int)MathF.Ceiling(ClampColor(pixel.Y) * Tuple.MaximumColorValue);
-                b = (int)MathF.Ceiling(ClampColor(pixel.Z) * Tuple.MaximumColorValue);
+                r = (int)MathF.Ceiling(ClampColor(pixel.X) * Color.MaximumColorValue);
+                g = (int)MathF.Ceiling(ClampColor(pixel.Y) * Color.MaximumColorValue);
+                b = (int)MathF.Ceiling(ClampColor(pixel.Z) * Color.MaximumColorValue);
                 redString = $"{r} ";
                 greenString = $"{g} ";
                 blueString = $"{b} ";

@@ -1124,13 +1124,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Translate(5, -3, 2);
-            var point = Tuple.Point(-3, 4, 5);
+            var point = new Point(-3, 4, 5);
 
             // Act
             var translatedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(2, 1, 7);
+            var expectedPoint = new Point(2, 1, 7);
 
             Assert.True(expectedPoint.Equals(translatedPoint));
         }
@@ -1145,13 +1145,13 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
             var transform = Matrix.Translate(5, -3, 2);
             var inverse = Matrix.Inverse(transform);
-            var point = Tuple.Point(-3, 4, 5);
+            var point = new Point(-3, 4, 5);
 
             // Act
             var translatedPoint = inverse * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(-8, 7, 3);
+            var expectedPoint = new Point(-8, 7, 3);
 
             Assert.True(expectedPoint.Equals(translatedPoint));
         }
@@ -1164,7 +1164,7 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Translate(5, -3, 2);
-            var vector = Tuple.Vector(-3, 4, 5);
+            var vector = new Vector(-3, 4, 5);
 
             // Act
             var translatedVector = transform * vector;
@@ -1181,13 +1181,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Scale(2, 3, 4);
-            var point = Tuple.Point(-4, 6, 8);
+            var point = new Point(-4, 6, 8);
 
             // Act
             var scaledPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(-8, 18, 32);
+            var expectedPoint = new Point(-8, 18, 32);
 
             Assert.True(expectedPoint.Equals(scaledPoint));
         }
@@ -1200,13 +1200,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Scale(2, 3, 4);
-            var vector = Tuple.Vector(-4, 6, 8);
+            var vector = new Vector(-4, 6, 8);
 
             // Act
             var scaledVector = transform * vector;
 
             // Asserts
-            var expectedVector = Tuple.Vector(-8, 18, 32);
+            var expectedVector = new Vector(-8, 18, 32);
 
             Assert.True(expectedVector.Equals(scaledVector));
         }
@@ -1221,13 +1221,13 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
             var transform = Matrix.Scale(2, 3, 4);
             var inverse = Matrix.Inverse(transform);
-            var vector = Tuple.Vector(-4, 6, 8);
+            var vector = new Vector(-4, 6, 8);
 
             // Act
             var scaledVector = inverse * vector;
 
             // Asserts
-            var expectedVector = Tuple.Vector(-2, 2, 2);
+            var expectedVector = new Vector(-2, 2, 2);
 
             Assert.True(expectedVector.Equals(scaledVector));
         }
@@ -1241,13 +1241,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Scale(-1, 1, 1);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var scaledPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(-2, 3, 4);
+            var expectedPoint = new Point(-2, 3, 4);
 
             Assert.True(expectedPoint.Equals(scaledPoint));
         }
@@ -1259,7 +1259,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPoint_WhenRotatingAroundTheXAxis_ThenRotatedPointIsReturned()
         {
             // Arrange
-            var point = Tuple.Point(0, 1, 0);
+            var point = new Point(0, 1, 0);
 
             var halfQuarterRotation = Matrix.RotateX(MathF.PI / 4f);
             var quarterRotation = Matrix.RotateX(MathF.PI / 2f);
@@ -1269,8 +1269,8 @@ namespace RayTracerChallenge.Core.Test
             var quarterPoint = quarterRotation * point;
 
             // Asserts
-            var expectedHalfQuarterPoint = Tuple.Point(0, MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2);
-            var expectedQuarterPoint = Tuple.Point(0, 0, 1);
+            var expectedHalfQuarterPoint = new Point(0, MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2);
+            var expectedQuarterPoint = new Point(0, 0, 1);
 
             Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
             Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
@@ -1284,7 +1284,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPoint_WhenRotatingAroundTheInvertedXAxis_ThenRotatedPointIsReturned()
         {
             // Arrange
-            var point = Tuple.Point(0, 1, 0);
+            var point = new Point(0, 1, 0);
 
             var halfQuarterRotation = Matrix.RotateX(MathF.PI / 4);
             var invertedHalfQuarterRotation = Matrix.Inverse(halfQuarterRotation);
@@ -1293,7 +1293,7 @@ namespace RayTracerChallenge.Core.Test
             var halfQuarterPoint = invertedHalfQuarterRotation * point;
 
             // Asserts
-            var expectedHalfQuarterPoint = Tuple.Point(0, MathF.Sqrt(2) / 2, -(MathF.Sqrt(2) / 2));
+            var expectedHalfQuarterPoint = new Point(0, MathF.Sqrt(2) / 2, -(MathF.Sqrt(2) / 2));
 
             Assert.Equal(expectedHalfQuarterPoint.X, halfQuarterPoint.X, DefaultComparer);
             Assert.Equal(expectedHalfQuarterPoint.Y, halfQuarterPoint.Y, DefaultComparer);
@@ -1307,7 +1307,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPoint_WhenRotatingAroundTheYAxis_ThenRotatedPointIsReturned()
         {
             // Arrange
-            var point = Tuple.Point(0, 0, 1);
+            var point = new Point(0, 0, 1);
 
             var halfQuarterRotation = Matrix.RotateY(MathF.PI / 4f);
             var quarterRotation = Matrix.RotateY(MathF.PI / 2f);
@@ -1317,8 +1317,8 @@ namespace RayTracerChallenge.Core.Test
             var quarterPoint = quarterRotation * point;
 
             // Asserts
-            var expectedHalfQuarterPoint = Tuple.Point(MathF.Sqrt(2) / 2, 0, MathF.Sqrt(2) / 2);
-            var expectedQuarterPoint = Tuple.Point(1, 0, 0);
+            var expectedHalfQuarterPoint = new Point(MathF.Sqrt(2) / 2, 0, MathF.Sqrt(2) / 2);
+            var expectedQuarterPoint = new Point(1, 0, 0);
 
             Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
             Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
@@ -1331,7 +1331,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPoint_WhenRotatingAroundTheZAxis_ThenRotatedPointIsReturned()
         {
             // Arrange
-            var point = Tuple.Point(0, 1, 0);
+            var point = new Point(0, 1, 0);
 
             var halfQuarterRotation = Matrix.RotateZ(MathF.PI / 4f);
             var quarterRotation = Matrix.RotateZ(MathF.PI / 2f);
@@ -1341,8 +1341,8 @@ namespace RayTracerChallenge.Core.Test
             var quarterPoint = quarterRotation * point;
 
             // Asserts
-            var expectedHalfQuarterPoint = Tuple.Point(-MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2, 0);
-            var expectedQuarterPoint = Tuple.Point(-1, 0, 0);
+            var expectedHalfQuarterPoint = new Point(-MathF.Sqrt(2) / 2, MathF.Sqrt(2) / 2, 0);
+            var expectedQuarterPoint = new Point(-1, 0, 0);
 
             Assert.True(expectedHalfQuarterPoint.Equals(halfQuarterPoint, 0));
             Assert.True(expectedQuarterPoint.Equals(quarterPoint, 0));
@@ -1356,13 +1356,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(1, 0, 0, 0, 0, 0);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(5, 3, 4);
+            var expectedPoint = new Point(5, 3, 4);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1375,13 +1375,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(0, 1, 0, 0, 0, 0);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(6, 3, 4);
+            var expectedPoint = new Point(6, 3, 4);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1394,13 +1394,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(0, 0, 1, 0, 0, 0);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(2, 5, 4);
+            var expectedPoint = new Point(2, 5, 4);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1413,13 +1413,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(0, 0, 0, 1, 0, 0);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(2, 7, 4);
+            var expectedPoint = new Point(2, 7, 4);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1432,13 +1432,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(0, 0, 0, 0, 1, 0);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(2, 3, 6);
+            var expectedPoint = new Point(2, 3, 6);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1451,13 +1451,13 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Shear(0, 0, 0, 0, 0, 1);
-            var point = Tuple.Point(2, 3, 4);
+            var point = new Point(2, 3, 4);
 
             // Act
             var transformedPoint = transform * point;
 
             // Asserts
-            var expectedPoint = Tuple.Point(2, 3, 7);
+            var expectedPoint = new Point(2, 3, 7);
 
             Assert.True(expectedPoint.Equals(transformedPoint));
         }
@@ -1471,7 +1471,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenIndividualTransformations_WhenAppliedInSequense_ThenAPointIsReturned()
         {
             // Arrange
-            var p = Tuple.Point(1, 0, 1);
+            var p = new Point(1, 0, 1);
             var a = Matrix.RotateX(MathF.PI / 2);
             var b = Matrix.Scale(5, 5, 5);
             var c = Matrix.Translate(10, 5, 7);
@@ -1482,9 +1482,9 @@ namespace RayTracerChallenge.Core.Test
             var p4 = c * p3;
 
             // Asserts
-            var expectedP2 = Tuple.Point(1, -1, 0);
-            var expectedP3 = Tuple.Point(5, -5, 0);
-            var expectedP4 = Tuple.Point(15, 0, 7);
+            var expectedP2 = new Point(1, -1, 0);
+            var expectedP3 = new Point(5, -5, 0);
+            var expectedP4 = new Point(15, 0, 7);
 
             Assert.True(expectedP2.Equals(p2, 0));
             Assert.True(expectedP3.Equals(p3, 0));
@@ -1500,7 +1500,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenChainedTransformations_WhenAppliedInReverseOrder_ThenAPointIsReturned()
         {
             // Arrange
-            var p = Tuple.Point(1, 0, 1);
+            var p = new Point(1, 0, 1);
             var a = Matrix.RotateX(MathF.PI / 2);
             var b = Matrix.Scale(5, 5, 5);
             var c = Matrix.Translate(10, 5, 7);
@@ -1510,7 +1510,7 @@ namespace RayTracerChallenge.Core.Test
             var tp = t * p;
 
             // Asserts
-            var expectedTp = Tuple.Point(15, 0, 7);
+            var expectedTp = new Point(15, 0, 7);
 
             Assert.True(expectedTp.Equals(tp));
         }

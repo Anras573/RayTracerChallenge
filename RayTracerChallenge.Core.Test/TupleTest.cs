@@ -38,7 +38,7 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
 
             // Act
-            var point = Tuple.Point(x, y, z);
+            var point = new Point(x, y, z);
 
             // Assert
             Assert.Equal(x, point.X);
@@ -57,7 +57,7 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
             
             // Act
-            var point = Tuple.Point(x, y, z);
+            var point = new Point(x, y, z);
 
             // Assert
             Assert.Equal(x, point.X);
@@ -76,7 +76,7 @@ namespace RayTracerChallenge.Core.Test
             var z = 3f;
 
             // Act
-            var vector = Tuple.Vector(x, y, z);
+            var vector = new Vector(x, y, z);
 
             // Assert
             Assert.Equal(x, vector.X);
@@ -94,8 +94,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var firstPoint = Tuple.Point(x, y, z);
-            var secondPoint = Tuple.Point(x, y, z);
+            var firstPoint = new Point(x, y, z);
+            var secondPoint = new Point(x, y, z);
 
             // Act
             var isEqual = firstPoint.Equals(secondPoint);
@@ -113,8 +113,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var firstVector = Tuple.Vector(x, y, z);
-            var secondVector = Tuple.Vector(x, y, z);
+            var firstVector = new Vector(x, y, z);
+            var secondVector = new Vector(x, y, z);
 
             // Act
             var isEqual = firstVector.Equals(secondVector);
@@ -129,8 +129,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoNonIdenticalPoints_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var firstPoint = Tuple.Point(4f, -4f, 3f);
-            var secondPoint = Tuple.Point(-4f, 4f, -3f);
+            var firstPoint = new Point(4f, -4f, 3f);
+            var secondPoint = new Point(-4f, 4f, -3f);
 
             // Act
             var isEqual = firstPoint.Equals(secondPoint);
@@ -145,8 +145,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoNonIdenticalVectors_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var firstVector = Tuple.Vector(4f, -4f, 3f);
-            var secondVector = Tuple.Vector(-4f, 4f, -3f);
+            var firstVector = new Vector(4f, -4f, 3f);
+            var secondVector = new Vector(-4f, 4f, -3f);
 
             // Act
             var isEqual = firstVector.Equals(secondVector);
@@ -165,8 +165,8 @@ namespace RayTracerChallenge.Core.Test
             var x = 4f;
             var y = -4f;
             var z = 3f;
-            var vector = Tuple.Vector(x, y, z);
-            var point = Tuple.Point(x, y, z);
+            var vector = new Vector(x, y, z);
+            var point = new Point(x, y, z);
 
             // Act
             var isEqual = vector.Equals(point);
@@ -182,8 +182,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenNonIdenticalPointAndVector_WhenCallingEqual_ThenFalseIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(4f, -4f, 3f);
-            var point = Tuple.Point(-4f, 4f, -3f);
+            var vector = new Vector(4f, -4f, 3f);
+            var point = new Point(-4f, 4f, -3f);
 
             // Act
             var isEqual = vector.Equals(point);
@@ -199,8 +199,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenAddingThemTogether_ThenAPointIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(3f, -2f, 5f);
-            var point = Tuple.Point(-2f, 3f, 1f);
+            var vector = new Vector(3f, -2f, 5f);
+            var point = new Point(-2f, 3f, 1f);
 
             // Act
             var tuple = vector + point;
@@ -218,8 +218,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenAddingThemTogether_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tuple.Vector(3f, -2f, 5f);
-            var secondVector = Tuple.Vector(-2f, 3f, 1f);
+            var firstVector = new Vector(3f, -2f, 5f);
+            var secondVector = new Vector(-2f, 3f, 1f);
 
             // Act
             var newVector = firstVector + secondVector;
@@ -232,30 +232,13 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Addition")]
-        [Trait("Category", "Point")]
-        [Trait("Category", "Exception")]
-        public void GivenTwoPoints_WhenAddingThemTogether_ThenAnArithmeticExceptionIsThrown()
-        {
-            // Arrange
-            var firstPoint = Tuple.Point(3f, -2f, 5f);
-            var secondPoint = Tuple.Point(-2f, 3f, 1f);
-
-            // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() => firstPoint + secondPoint);
-
-            // Assert
-            Assert.Equal("You can't add two Points together!", ex.Message);
-        }
-
-        [Fact]
         [Trait("Category", "Substraction")]
         [Trait("Category", "Point")]
         public void GivenTwoPoints_WhenSubstracingThem_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstPoint = Tuple.Point(3f, 2f, 1f);
-            var secondPoint = Tuple.Point(5f, 6f, 7f);
+            var firstPoint = new Point(3f, 2f, 1f);
+            var secondPoint = new Point(5f, 6f, 7f);
 
             // Act
             var tuple = firstPoint - secondPoint;
@@ -273,8 +256,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenSubstracingThem_ThenAVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tuple.Vector(3f, 2f, 1f);
-            var secondVector = Tuple.Vector(5f, 6f, 7f);
+            var firstVector = new Vector(3f, 2f, 1f);
+            var secondVector = new Vector(5f, 6f, 7f);
 
             // Act
             var tuple = firstVector - secondVector;
@@ -293,8 +276,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVectorAndAPoint_WhenSubstracingVectorFromPoint_ThenAPointIsReturned()
         {
             // Arrange
-            var point = Tuple.Point(3f, 2f, 1f);
-            var vector = Tuple.Vector(5f, 6f, 7f);
+            var point = new Point(3f, 2f, 1f);
+            var vector = new Vector(5f, 6f, 7f);
 
             // Act
             var tuple = point - vector;
@@ -304,24 +287,6 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(-4f, tuple.Y);
             Assert.Equal(-6f, tuple.Z);
             Assert.Equal(Tuple.PointIndicator, tuple.W);
-        }
-
-        [Fact]
-        [Trait("Category", "Substraction")]
-        [Trait("Category", "Point")]
-        [Trait("Category", "Vector")]
-        [Trait("Category", "Exception")]
-        public void GivenAVectorAndAPoint_WhenSubstracingPointFromVector_ThenAnArithmeticExceptionIsThrown()
-        {
-            // Arrange
-            var vector = Tuple.Vector(3f, 2f, 1f);
-            var point = Tuple.Point(5f, 6f, 7f);
-
-            // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() => vector - point);
-
-            // Assert
-            Assert.Equal("You can't substract a Vector from a Point!", ex.Message);
         }
 
         [Fact]
@@ -397,29 +362,13 @@ namespace RayTracerChallenge.Core.Test
 
         [Fact]
         [Trait("Category", "Magnitude")]
-        [Trait("Category", "Point")]
-        [Trait("Category", "Exception")]
-        public void GivenAPoint_WhenGettingMagnitude_ThenAnArithmeticExceptionIsThrown()
-        {
-            // Arrange
-            var point = Tuple.Point(1f, -2f, 3f);
-
-            // Act
-            ArithmeticException ex = Assert.Throws<ArithmeticException>(() => point.Magnitude());
-
-            // Assert
-            Assert.Equal("This operation can only be used on a Vector!", ex.Message);
-        }
-
-        [Fact]
-        [Trait("Category", "Magnitude")]
         [Trait("Category", "Vector")]
         public void GivenAVectorWithAValueOf1InXOrYOrZ_WhenGettingMagnitude_Then1IsReturned()
         {
             // Arrange
-            var xVector = Tuple.Vector(1f, 0f, 0f);
-            var yVector = Tuple.Vector(0f, 1f, 0f);
-            var zVector = Tuple.Vector(0f, 0f, 1f);
+            var xVector = new Vector(1f, 0f, 0f);
+            var yVector = new Vector(0f, 1f, 0f);
+            var zVector = new Vector(0f, 0f, 1f);
 
             // Act
             var xMagnitude = xVector.Magnitude();
@@ -438,7 +387,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAPositiveVector_WhenGettingMagnitude_ThenAPositiveMagnitudeIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(1f, 2f, 3f);
+            var vector = new Vector(1f, 2f, 3f);
 
             // Act
             var magnitude = vector.Magnitude();
@@ -453,7 +402,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenANegativeVector_WhenGettingMagnitude_ThenAPositiveMagnitudeIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(-1f, -2f, -3f);
+            var vector = new Vector(-1f, -2f, -3f);
 
             // Act
             var magnitude = vector.Magnitude();
@@ -468,7 +417,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAVector_WhenNormalizing_ThenANewVectorIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(4f, 0f, 0f);
+            var vector = new Vector(4f, 0f, 0f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -485,7 +434,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAnotherVector_WhenNormalizing_ThenANewVectorIsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(1f, 2f, 3f);
+            var vector = new Vector(1f, 2f, 3f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -507,7 +456,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenANormalizedVector_WhenGettingMagnitude_Then1IsReturned()
         {
             // Arrange
-            var vector = Tuple.Vector(1f, 2f, 3f);
+            var vector = new Vector(1f, 2f, 3f);
 
             // Act
             var normalizedVector = vector.Normalize();
@@ -523,34 +472,14 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenGettingDotProduct_ThenDotProductIsReturned()
         {
             // Arrange
-            var firstVector = Tuple.Vector(1f, 2f, 3f);
-            var secondVector = Tuple.Vector(2f, 3f, 4f);
+            var firstVector = new Vector(1f, 2f, 3f);
+            var secondVector = new Vector(2f, 3f, 4f);
 
             // Act
-            var dotProduct = Tuple.Dot(firstVector, secondVector);
+            var dotProduct = firstVector.Dot(secondVector);
 
             // Assert
             Assert.Equal(20f, dotProduct);
-        }
-
-        [Fact]
-        [Trait("Category", "Dot Product")]
-        [Trait("Category", "Point")]
-        [Trait("Category", "Vector")]
-        [Trait("Category", "Exception")]
-        public void GivenAVectorAndAPoint_WhenGettingDotProduct_ThenAnArithmeticExceptionIsThrown()
-        {
-            // Arrange
-            var vector = Tuple.Vector(1f, 2f, 3f);
-            var point = Tuple.Point(1f, 2f, 3f);
-
-            // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
-
-            // Assert
-            Assert.Equal("This operation can only be used on Vectors!", ex.Message);
-            Assert.Equal("This operation can only be used on Vectors!", ex2.Message);
         }
 
         [Fact]
@@ -559,12 +488,12 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoVectors_WhenGettingCrossProduct_ThenANewVectorIsReturned()
         {
             // Arrange
-            var firstVector = Tuple.Vector(1f, 2f, 3f);
-            var secondVector = Tuple.Vector(2f, 3f, 4f);
+            var firstVector = new Vector(1f, 2f, 3f);
+            var secondVector = new Vector(2f, 3f, 4f);
 
             // Act
-            var crossVector = Tuple.Cross(firstVector, secondVector);
-            var reversedCrossVector = Tuple.Cross(secondVector, firstVector);
+            var crossVector =firstVector.Cross(secondVector);
+            var reversedCrossVector = secondVector.Cross(firstVector);
 
             // Assert
             Assert.Equal(-1f, crossVector.X);
@@ -573,26 +502,6 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(1f, reversedCrossVector.X);
             Assert.Equal(-2f, reversedCrossVector.Y);
             Assert.Equal(1f, reversedCrossVector.Z);
-        }
-
-        [Fact]
-        [Trait("Category", "Cross Product")]
-        [Trait("Category", "Point")]
-        [Trait("Category", "Vector")]
-        [Trait("Category", "Exception")]
-        public void GivenAVectorAndAPoint_WhenGettingCrossProduct_ThenAnArithmeticExceptionIsThrown()
-        {
-            // Arrange
-            var vector = Tuple.Vector(1f, 2f, 3f);
-            var point = Tuple.Point(2f, 3f, 4f);
-
-            // Act
-            var ex = Assert.Throws<ArithmeticException>(() => Tuple.Dot(vector, point));
-            var ex2 = Assert.Throws<ArithmeticException>(() => Tuple.Dot(point, vector));
-
-            // Assert
-            Assert.Equal("This operation can only be used on Vectors!", ex.Message);
-            Assert.Equal("This operation can only be used on Vectors!", ex2.Message);
         }
 
         [Fact]
@@ -606,7 +515,7 @@ namespace RayTracerChallenge.Core.Test
             var z = 1.7f;
 
             // Act
-            var color = Tuple.Color(x, y, z);
+            var color = new Color(x, y, z);
 
             // Assert
             Assert.Equal(x, color.X);
@@ -621,8 +530,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenAddingThemTogether_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tuple.Color(.9f, .6f, .75f);
-            var secondColor = Tuple.Color(.7f, .1f, .25f);
+            var firstColor = new Color(.9f, .6f, .75f);
+            var secondColor = new Color(.7f, .1f, .25f);
 
             // Act
             var color = firstColor + secondColor;
@@ -640,8 +549,8 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenSubstractingThem_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tuple.Color(.9f, .6f, .75f);
-            var secondColor = Tuple.Color(.7f, .1f, .25f);
+            var firstColor = new Color(.9f, .6f, .75f);
+            var secondColor = new Color(.7f, .1f, .25f);
 
             // Act
             var color = firstColor - secondColor;
@@ -659,7 +568,7 @@ namespace RayTracerChallenge.Core.Test
         public void GivenAColor_WhenMultiplyingWithAScalar_ThenANewColorIsReturned()
         {
             // Arrange
-            var color = Tuple.Color(.2f, .3f, .4f);
+            var color = new Color(.2f, .3f, .4f);
             var scalar = 2f;
 
             // Act
@@ -678,11 +587,11 @@ namespace RayTracerChallenge.Core.Test
         public void GivenTwoColors_WhenMultiplyingThem_ThenANewColorIsReturned()
         {
             // Arrange
-            var firstColor = Tuple.Color(1f, .2f, .4f);
-            var secondColor = Tuple.Color(.9f, 1f, .1f);
+            var firstColor = new Color(1f, .2f, .4f);
+            var secondColor = new Color(.9f, 1f, .1f);
 
             // Act
-            var newColor = Tuple.HadamardProduct(firstColor, secondColor);
+            var newColor = firstColor.HadamardProduct(secondColor);
 
             // Assert
             Assert.Equal(.9f, newColor.X);

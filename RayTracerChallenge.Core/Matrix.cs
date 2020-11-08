@@ -53,10 +53,7 @@ namespace RayTracerChallenge.Core
             }
         }
 
-        private int CalculateIndex(int row, int column)
-        {
-            return (row * Columns) + column;
-        }
+        private int CalculateIndex(int row, int column) => (row * Columns) + column;
 
         public bool Equals(Matrix other)
         {
@@ -143,10 +140,61 @@ namespace RayTracerChallenge.Core
             return new Tuple(x, y, z, w);
         }
 
-        public static Tuple operator *(Tuple tuple, Matrix matrix)
+        public static Tuple operator *(Tuple tuple, Matrix matrix) => matrix * tuple;
+
+        public static Point operator *(Matrix matrix, Point point)
         {
-            return matrix * tuple;
+            if (matrix.Rows != 4 || matrix.Columns != 4)
+            {
+                throw new ArithmeticException("This operation only supports 4x4 Matrices!");
+            }
+
+            var x = matrix[0, 0] * point.X +
+                   matrix[0, 1] * point.Y +
+                   matrix[0, 2] * point.Z +
+                   matrix[0, 3] * point.W;
+
+            var y = matrix[1, 0] * point.X +
+                    matrix[1, 1] * point.Y +
+                    matrix[1, 2] * point.Z +
+                    matrix[1, 3] * point.W;
+
+            var z = matrix[2, 0] * point.X +
+                    matrix[2, 1] * point.Y +
+                    matrix[2, 2] * point.Z +
+                    matrix[2, 3] * point.W;
+
+            return new Point(x, y, z);
         }
+
+        public static Point operator *(Point point, Matrix matrix) => matrix * point;
+
+        public static Vector operator *(Matrix matrix, Vector vector)
+        {
+            if (matrix.Rows != 4 || matrix.Columns != 4)
+            {
+                throw new ArithmeticException("This operation only supports 4x4 Matrices!");
+            }
+
+            var x = matrix[0, 0] * vector.X +
+                   matrix[0, 1] * vector.Y +
+                   matrix[0, 2] * vector.Z +
+                   matrix[0, 3] * vector.W;
+
+            var y = matrix[1, 0] * vector.X +
+                    matrix[1, 1] * vector.Y +
+                    matrix[1, 2] * vector.Z +
+                    matrix[1, 3] * vector.W;
+
+            var z = matrix[2, 0] * vector.X +
+                    matrix[2, 1] * vector.Y +
+                    matrix[2, 2] * vector.Z +
+                    matrix[2, 3] * vector.W;
+
+            return new Vector(x, y, z);
+        }
+
+        public static Vector operator *(Vector vector, Matrix matrix) => matrix * vector;
 
         public static Matrix IdentityMatrix()
         {
@@ -235,8 +283,9 @@ namespace RayTracerChallenge.Core
         {
             var minor = Minor(matrix, rowToRemove, columnToRemove);
 
-            return (rowToRemove + columnToRemove) % 2 == 0 ?
-                minor : minor * -1;
+            return (rowToRemove + columnToRemove) % 2 == 0
+                ? minor
+                : minor * -1;
         }
 
         public static Matrix Inverse(Matrix matrix)

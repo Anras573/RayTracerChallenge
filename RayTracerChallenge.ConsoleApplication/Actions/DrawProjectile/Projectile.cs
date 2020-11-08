@@ -4,7 +4,7 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public class Projectile
     {
-        public Tuple Position { get; set; }
-        public Tuple Velocity { get; set; }
+        public Point Position { get; set; }
+        public Vector Velocity { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using RayTracerChallenge.Core;
 using System;
 using System.IO;
-using Tuple = RayTracerChallenge.Core.Tuple;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
 {
@@ -19,7 +18,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
 
             var canvas = new Canvas(canvasSize, canvasSize);
 
-            var twelve = Tuple.Point(0, 0, 1);
+            var twelve = new Point(0, 0, 1);
             DrawPoint(twelve, canvas);
 
             for (int i = 1; i < 12; i++)
@@ -37,12 +36,12 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
             Console.WriteLine($"Image saved as {filePath}");
         }
 
-        private static void DrawPoint(Tuple point, Canvas canvas)
+        private static void DrawPoint(Point point, Canvas canvas)
         {
             var x = point.X * ClockRadius + canvasSize / 2;
             var y = point.Z * ClockRadius + canvasSize / 2;
 
-            canvas.WritePixel((int)x, (int)y, Color.White);
+            canvas.WritePixel((int)x, (int)y, Colors.White);
         }
     }
 }
