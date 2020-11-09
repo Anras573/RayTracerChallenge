@@ -29,7 +29,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix
             Console.WriteLine(matrix);
 
             Console.WriteLine("Generating subMatrix:");
-            var submatrix = Matrix.Submatrix(matrix, 2, 1);
+            var submatrix = matrix.Submatrix(2, 1);
 
             Console.WriteLine(submatrix);
         }

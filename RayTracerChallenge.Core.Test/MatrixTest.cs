@@ -530,7 +530,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 3] = 8;
 
             // Act
-            var transposedMatrix = Matrix.Transpose(matrix);
+            var transposedMatrix = matrix.Transpose();
 
             // Assert
             var expectedMatrix = new Matrix(columns, rows);
@@ -563,7 +563,7 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
 
             // Act
-            var transposedMatrix = Matrix.Transpose(Matrix.IdentityMatrix());
+            var transposedMatrix = Matrix.IdentityMatrix().Transpose();
 
             // Assert
             Assert.True(transposedMatrix.Equals(Matrix.IdentityMatrix()));
@@ -581,7 +581,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[1, 1] = 2f;
 
             // Act
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Assert
             Assert.Equal(17f, determinant);
@@ -604,7 +604,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[2, 2] = -3f;
 
             // Act
-            var submatrix = Matrix.Submatrix(matrix, 0, 2);
+            var submatrix = matrix.Submatrix(0, 2);
 
             // Assert
             Assert.Equal(2, submatrix.Columns);
@@ -639,7 +639,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 3] = 1f;
 
             // Act
-            var submatrix = Matrix.Submatrix(matrix, 2, 1);
+            var submatrix = matrix.Submatrix(2, 1);
 
             // Assert
             Assert.Equal(3, submatrix.Columns);
@@ -673,11 +673,11 @@ namespace RayTracerChallenge.Core.Test
             matrix[2, 1] = -1f;
             matrix[2, 2] = 5f;
 
-            var subMatrix = Matrix.Submatrix(matrix, 1, 0);
-            var determinant = Matrix.Determinant(subMatrix);
+            var subMatrix = matrix.Submatrix(1, 0);
+            var determinant = subMatrix.Determinant();
 
             // Act
-            var minor = Matrix.Minor(matrix, 1, 0);
+            var minor = matrix.Minor(1, 0);
 
             // Assert
             Assert.Equal(minor, determinant);
@@ -702,12 +702,12 @@ namespace RayTracerChallenge.Core.Test
             matrix[2, 1] = -1f;
             matrix[2, 2] = 5f;
 
-            var firstMinor = Matrix.Minor(matrix, 0, 0);
-            var secondMinor = Matrix.Minor(matrix, 1, 0);
+            var firstMinor = matrix.Minor(0, 0);
+            var secondMinor = matrix.Minor(1, 0);
 
             // Act
-            var firstCofactor = Matrix.Cofactor(matrix, 0, 0);
-            var secondCofactor = Matrix.Cofactor(matrix, 1, 0);
+            var firstCofactor = matrix.Cofactor(0, 0);
+            var secondCofactor = matrix.Cofactor(1, 0);
 
             // Assert
             Assert.Equal(-12f, firstMinor);
@@ -733,12 +733,12 @@ namespace RayTracerChallenge.Core.Test
             matrix[2, 1] = 6f;
             matrix[2, 2] = 4f;
 
-            var firstCofactor = Matrix.Cofactor(matrix, 0, 0);
-            var secondCofactor = Matrix.Cofactor(matrix, 0, 1);
-            var thirdCofactor = Matrix.Cofactor(matrix, 0, 2);
+            var firstCofactor = matrix.Cofactor(0, 0);
+            var secondCofactor = matrix.Cofactor(0, 1);
+            var thirdCofactor = matrix.Cofactor(0, 2);
 
             // Act
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Assert
             Assert.Equal(56f, firstCofactor);
@@ -771,13 +771,13 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 2] = 7f;
             matrix[3, 3] = -9f;
 
-            var firstCofactor = Matrix.Cofactor(matrix, 0, 0);
-            var secondCofactor = Matrix.Cofactor(matrix, 0, 1);
-            var thirdCofactor = Matrix.Cofactor(matrix, 0, 2);
-            var fourthCofactor = Matrix.Cofactor(matrix, 0, 3);
+            var firstCofactor = matrix.Cofactor(0, 0);
+            var secondCofactor = matrix.Cofactor(0, 1);
+            var thirdCofactor = matrix.Cofactor(0, 2);
+            var fourthCofactor = matrix.Cofactor(0, 3);
 
             // Act
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Assert
             Assert.Equal(690f, firstCofactor);
@@ -811,7 +811,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 2] = 7f;
             matrix[3, 3] = -6f;
 
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Act
             var isInvertible = matrix.IsInvertible;
@@ -845,7 +845,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 2] = 0f;
             matrix[3, 3] = 0f;
 
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Act
             var isInvertible = matrix.IsInvertible;
@@ -880,12 +880,12 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 2] = 7f;
             matrix[3, 3] = 4f;
 
-            var determinant = Matrix.Determinant(matrix);
-            var firstCofactor = Matrix.Cofactor(matrix, 2, 3);
-            var secondCofactor = Matrix.Cofactor(matrix, 3, 2);
+            var determinant = matrix.Determinant();
+            var firstCofactor = matrix.Cofactor(2, 3);
+            var secondCofactor = matrix.Cofactor(3, 2);
 
             // Act
-            var inversedMatrix = Matrix.Inverse(matrix);
+            var inversedMatrix = matrix.Inverse();
 
             // Asserts
             Assert.Equal(532f, determinant);
@@ -938,7 +938,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 3] = -4f;
 
             // Act
-            var inversedMatrix = Matrix.Inverse(matrix);
+            var inversedMatrix = matrix.Inverse();
 
             // Asserts
             Assert.Equal(-.15385f, inversedMatrix[0, 0], DefaultComparer);
@@ -988,7 +988,7 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 3] = 2f;
 
             // Act
-            var inversedMatrix = Matrix.Inverse(matrix);
+            var inversedMatrix = matrix.Inverse();
 
             // Asserts
             Assert.Equal(-.04074f, inversedMatrix[0, 0], DefaultComparer);
@@ -1037,12 +1037,12 @@ namespace RayTracerChallenge.Core.Test
             matrix[3, 2] = 0f;
             matrix[3, 3] = 0f;
 
-            var determinant = Matrix.Determinant(matrix);
+            var determinant = matrix.Determinant();
 
             // Act
             ArithmeticException ex = Assert.Throws<ArithmeticException>(() =>
             {
-                var value = Matrix.Inverse(matrix);
+                var value = matrix.Inverse();
             });
 
             // Assert
@@ -1095,7 +1095,7 @@ namespace RayTracerChallenge.Core.Test
             var product = firstMatrix * secondMatrix;
 
             // Act
-            var firstMatrixRecreated = product * Matrix.Inverse(secondMatrix);
+            var firstMatrixRecreated = product * secondMatrix.Inverse();
 
             // Asserts
             Assert.Equal(firstMatrix[0, 0], firstMatrixRecreated[0, 0], DefaultComparer);
@@ -1144,7 +1144,7 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Translate(5, -3, 2);
-            var inverse = Matrix.Inverse(transform);
+            var inverse = transform.Inverse();
             var point = new Point(-3, 4, 5);
 
             // Act
@@ -1220,7 +1220,7 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var transform = Matrix.Scale(2, 3, 4);
-            var inverse = Matrix.Inverse(transform);
+            var inverse = transform.Inverse();
             var vector = new Vector(-4, 6, 8);
 
             // Act
@@ -1287,7 +1287,7 @@ namespace RayTracerChallenge.Core.Test
             var point = new Point(0, 1, 0);
 
             var halfQuarterRotation = Matrix.RotateX(MathF.PI / 4);
-            var invertedHalfQuarterRotation = Matrix.Inverse(halfQuarterRotation);
+            var invertedHalfQuarterRotation = halfQuarterRotation.Inverse();
 
             // Act
             var halfQuarterPoint = invertedHalfQuarterRotation * point;

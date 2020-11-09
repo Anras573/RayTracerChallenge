@@ -3,12 +3,12 @@ using System.Text;
 
 namespace RayTracerChallenge.Core
 {
-    public struct Matrix
+    public class Matrix
     {
         public int Rows { get; }
         public int Columns { get; }
 
-        public bool IsInvertible => Determinant(this) != 0;
+        public bool IsInvertible => Determinant() != 0;
 
         private float[] Matrices { get; }
 
@@ -208,60 +208,54 @@ namespace RayTracerChallenge.Core
             return matrix;
         }
 
-        public static Matrix Transpose(Matrix matrix)
+        public Matrix Transpose()
         {
-            var transposedMatrix = new Matrix(matrix.Columns, matrix.Rows);
+            var transposedMatrix = new Matrix(Columns, Rows);
 
-            for (var row = 0; row < matrix.Rows; row++)
+            for (var row = 0; row < Rows; row++)
             {
-                for (var column = 0; column < matrix.Columns; column++)
+                for (var column = 0; column < Columns; column++)
                 {
-                    transposedMatrix[column, row] = matrix[row, column];
+                    transposedMatrix[column, row] = this[row, column];
                 }
             }
 
             return transposedMatrix;
         }
 
-        public static float Determinant(Matrix matrix)
+        public float Determinant()
         {
-            if (matrix.Rows == 2 && matrix.Columns == 2)
+            if (Rows == 2 && Columns == 2)
             {
-                return matrix[0, 0] * matrix[1, 1] - matrix[0, 1] * matrix[1, 0];
+                return this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0];
             }
 
             float determinant = 0f;
 
-            for (var column = 0; column < matrix.Columns; column++)
+            for (var column = 0; column < Columns; column++)
             {
-                determinant += matrix[0, column] * Cofactor(matrix, 0, column);
+                determinant += this[0, column] * Cofactor(0, column);
             }
 
             return determinant;
         }
 
-        public static Matrix Submatrix(Matrix matrix, int rowToRemove, int columnToRemove)
+        public Matrix Submatrix(int rowToRemove, int columnToRemove)
         {
-            var subMatrix = new Matrix(matrix.Rows - 1, matrix.Columns - 1);
+            var subMatrix = new Matrix(Rows - 1, Columns - 1);
             var currentRow = 0;
             
-            for (var row = 0; row < matrix.Rows; row++)
+            for (var row = 0; row < Rows; row++)
             {
                 var currentColumn = 0;
 
-                if (row == rowToRemove)
-                {
-                    continue;
-                }
+                if (row == rowToRemove) continue;
 
-                for (var column = 0; column < matrix.Columns; column++)
+                for (var column = 0; column < Columns; column++)
                 {
-                    if (column == columnToRemove)
-                    {
-                        continue;
-                    }
+                    if (column == columnToRemove) continue;
 
-                    subMatrix[currentRow, currentColumn] = matrix[row, column];
+                    subMatrix[currentRow, currentColumn] = this[row, column];
 
                     currentColumn++;
                 }
@@ -272,37 +266,37 @@ namespace RayTracerChallenge.Core
             return subMatrix;
         }
 
-        public static float Minor(Matrix matrix, int rowToRemove, int columnToRemove)
+        public float Minor(int rowToRemove, int columnToRemove)
         {
-            var subMatrix = Submatrix(matrix, rowToRemove, columnToRemove);
-            var determinant = Determinant(subMatrix);
+            var subMatrix = Submatrix(rowToRemove, columnToRemove);
+            var determinant = subMatrix.Determinant();
             return determinant;
         }
 
-        public static float Cofactor(Matrix matrix, int rowToRemove, int columnToRemove)
+        public float Cofactor(int rowToRemove, int columnToRemove)
         {
-            var minor = Minor(matrix, rowToRemove, columnToRemove);
+            var minor = Minor(rowToRemove, columnToRemove);
 
             return (rowToRemove + columnToRemove) % 2 == 0
                 ? minor
                 : minor * -1;
         }
 
-        public static Matrix Inverse(Matrix matrix)
+        public Matrix Inverse()
         {
-            if (!matrix.IsInvertible)
+            if (!IsInvertible)
             {
                 throw new ArithmeticException("This matrix is not invertible!");
             }
 
-            var inversedMatrix = new Matrix(matrix.Rows, matrix.Columns);
-            var determinant = Determinant(matrix);
+            var inversedMatrix = new Matrix(Rows, Columns);
+            var determinant = Determinant();
 
-            for (var row = 0; row < matrix.Rows; row++)
+            for (var row = 0; row < Rows; row++)
             {
-                for (var column = 0; column < matrix.Columns; column++)
+                for (var column = 0; column < Columns; column++)
                 {
-                    var cofactor = Cofactor(matrix, row, column);
+                    var cofactor = Cofactor(row, column);
 
                     // note that "col, row" here, instead of "row, col", accomplishes the transpose operation!
                     inversedMatrix[column, row] = cofactor / determinant;
