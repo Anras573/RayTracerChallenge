@@ -1,5 +1,6 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Actions.AnalogClock;
 using RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile;
+using RayTracerChallenge.ConsoleApplication.Actions.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using System;
@@ -14,7 +15,8 @@ namespace RayTracerChallenge.ConsoleApplication
         {
             DrawProjectile,
             PrintMatrix,
-            DrawAnalogClock
+            DrawAnalogClock,
+            DrawSphere
         };
 
         public static void Main()
@@ -64,6 +66,11 @@ namespace RayTracerChallenge.ConsoleApplication
         private static void DrawAnalogClock()
         {
             AnalogClockService.Run();
+        }
+
+        private static void DrawSphere()
+        {
+            DrawSphereService.Run();
         }
     }
 }

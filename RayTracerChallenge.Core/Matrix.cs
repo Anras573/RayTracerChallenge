@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace RayTracerChallenge.Core
 {
-    public class Matrix
+    public class Matrix : IEquatable<Matrix>
     {
         public int Rows { get; }
         public int Columns { get; }
@@ -404,6 +405,21 @@ namespace RayTracerChallenge.Core
             }
 
             return stringBuilder.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Matrix other))
+            {
+                return false;
+            }
+
+            return Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Matrices.Sum(m => m.GetHashCode());
         }
     }
 }
