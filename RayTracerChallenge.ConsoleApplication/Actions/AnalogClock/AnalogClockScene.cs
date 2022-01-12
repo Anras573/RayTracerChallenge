@@ -5,12 +5,12 @@ using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
 {
-    public static class AnalogClockService
+    public static class AnalogClockScene
     {
         private const int canvasSize = 500;
         private static float ClockRadius => canvasSize * 3f / 8f;
 
-        public static void Run()
+        public static void Render()
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "analogClock.ppm";

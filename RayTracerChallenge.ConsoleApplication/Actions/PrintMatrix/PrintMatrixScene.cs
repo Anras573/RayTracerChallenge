@@ -3,9 +3,9 @@ using System;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix
 {
-    public static class PrintMatrixService
+    public static class PrintMatrixScene
     {
-        public static void Run()
+        public static void Render()
         {
             Console.WriteLine("Generating 4x4 Matrix: ");
             var matrix = new Matrix(4, 4);

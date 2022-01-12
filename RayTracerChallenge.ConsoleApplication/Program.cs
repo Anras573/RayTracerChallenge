@@ -55,22 +55,22 @@ namespace RayTracerChallenge.ConsoleApplication
 
         private static void PrintMatrix()
         {
-            PrintMatrixService.Run();
+            PrintMatrixScene.Render();
         }
 
         private static void DrawProjectile()
         {
-            DrawProjectileService.Run();
+            DrawProjectileScene.Render();
         }
 
         private static void DrawAnalogClock()
         {
-            AnalogClockService.Run();
+            AnalogClockScene.Render();
         }
 
         private static void DrawSphere()
         {
-            DrawSphereService.Run();
+            DrawSphereScene.Render();
         }
     }
 }

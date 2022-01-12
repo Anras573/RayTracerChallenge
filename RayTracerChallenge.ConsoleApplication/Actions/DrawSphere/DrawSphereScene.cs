@@ -5,13 +5,13 @@ using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.DrawSphere
 {
-    public static class DrawSphereService
+    public static class DrawSphereScene
     {
         private const int CanvasPixels = 100;
         private const float WallZ = 10f;
         private const float WallSize = 7f;
 
-        public static void Run()
+        public static void Render()
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "sphere.ppm";

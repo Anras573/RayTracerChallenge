@@ -5,9 +5,9 @@ using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
 {
-    public static class DrawProjectileService
+    public static class DrawProjectileScene
     {
-        public static void Run()
+        public static void Render()
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "projectile.ppm";
