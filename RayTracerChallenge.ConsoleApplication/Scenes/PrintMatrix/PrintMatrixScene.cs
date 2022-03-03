@@ -1,11 +1,13 @@
 ﻿using RayTracerChallenge.Core;
 using System;
 
-namespace RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix
+namespace RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix
 {
-    public static class PrintMatrixScene
+    public class PrintMatrixScene : IScene
     {
-        public static void Render()
+        public string Name => "Print Matrix";
+
+        public void Render()
         {
             Console.WriteLine("Generating 4x4 Matrix: ");
             var matrix = new Matrix(4, 4);

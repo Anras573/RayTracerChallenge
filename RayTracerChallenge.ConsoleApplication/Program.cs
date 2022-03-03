@@ -1,7 +1,8 @@
-﻿using RayTracerChallenge.ConsoleApplication.Actions.AnalogClock;
-using RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile;
-using RayTracerChallenge.ConsoleApplication.Actions.DrawSphere;
-using RayTracerChallenge.ConsoleApplication.Actions.PrintMatrix;
+﻿using RayTracerChallenge.ConsoleApplication.Scenes;
+using RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock;
+using RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile;
+using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
+using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public static class Program
     {
-        private static readonly List<Action> _actions = new List<Action>
+        private static readonly List<IScene> _scenes = new List<IScene>
         {
-            DrawProjectile,
-            PrintMatrix,
-            DrawAnalogClock,
-            DrawSphere
+            new DrawProjectileScene(),
+            new PrintMatrixScene(),
+            new AnalogClockScene(),
+            new DrawSphereScene()
         };
 
         public static void Main()
@@ -28,9 +29,9 @@ namespace RayTracerChallenge.ConsoleApplication
         {
             Console.WriteLine("Choose option to run, or enter exit to exit program.");
 
-            foreach (var (i, action) in _actions.AsIndexable())
+            foreach (var (i, scene) in _scenes.AsIndexable())
             {
-                Console.WriteLine($"{i} - {action.Method.Name}");
+                Console.WriteLine($"{i} - {scene.Name}");
             }
 
             var input = Console.ReadLine().Trim();
@@ -42,35 +43,15 @@ namespace RayTracerChallenge.ConsoleApplication
 
             if (int.TryParse(input, out var choice))
             {
-                var action = _actions.ElementAtOrDefault(choice);
+                var scene = _scenes.ElementAtOrDefault(choice);
 
-                if (action != null)
+                if (scene != null)
                 {
-                    action.Invoke();
+                    scene.Render();
                 }
             }
 
             ListOptions();
-        }
-
-        private static void PrintMatrix()
-        {
-            PrintMatrixScene.Render();
-        }
-
-        private static void DrawProjectile()
-        {
-            DrawProjectileScene.Render();
-        }
-
-        private static void DrawAnalogClock()
-        {
-            AnalogClockScene.Render();
-        }
-
-        private static void DrawSphere()
-        {
-            DrawSphereScene.Render();
         }
     }
 }

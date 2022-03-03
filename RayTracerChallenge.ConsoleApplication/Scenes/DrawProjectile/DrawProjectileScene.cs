@@ -3,11 +3,13 @@ using RayTracerChallenge.Core;
 using System;
 using System.IO;
 
-namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
+namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
 {
-    public static class DrawProjectileScene
+    public class DrawProjectileScene : IScene
     {
-        public static void Render()
+        public string Name => "Draw Projectile";
+
+        public void Render()
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "projectile.ppm";
@@ -52,7 +54,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
             Console.WriteLine($"Image saved as {filePath}");
         }
 
-        private static Projectile Tick(Environment environment, Projectile projectile)
+        private Projectile Tick(Environment environment, Projectile projectile)
         {
             var position = projectile.Position + projectile.Velocity;
             var velocity = projectile.Velocity + environment.Gravity + environment.Wind;
@@ -64,7 +66,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.DrawProjectile
             };
         }
 
-        private static void DrawOnCanvas(Projectile projectile, Canvas canvas)
+        private void DrawOnCanvas(Projectile projectile, Canvas canvas)
         {
             var y = canvas.Height - projectile.Position.Y;
             var x = projectile.Position.X;

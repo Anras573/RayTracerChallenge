@@ -3,14 +3,16 @@ using RayTracerChallenge.Core;
 using System;
 using System.IO;
 
-namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
+namespace RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock
 {
-    public static class AnalogClockScene
+    public class AnalogClockScene : IScene
     {
-        private const int canvasSize = 500;
-        private static float ClockRadius => canvasSize * 3f / 8f;
+        public string Name => "Analog Clock";
 
-        public static void Render()
+        private const int canvasSize = 500;
+        private float ClockRadius => canvasSize * 3f / 8f;
+
+        public void Render()
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "analogClock.ppm";
@@ -36,7 +38,7 @@ namespace RayTracerChallenge.ConsoleApplication.Actions.AnalogClock
             Console.WriteLine($"Image saved as {filePath}");
         }
 
-        private static void DrawPoint(Point point, Canvas canvas)
+        private void DrawPoint(Point point, Canvas canvas)
         {
             var x = point.X * ClockRadius + canvasSize / 2;
             var y = point.Z * ClockRadius + canvasSize / 2;
