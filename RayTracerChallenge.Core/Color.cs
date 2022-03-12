@@ -5,6 +5,8 @@ namespace RayTracerChallenge.Core
 {
     public class Color : Tuple, IEquatable<Color>
     {
+        public static Color Black => new(0f, 0f, 0f);
+
         public float R => X;
         public float G => Y;
         public float B => Z;
@@ -20,6 +22,12 @@ namespace RayTracerChallenge.Core
 
         public static Color operator -(Color left, Color right)
             => new Color(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+
+        public static Color operator *(Color left, Color right)
+            => new Color(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+
+        public static Color operator *(Color c, float val)
+            => new Color(c.X * val, c.Y * val, c.Z * val);
 
         public Color HadamardProduct(Color other) => new Color(R * other.R, G * other.G, B * other.B);
 

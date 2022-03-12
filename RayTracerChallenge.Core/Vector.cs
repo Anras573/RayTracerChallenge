@@ -19,13 +19,13 @@ namespace RayTracerChallenge.Core
 
         public Vector Normalize()
         {
-            var magnitude = 1f / Magnitude();
+            var magnitude = Magnitude();
 
-            return new Vector(X * magnitude, Y * magnitude, Z * magnitude);
+            return new Vector(X / magnitude, Y / magnitude, Z / magnitude);
         }
 
         public float Magnitude()
-            => MathF.Sqrt(X* X + Y* Y + Z* Z);
+            => MathF.Sqrt(MathF.Pow(X, 2) + MathF.Pow(Y, 2) + MathF.Pow(Z, 2));
 
         public bool Equals([AllowNull] Vector other)
         {
@@ -42,5 +42,13 @@ namespace RayTracerChallenge.Core
 
         public static Vector operator *(Vector vector, float scalar)
             => new Vector(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
+
+        public static Vector operator -(Vector vector)
+            => new Vector(-vector.X, -vector.Y, -vector.Z);
+
+        public Vector Reflect(Vector surface)
+        {
+            return this - surface * 2 * Dot(surface);
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace RayTracerChallenge.Core.Test
     [Trait("Category", "Matrix")]
     public class MatrixTest
     {
-        private ApproximateComparer DefaultComparer => new ApproximateComparer(.0001f);
+        private static ApproximateComparer DefaultComparer => new ApproximateComparer(.0001f);
 
         [Fact]
         public void GivenRowAndColumnOf4_WhenCreatingAnMatrix_ThenA4x4MatrixIsCreated()
@@ -1117,7 +1117,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Translation")]
+        [Trait("Category", "Translate")]
         [Trait("Category", "Multiplication")]
         [Trait("Category", "Point")]
         public void GivenAPoint_WhenMultiplyingByATranslationMatrix_ThenTranslatedPointIsReturned()
@@ -1136,7 +1136,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Translation")]
+        [Trait("Category", "Translate")]
         [Trait("Category", "Inverse")]
         [Trait("Category", "Multiplication")]
         [Trait("Category", "Point")]
@@ -1157,7 +1157,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Translation")]
+        [Trait("Category", "Translate")]
         [Trait("Category", "Vector")]
         [Trait("Category", "Multiplication")]
         public void GivenAVector_WhenMultiplyingByTheInverseOfATranslationMatrix_ThenTranslationDoesNotAffectVectors()
@@ -1174,7 +1174,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Scaling")]
+        [Trait("Category", "Scale")]
         [Trait("Category", "Point")]
         [Trait("Category", "Multiplication")]
         public void GivenAPoint_WhenApplyingAScalingMatrix_ThenAScaledPointIsReturned()
@@ -1193,7 +1193,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Scaling")]
+        [Trait("Category", "Scale")]
         [Trait("Category", "Vector")]
         [Trait("Category", "Multiplication")]
         public void GivenAVector_WhenApplyingAScalingMatrix_ThenAScaledVectorIsReturned()
@@ -1212,7 +1212,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Translation")]
+        [Trait("Category", "Translate")]
         [Trait("Category", "Inverse")]
         [Trait("Category", "Multiplication")]
         [Trait("Category", "Point")]
@@ -1233,7 +1233,7 @@ namespace RayTracerChallenge.Core.Test
         }
 
         [Fact]
-        [Trait("Category", "Scaling")]
+        [Trait("Category", "Scale")]
         [Trait("Category", "Point")]
         [Trait("Category", "Reflection")]
         [Trait("Category", "Multiplication")]

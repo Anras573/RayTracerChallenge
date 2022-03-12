@@ -14,14 +14,8 @@ namespace RayTracerChallenge.Core.Test.Comparers
 
         public bool Equals(float x, float y)
         {
-            if (x != 0f || y != 0f)
-            {
-                var margin = MathF.Abs((x - y) / x);
 
-                return margin <= _marginOfError;
-            }
-
-            return x == y;
+            return MathF.Abs(x - y) < _marginOfError;
         }
 
         public int GetHashCode(float obj)

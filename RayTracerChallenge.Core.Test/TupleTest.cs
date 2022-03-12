@@ -7,7 +7,7 @@ namespace RayTracerChallenge.Core.Test
     [Trait("Category", "Tuple")]
     public class TupleTest
     {
-        private ApproximateComparer DefaultComparer => new ApproximateComparer(.000001f);
+        private static ApproximateComparer DefaultComparer => new ApproximateComparer(.000001f);
 
         [Fact]
         [Trait("Category", "Vector")]
@@ -598,6 +598,40 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(.2f, newColor.Y);
             Assert.Equal(.04f, newColor.Z, DefaultComparer);
             Assert.Equal(Tuple.VectorIndicator, newColor.W);
+        }
+
+        [Fact]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "Reflect")]
+        public void GivenAnAngle_WhenReflectingVector_ThenNewReflectVectorIsReturned()
+        {
+            // Arrange
+            var vector = new Vector(1f, -1f, 0f);
+            var surface = new Vector(0f, 1f, 0f);
+
+            // Act
+            var reflection = vector.Reflect(surface);
+
+            // Assert
+            Assert.Equal(reflection, new Vector(1f, 1f, 0f));
+        }
+
+        [Fact]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "Reflect")]
+        public void GivenASlantedAngle_WhenReflectingVector_ThenNewReflectVectorIsReturned()
+        {
+            // Arrange
+            var vector = new Vector(0f, -1f, 0f);
+            var surface = new Vector(MathF.Sqrt(2f) / 2f, MathF.Sqrt(2f) / 2f, 0f);
+
+            // Act
+            var reflection = vector.Reflect(surface);
+
+            // Assert
+            Assert.Equal(1f, reflection.X, DefaultComparer);
+            Assert.Equal(0f, reflection.Y, DefaultComparer);
+            Assert.Equal(0f, reflection.Z, DefaultComparer);
         }
     }
 }

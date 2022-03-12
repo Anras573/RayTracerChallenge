@@ -7,12 +7,14 @@ namespace RayTracerChallenge.Core
         public Point Origin;
         public Guid Id { get; }
         public Matrix Transform;
+        public Material Material;
 
         public Sphere()
         {
             Origin = new Point(0f, 0f, 0f);
             Id = Guid.NewGuid();
             Transform = Matrix.IdentityMatrix();
+            Material = Material.Default;
         }
 
         public Intersections Intersects(Ray ray)
@@ -35,6 +37,15 @@ namespace RayTracerChallenge.Core
             return new Intersections(
                 new Intersection(MathF.Min(t1, t2), this),
                 new Intersection(MathF.Max(t1, t2), this));
+        }
+
+        public Vector NormalAt(Point worldPoint)
+        {
+            var objectPoint = Transform.Inverse() * worldPoint;
+            var objectNormal = objectPoint - Origin;
+            var worldNormal = Transform.Transpose().Inverse() * objectNormal;
+
+            return worldNormal.Normalize();
         }
     }
 }
