@@ -3,6 +3,7 @@ using RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
+using RayTracerChallenge.ConsoleApplication.Scenes.MovingLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
@@ -24,7 +25,8 @@ namespace RayTracerChallenge.ConsoleApplication
             new PrintMatrixScene(),
             new AnalogClockScene(),
             new DrawSphereScene(),
-            new DrawSphereWithLightScene()
+            new DrawSphereWithLightScene(),
+            new MovingLightScene()
         };
 
         public static void Main()

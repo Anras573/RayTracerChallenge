@@ -5,22 +5,24 @@ using Color = RayTracerChallenge.Core.Color;
 
 namespace RayTracerChallenge.Integration.ImageSharp
 {
-    public class ImageSharpCanvasRenderer : ICanvasRenderer
+    public class ImageSharpGifRenderer
     {
-        private readonly string _fileType;
+        private readonly Image<Rgb24> _innerImage;
+        private readonly int _frameDelay;
 
-        public ImageSharpCanvasRenderer(string fileType)
+        public ImageSharpGifRenderer(int width, int height, int frameDelay = 1000/60)
         {
-            _fileType = fileType.StartsWith(".") ? fileType : $".{fileType}";
+            _innerImage = new Image<Rgb24>(width, height);
+            _frameDelay = frameDelay;
         }
 
-        public void Render(Canvas canvas, string path)
+        public void RenderFrame(Canvas canvas)
         {
             using var image = new Image<Rgb24>(canvas.Width, canvas.Height);
 
             for (int x = 0; x < canvas.Width; x++)
             {
-                for(int y = 0; y < canvas.Height; y++)
+                for (int y = 0; y < canvas.Height; y++)
                 {
                     var index = (y * canvas.Width) + x;
                     var color = canvas.Pixels[index];
@@ -33,12 +35,23 @@ namespace RayTracerChallenge.Integration.ImageSharp
                 }
             }
 
-            if (!path.EndsWith(_fileType, StringComparison.CurrentCultureIgnoreCase))
+
+            // Set the delay until the next image is displayed.
+            var metadata = image.Frames.RootFrame.Metadata.GetGifMetadata();
+            metadata.FrameDelay = _frameDelay;
+
+            // Add the color image to the gif.
+            _innerImage.Frames.AddFrame(image.Frames.RootFrame);
+        }
+
+        public void Render(string path)
+        {
+            if (!path.EndsWith(".gif", StringComparison.CurrentCultureIgnoreCase))
             {
-                path = $"{path}{_fileType}";
+                path = $"{path}.gif";
             }
 
-            image.Save(path);
+            _innerImage.SaveAsGif(path);
         }
 
         /// <summary>
