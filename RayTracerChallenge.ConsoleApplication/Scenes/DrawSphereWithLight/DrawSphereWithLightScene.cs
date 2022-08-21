@@ -13,7 +13,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
         private const float WallZ = 10f;
         private const float WallSize = 7f;
 
-        public void Render()
+        public void Render(ICanvasRenderer canvasRenderer)
         {
             var sphere = new Sphere();
             sphere.Material.Color = new Color(1f, 0.2f, 1f);
@@ -54,9 +54,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
                 }
             }
 
-            var imageAsString = canvas.ToPpm();
-
-            File.WriteAllText(filePath, imageAsString);
+            canvasRenderer.Render(canvas, filePath);
 
             Console.WriteLine($"Image saved as {filePath}");
         }

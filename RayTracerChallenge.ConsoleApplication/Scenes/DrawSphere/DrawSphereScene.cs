@@ -13,7 +13,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
         private const float WallZ = 10f;
         private const float WallSize = 7f;
 
-        public void Render()
+        public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "sphere.ppm";
@@ -51,9 +51,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
                 }
             }
 
-            var imageAsString = canvas.ToPpm();
-
-            File.WriteAllText(filePath, imageAsString);
+            canvasRenderer.Render(canvas, filePath);
 
             Console.WriteLine($"Image saved as {filePath}");
         }

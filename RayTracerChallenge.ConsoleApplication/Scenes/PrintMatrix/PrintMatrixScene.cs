@@ -7,7 +7,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix
     {
         public string Name => "Print Matrix";
 
-        public void Render()
+        public void Render(ICanvasRenderer canvasRenderer)
         {
             Console.WriteLine("Generating 4x4 Matrix: ");
             var matrix = new Matrix(4, 4);

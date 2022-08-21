@@ -10,9 +10,9 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock
         public string Name => "Analog Clock";
 
         private const int canvasSize = 500;
-        private float ClockRadius => canvasSize * 3f / 8f;
+        private static float ClockRadius => canvasSize * 3f / 8f;
 
-        public void Render()
+        public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "analogClock.ppm";
@@ -31,9 +31,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock
                 DrawPoint(point, canvas);
             }
 
-            var imageAsString = canvas.ToPpm();
-
-            File.WriteAllText(filePath, imageAsString);
+            canvasRenderer.Render(canvas, filePath);
 
             Console.WriteLine($"Image saved as {filePath}");
         }

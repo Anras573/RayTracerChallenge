@@ -1,8 +1,10 @@
-﻿namespace RayTracerChallenge.ConsoleApplication.Scenes
+﻿using RayTracerChallenge.Core;
+
+namespace RayTracerChallenge.ConsoleApplication.Scenes
 {
     internal interface IScene
     {
         string Name { get; }
-        void Render();
+        void Render(ICanvasRenderer canvasRenderer);
     }
 }

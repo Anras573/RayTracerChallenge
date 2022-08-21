@@ -5,6 +5,7 @@ using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
+using RayTracerChallenge.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public static class Program
     {
-        private static readonly List<IScene> _scenes = new List<IScene>
+        private static readonly ICanvasRenderer _canvasRenderer = new PpmCanvasRenderer();
+
+        private static readonly List<IScene> _scenes = new()
         {
             new DrawProjectileScene(),
             new PrintMatrixScene(),
@@ -47,10 +50,7 @@ namespace RayTracerChallenge.ConsoleApplication
             {
                 var scene = _scenes.ElementAtOrDefault(choice);
 
-                if (scene != null)
-                {
-                    scene.Render();
-                }
+                scene?.Render(_canvasRenderer);
             }
 
             ListOptions();

@@ -9,7 +9,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
     {
         public string Name => "Draw Projectile";
 
-        public void Render()
+        public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "projectile.ppm";
@@ -47,9 +47,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
             Console.WriteLine($"It took {numberOfTicks} ticks to hit the ground!");
             DrawOnCanvas(projectile, canvas);
 
-            var imageAsString = canvas.ToPpm();
-
-            File.WriteAllText(filePath, imageAsString);
+            canvasRenderer.Render(canvas, filePath);
 
             Console.WriteLine($"Image saved as {filePath}");
         }
