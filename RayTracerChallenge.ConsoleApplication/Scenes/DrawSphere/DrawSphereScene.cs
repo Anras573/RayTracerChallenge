@@ -1,6 +1,7 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
@@ -16,7 +17,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
         public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "sphere.ppm";
+            var fileName = "sphere";
             var filePath = Path.Combine(path, fileName);
 
             var canvas = new Canvas(CanvasPixels, CanvasPixels);

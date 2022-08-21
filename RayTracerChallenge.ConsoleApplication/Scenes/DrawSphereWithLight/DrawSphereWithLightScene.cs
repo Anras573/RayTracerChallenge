@@ -21,7 +21,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
             var light = new Light(new Point(-10f, 10f, -10f), new Color(1f, 1f, 1f));
 
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "sphere light.ppm";
+            var fileName = "sphere light";
             var filePath = Path.Combine(path, fileName);
 
             var canvas = new Canvas(CanvasPixels, CanvasPixels);

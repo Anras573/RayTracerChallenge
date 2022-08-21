@@ -6,6 +6,7 @@ using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
+using RayTracerChallenge.Integration.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace RayTracerChallenge.ConsoleApplication
 {
     public static class Program
     {
-        private static readonly ICanvasRenderer _canvasRenderer = new PpmCanvasRenderer();
+        //private static readonly ICanvasRenderer _canvasRenderer = new PpmCanvasRenderer();
+        private static readonly ICanvasRenderer _canvasRenderer = new ImageSharpCanvasRenderer(".png");
 
         private static readonly List<IScene> _scenes = new()
         {

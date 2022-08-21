@@ -1,6 +1,7 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
@@ -12,7 +13,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
         public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "projectile.ppm";
+            var fileName = "projectile";
             var filePath = Path.Combine(path, fileName);
 
             var projectile = new Projectile

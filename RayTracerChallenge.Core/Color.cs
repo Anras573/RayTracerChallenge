@@ -11,11 +11,9 @@ namespace RayTracerChallenge.Core
         public float G => Y;
         public float B => Z;
 
-        public static int MaximumColorValue = 255;
+        public const int MaximumColorValue = 255;
 
-        public Color(float r, float g, float b) : base(r, g, b, VectorIndicator)
-        {
-        }
+        public Color(float r, float g, float b) : base(r, g, b, VectorIndicator) { }
 
         public static Color operator +(Color left, Color right)
             => new Color(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
@@ -38,6 +36,16 @@ namespace RayTracerChallenge.Core
             if (other == null) return false;
 
             return R == other.R && G == other.G && B == other.B;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Color);
+        }
+
+        public override int GetHashCode()
+        {
+            return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode();
         }
     }
 }

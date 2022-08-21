@@ -72,6 +72,11 @@ namespace RayTracerChallenge.Core
             stringBuilder.AppendLine(line);
             stringBuilder.AppendLine(); // End on an empty line!
             
+            if (!path.EndsWith(".ppm", StringComparison.CurrentCultureIgnoreCase))
+            {
+                path = $"{path}.ppm";
+            }
+
             File.WriteAllText(path, stringBuilder.ToString());
         }
 
