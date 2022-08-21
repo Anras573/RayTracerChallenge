@@ -19,7 +19,7 @@ namespace RayTracerChallenge.Core.Test
             var ppmIdentifier = "P3";
             var newLine = Environment.NewLine;
             var sut = new PpmCanvasRenderer();
-            var tempPath = Path.GetTempFileName();
+            var tempPath = GetPpmTempFileName();
 
             // Act
             sut.Render(canvas, tempPath);
@@ -47,7 +47,7 @@ namespace RayTracerChallenge.Core.Test
             var color2 = new Color(0f, .5f, 0f);
             var color3 = new Color(-.5f, 0f, 1f);
             var sut = new PpmCanvasRenderer();
-            var tempPath = Path.GetTempFileName();
+            var tempPath = GetPpmTempFileName();
 
             // Act
             canvas.WritePixel(0, 0, color1);
@@ -74,7 +74,7 @@ namespace RayTracerChallenge.Core.Test
             var height = 20;
             var canvas = new Canvas(width, height);
             var sut = new PpmCanvasRenderer();
-            var tempPath = Path.GetTempFileName();
+            var tempPath = GetPpmTempFileName();
 
             // Act
             sut.Render(canvas, tempPath);
@@ -94,7 +94,7 @@ namespace RayTracerChallenge.Core.Test
             var canvas = new Canvas(width, height);
             var color = new Color(1f, .8f, .6f);
             var sut = new PpmCanvasRenderer();
-            var tempPath = Path.GetTempFileName();
+            var tempPath = GetPpmTempFileName();
 
             // Act
             for (var x = 0; x < width; x++)
@@ -118,6 +118,11 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(line5, lines[4]);
             Assert.Equal(line6, lines[5]);
             Assert.Equal(line7, lines[6]);
+        }
+
+        private static string GetPpmTempFileName()
+        {
+            return $"{Path.GetTempFileName()}.ppm";
         }
     }
 }
