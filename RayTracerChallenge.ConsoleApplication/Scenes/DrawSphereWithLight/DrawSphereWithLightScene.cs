@@ -2,6 +2,7 @@
 using RayTracerChallenge.Core;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
 {
@@ -18,7 +19,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
             var sphere = new Sphere();
             sphere.Material.Color = new Color(1f, 0.2f, 1f);
 
-            var light = new Light(new Point(-10f, 10f, -10f), new Color(1f, 1f, 1f));
+            var light = new Light(new Point(-10f, 10f, -10f), Colors.White);
 
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "sphere light";
@@ -29,7 +30,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
             var pixelSize = WallSize / CanvasPixels;
             var half = WallSize / 2;
 
-            for (int y = 0; y < CanvasPixels; y++)
+            Parallel.For(0, CanvasPixels, (y) =>
             {
                 var worldY = half - pixelSize * y;
                 for (int x = 0; x < CanvasPixels; x++)
@@ -52,7 +53,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
                         canvas.WritePixel(x, y, color);
                     }
                 }
-            }
+            });
 
             canvasRenderer.Render(canvas, filePath);
 

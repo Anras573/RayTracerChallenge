@@ -6,6 +6,7 @@ namespace RayTracerChallenge.Core
     public class Color : Tuple, IEquatable<Color>
     {
         public static Color Black => new(0f, 0f, 0f);
+        public static Color White => new(1f, 1f, 1f);
 
         public float R => X;
         public float G => Y;

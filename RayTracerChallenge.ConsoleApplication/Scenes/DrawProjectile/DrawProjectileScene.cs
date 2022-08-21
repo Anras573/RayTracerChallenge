@@ -1,7 +1,6 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile

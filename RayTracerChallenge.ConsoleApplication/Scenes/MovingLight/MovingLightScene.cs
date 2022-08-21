@@ -3,6 +3,7 @@ using RayTracerChallenge.Core;
 using RayTracerChallenge.Integration.ImageSharp;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
 {
@@ -16,7 +17,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
 
         public void Render(ICanvasRenderer canvasRenderer)
         {
-            var renderer = new ImageSharpGifRenderer(CanvasPixels, CanvasPixels);
+            var renderer = new ImageSharpGifRenderer(CanvasPixels, CanvasPixels, 8);
 
             var path = ConsoleHelper.GetPath("output file");
             var fileName = "sphere light";
@@ -31,15 +32,15 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
             var half = WallSize / 2;
 
             var currentFrameNumber = 1;
-            var maxFrameNumber = 21;
+            var maxFrameNumber = 42;
 
-            for (float i = -10f; i < 11f; i++)
+            for (float i = -10f; i < 11f; i += 0.5f)
             {
-                var light = new Light(new Point(i, 10f, -10f), new Color(1f, 1f, 1f));
+                var light = new Light(new Point(i, 10f, -10f), Colors.White);
 
                 Console.WriteLine($"Rendering frame {currentFrameNumber++} out of {maxFrameNumber}");
 
-                for (int y = 0; y < CanvasPixels; y++)
+                Parallel.For(0, CanvasPixels, (y) =>
                 {
                     var worldY = half - pixelSize * y;
                     for (int x = 0; x < CanvasPixels; x++)
@@ -62,7 +63,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
                             canvas.WritePixel(x, y, color);
                         }
                     }
-                }
+                });
 
                 renderer.RenderFrame(canvas);
             }
