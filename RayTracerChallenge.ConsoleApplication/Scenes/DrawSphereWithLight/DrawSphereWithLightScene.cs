@@ -8,7 +8,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
 {
     public class DrawSphereWithLightScene : IScene
     {
-        public string Name => "Draw Sphere With Light";
+        public string Name => "Draw Sphere With Lights";
 
         private const int CanvasPixels = 400;
         private const float WallZ = 10f;

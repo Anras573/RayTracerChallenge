@@ -10,4 +10,8 @@
     <ProjectReference Include="..\RayTracerChallenge.Integration.ImageSharp\RayTracerChallenge.Integration.ImageSharp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scenes\SceneWithSpheres\" />
+  </ItemGroup>
+
 </Project>

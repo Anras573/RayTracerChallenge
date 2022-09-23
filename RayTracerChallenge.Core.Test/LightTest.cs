@@ -2,7 +2,7 @@
 
 namespace RayTracerChallenge.Core.Test
 {
-    [Trait("Category", "Light")]
+    [Trait("Category", "Lights")]
     public class LightTest
     {
         [Fact]
@@ -10,7 +10,7 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var position = new Point(0f, 0f, 0f);
-            var intensity = new Color(1f, 1f, 1f);
+            var intensity = Color.White;
 
             // Act
             var light = new Light(position, intensity);

@@ -5,6 +5,7 @@ using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.MovingLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using RayTracerChallenge.Integration.ImageSharp;
@@ -26,7 +27,8 @@ namespace RayTracerChallenge.ConsoleApplication
             new AnalogClockScene(),
             new DrawSphereScene(),
             new DrawSphereWithLightScene(),
-            new MovingLightScene()
+            new MovingLightScene(),
+            new RenderSpheresScene()
         };
 
         public static void Main()
@@ -43,11 +45,11 @@ namespace RayTracerChallenge.ConsoleApplication
                 Console.WriteLine($"{i} - {scene.Name}");
             }
 
-            var input = Console.ReadLine().Trim();
+            var input = Console.ReadLine()?.Trim();
 
             if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
             {
-                System.Environment.Exit(0);
+                return;
             }
 
             if (int.TryParse(input, out var choice))

@@ -7,8 +7,6 @@ namespace RayTracerChallenge.Core.Test
     [Trait("Category", "Matrix")]
     public class MatrixTest
     {
-        private static ApproximateComparer DefaultComparer => new ApproximateComparer(.0001f);
-
         [Fact]
         public void GivenRowAndColumnOf4_WhenCreatingAnMatrix_ThenA4x4MatrixIsCreated()
         {
@@ -894,22 +892,22 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(firstCofactor / determinant, inversedMatrix[3, 2]);
             Assert.Equal(secondCofactor / determinant, inversedMatrix[2, 3]);
 
-            Assert.Equal(.21805f, inversedMatrix[0, 0], DefaultComparer);
-            Assert.Equal(.45113f, inversedMatrix[0, 1], DefaultComparer);
-            Assert.Equal(.24060f, inversedMatrix[0, 2], DefaultComparer);
-            Assert.Equal(-.04511f, inversedMatrix[0, 3], DefaultComparer);
-            Assert.Equal(-.80827f, inversedMatrix[1, 0], DefaultComparer);
-            Assert.Equal(-1.45677f, inversedMatrix[1, 1], DefaultComparer);
-            Assert.Equal(-.44361f, inversedMatrix[1, 2], DefaultComparer);
-            Assert.Equal(.52068f, inversedMatrix[1, 3], DefaultComparer);
-            Assert.Equal(-.07895f, inversedMatrix[2, 0], DefaultComparer);
-            Assert.Equal(-.22368f, inversedMatrix[2, 1], DefaultComparer);
-            Assert.Equal(-.05263f, inversedMatrix[2, 2], DefaultComparer);
-            Assert.Equal(.19737f, inversedMatrix[2, 3], DefaultComparer);
-            Assert.Equal(-.52256f, inversedMatrix[3, 0], DefaultComparer);
-            Assert.Equal(-.81391f, inversedMatrix[3, 1], DefaultComparer);
-            Assert.Equal(-.30075f, inversedMatrix[3, 2], DefaultComparer);
-            Assert.Equal(.30639f, inversedMatrix[3, 3], DefaultComparer);
+            Assert.Equal(.21805f, inversedMatrix[0, 0], ApproximateComparer.Default);
+            Assert.Equal(.45113f, inversedMatrix[0, 1], ApproximateComparer.Default);
+            Assert.Equal(.24060f, inversedMatrix[0, 2], ApproximateComparer.Default);
+            Assert.Equal(-.04511f, inversedMatrix[0, 3], ApproximateComparer.Default);
+            Assert.Equal(-.80827f, inversedMatrix[1, 0], ApproximateComparer.Default);
+            Assert.Equal(-1.45677f, inversedMatrix[1, 1], ApproximateComparer.Default);
+            Assert.Equal(-.44361f, inversedMatrix[1, 2], ApproximateComparer.Default);
+            Assert.Equal(.52068f, inversedMatrix[1, 3], ApproximateComparer.Default);
+            Assert.Equal(-.07895f, inversedMatrix[2, 0], ApproximateComparer.Default);
+            Assert.Equal(-.22368f, inversedMatrix[2, 1], ApproximateComparer.Default);
+            Assert.Equal(-.05263f, inversedMatrix[2, 2], ApproximateComparer.Default);
+            Assert.Equal(.19737f, inversedMatrix[2, 3], ApproximateComparer.Default);
+            Assert.Equal(-.52256f, inversedMatrix[3, 0], ApproximateComparer.Default);
+            Assert.Equal(-.81391f, inversedMatrix[3, 1], ApproximateComparer.Default);
+            Assert.Equal(-.30075f, inversedMatrix[3, 2], ApproximateComparer.Default);
+            Assert.Equal(.30639f, inversedMatrix[3, 3], ApproximateComparer.Default);
         }
 
         [Fact]
@@ -941,25 +939,25 @@ namespace RayTracerChallenge.Core.Test
             var inversedMatrix = matrix.Inverse();
 
             // Asserts
-            Assert.Equal(-.15385f, inversedMatrix[0, 0], DefaultComparer);
-            Assert.Equal(-.15385f, inversedMatrix[0, 1], DefaultComparer);
-            Assert.Equal(-.28205f, inversedMatrix[0, 2], DefaultComparer);
-            Assert.Equal(-.53846f, inversedMatrix[0, 3], DefaultComparer);
+            Assert.Equal(-.15385f, inversedMatrix[0, 0], ApproximateComparer.Default);
+            Assert.Equal(-.15385f, inversedMatrix[0, 1], ApproximateComparer.Default);
+            Assert.Equal(-.28205f, inversedMatrix[0, 2], ApproximateComparer.Default);
+            Assert.Equal(-.53846f, inversedMatrix[0, 3], ApproximateComparer.Default);
 
-            Assert.Equal(-.07692f, inversedMatrix[1, 0], DefaultComparer);
-            Assert.Equal(.12308f, inversedMatrix[1, 1], DefaultComparer);
-            Assert.Equal(.02564f, inversedMatrix[1, 2], DefaultComparer);
-            Assert.Equal(.03077f, inversedMatrix[1, 3], DefaultComparer);
+            Assert.Equal(-.07692f, inversedMatrix[1, 0], ApproximateComparer.Default);
+            Assert.Equal(.12308f, inversedMatrix[1, 1], ApproximateComparer.Default);
+            Assert.Equal(.02564f, inversedMatrix[1, 2], ApproximateComparer.Default);
+            Assert.Equal(.03077f, inversedMatrix[1, 3], ApproximateComparer.Default);
 
-            Assert.Equal(.35897f, inversedMatrix[2, 0], DefaultComparer);
-            Assert.Equal(.35897f, inversedMatrix[2, 1], DefaultComparer);
-            Assert.Equal(.43590f, inversedMatrix[2, 2], DefaultComparer);
-            Assert.Equal(.92308f, inversedMatrix[2, 3], DefaultComparer);
+            Assert.Equal(.35897f, inversedMatrix[2, 0], ApproximateComparer.Default);
+            Assert.Equal(.35897f, inversedMatrix[2, 1], ApproximateComparer.Default);
+            Assert.Equal(.43590f, inversedMatrix[2, 2], ApproximateComparer.Default);
+            Assert.Equal(.92308f, inversedMatrix[2, 3], ApproximateComparer.Default);
 
-            Assert.Equal(-.69231f, inversedMatrix[3, 0], DefaultComparer);
-            Assert.Equal(-.69231f, inversedMatrix[3, 1], DefaultComparer);
-            Assert.Equal(-.76923f, inversedMatrix[3, 2], DefaultComparer);
-            Assert.Equal(-1.92308f, inversedMatrix[3, 3], DefaultComparer);
+            Assert.Equal(-.69231f, inversedMatrix[3, 0], ApproximateComparer.Default);
+            Assert.Equal(-.69231f, inversedMatrix[3, 1], ApproximateComparer.Default);
+            Assert.Equal(-.76923f, inversedMatrix[3, 2], ApproximateComparer.Default);
+            Assert.Equal(-1.92308f, inversedMatrix[3, 3], ApproximateComparer.Default);
         }
 
         [Fact]
@@ -991,25 +989,25 @@ namespace RayTracerChallenge.Core.Test
             var inversedMatrix = matrix.Inverse();
 
             // Asserts
-            Assert.Equal(-.04074f, inversedMatrix[0, 0], DefaultComparer);
-            Assert.Equal(-.07778f, inversedMatrix[0, 1], DefaultComparer);
-            Assert.Equal(.14444f, inversedMatrix[0, 2], DefaultComparer);
-            Assert.Equal(-.22222f, inversedMatrix[0, 3], DefaultComparer);
+            Assert.Equal(-.04074f, inversedMatrix[0, 0], ApproximateComparer.Default);
+            Assert.Equal(-.07778f, inversedMatrix[0, 1], ApproximateComparer.Default);
+            Assert.Equal(.14444f, inversedMatrix[0, 2], ApproximateComparer.Default);
+            Assert.Equal(-.22222f, inversedMatrix[0, 3], ApproximateComparer.Default);
 
-            Assert.Equal(-.07778f, inversedMatrix[1, 0], DefaultComparer);
-            Assert.Equal(.03333334f, inversedMatrix[1, 1], DefaultComparer);
-            Assert.Equal(.36667f, inversedMatrix[1, 2], DefaultComparer);
-            Assert.Equal(-.33333f, inversedMatrix[1, 3], DefaultComparer);
+            Assert.Equal(-.07778f, inversedMatrix[1, 0], ApproximateComparer.Default);
+            Assert.Equal(.03333334f, inversedMatrix[1, 1], ApproximateComparer.Default);
+            Assert.Equal(.36667f, inversedMatrix[1, 2], ApproximateComparer.Default);
+            Assert.Equal(-.33333f, inversedMatrix[1, 3], ApproximateComparer.Default);
 
-            Assert.Equal(-.02901f, inversedMatrix[2, 0], DefaultComparer);
-            Assert.Equal(-.14630f, inversedMatrix[2, 1], DefaultComparer);
-            Assert.Equal(-.10926f, inversedMatrix[2, 2], DefaultComparer);
-            Assert.Equal(.12963f, inversedMatrix[2, 3], DefaultComparer);
+            Assert.Equal(-.02901f, inversedMatrix[2, 0], ApproximateComparer.Default);
+            Assert.Equal(-.14630f, inversedMatrix[2, 1], ApproximateComparer.Default);
+            Assert.Equal(-.10926f, inversedMatrix[2, 2], ApproximateComparer.Default);
+            Assert.Equal(.12963f, inversedMatrix[2, 3], ApproximateComparer.Default);
 
-            Assert.Equal(.17778f, inversedMatrix[3, 0], DefaultComparer);
-            Assert.Equal(.06667f, inversedMatrix[3, 1], DefaultComparer);
-            Assert.Equal(-.26667f, inversedMatrix[3, 2], DefaultComparer);
-            Assert.Equal(.33333f, inversedMatrix[3, 3], DefaultComparer);
+            Assert.Equal(.17778f, inversedMatrix[3, 0], ApproximateComparer.Default);
+            Assert.Equal(.06667f, inversedMatrix[3, 1], ApproximateComparer.Default);
+            Assert.Equal(-.26667f, inversedMatrix[3, 2], ApproximateComparer.Default);
+            Assert.Equal(.33333f, inversedMatrix[3, 3], ApproximateComparer.Default);
         }
 
         [Fact]
@@ -1098,22 +1096,22 @@ namespace RayTracerChallenge.Core.Test
             var firstMatrixRecreated = product * secondMatrix.Inverse();
 
             // Asserts
-            Assert.Equal(firstMatrix[0, 0], firstMatrixRecreated[0, 0], DefaultComparer);
-            Assert.Equal(firstMatrix[0, 1], firstMatrixRecreated[0, 1], DefaultComparer);
-            Assert.Equal(firstMatrix[0, 2], firstMatrixRecreated[0, 2], DefaultComparer);
-            Assert.Equal(firstMatrix[0, 3], firstMatrixRecreated[0, 3], DefaultComparer);
-            Assert.Equal(firstMatrix[1, 0], firstMatrixRecreated[1, 0], DefaultComparer);
-            Assert.Equal(firstMatrix[1, 1], firstMatrixRecreated[1, 1], DefaultComparer);
-            Assert.Equal(firstMatrix[1, 2], firstMatrixRecreated[1, 2], DefaultComparer);
-            Assert.Equal(firstMatrix[1, 3], firstMatrixRecreated[1, 3], DefaultComparer);
-            Assert.Equal(firstMatrix[2, 0], firstMatrixRecreated[2, 0], DefaultComparer);
-            Assert.Equal(firstMatrix[2, 1], firstMatrixRecreated[2, 1], DefaultComparer);
-            Assert.Equal(firstMatrix[2, 2], firstMatrixRecreated[2, 2], DefaultComparer);
-            Assert.Equal(firstMatrix[2, 3], firstMatrixRecreated[2, 3], DefaultComparer);
-            Assert.Equal(firstMatrix[3, 0], firstMatrixRecreated[3, 0], DefaultComparer);
-            Assert.Equal(firstMatrix[3, 1], firstMatrixRecreated[3, 1], DefaultComparer);
-            Assert.Equal(firstMatrix[3, 2], firstMatrixRecreated[3, 2], DefaultComparer);
-            Assert.Equal(firstMatrix[3, 3], firstMatrixRecreated[3, 3], DefaultComparer);
+            Assert.Equal(firstMatrix[0, 0], firstMatrixRecreated[0, 0], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[0, 1], firstMatrixRecreated[0, 1], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[0, 2], firstMatrixRecreated[0, 2], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[0, 3], firstMatrixRecreated[0, 3], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[1, 0], firstMatrixRecreated[1, 0], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[1, 1], firstMatrixRecreated[1, 1], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[1, 2], firstMatrixRecreated[1, 2], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[1, 3], firstMatrixRecreated[1, 3], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[2, 0], firstMatrixRecreated[2, 0], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[2, 1], firstMatrixRecreated[2, 1], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[2, 2], firstMatrixRecreated[2, 2], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[2, 3], firstMatrixRecreated[2, 3], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[3, 0], firstMatrixRecreated[3, 0], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[3, 1], firstMatrixRecreated[3, 1], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[3, 2], firstMatrixRecreated[3, 2], ApproximateComparer.Default);
+            Assert.Equal(firstMatrix[3, 3], firstMatrixRecreated[3, 3], ApproximateComparer.Default);
         }
 
         [Fact]
@@ -1295,9 +1293,9 @@ namespace RayTracerChallenge.Core.Test
             // Asserts
             var expectedHalfQuarterPoint = new Point(0, MathF.Sqrt(2) / 2, -(MathF.Sqrt(2) / 2));
 
-            Assert.Equal(expectedHalfQuarterPoint.X, halfQuarterPoint.X, DefaultComparer);
-            Assert.Equal(expectedHalfQuarterPoint.Y, halfQuarterPoint.Y, DefaultComparer);
-            Assert.Equal(expectedHalfQuarterPoint.Z, halfQuarterPoint.Z, DefaultComparer);
+            Assert.Equal(expectedHalfQuarterPoint.X, halfQuarterPoint.X, ApproximateComparer.Default);
+            Assert.Equal(expectedHalfQuarterPoint.Y, halfQuarterPoint.Y, ApproximateComparer.Default);
+            Assert.Equal(expectedHalfQuarterPoint.Z, halfQuarterPoint.Z, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -1513,6 +1511,122 @@ namespace RayTracerChallenge.Core.Test
             var expectedTp = new Point(15, 0, 7);
 
             Assert.True(expectedTp.Equals(tp));
+        }
+
+        [Fact]
+        [Trait("Category", "Identity")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "ViewTransformation")]
+        public void GivenViewTransformation_WhenGettingDefault_ThenIdentityMatrixIsReturned()
+        {
+            // Arrange
+            var from = new Point(0f, 0f, 0f);
+            var to = new Point(0f, 0f, -1f);
+            var up = new Vector(0f, 1f, 0f);
+
+            // Act
+            var t = Matrix.ViewTransformation(from, to, up);
+
+            // Asserts
+            var expectedT = Matrix.IdentityMatrix();
+
+            Assert.True(expectedT.Equals(t));
+        }
+
+        [Fact]
+        [Trait("Category", "Scale")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "ViewTransformation")]
+        public void GivenViewTransformation_WhenLookingInPositiveZDirection_ThenScaledIdentityMatrixIsReturned()
+        {
+            // Arrange
+            var from = new Point(0f, 0f, 0f);
+            var to = new Point(0f, 0f, 1f);
+            var up = new Vector(0f, 1f, 0f);
+
+            // Act
+            var t = Matrix.ViewTransformation(from, to, up);
+
+            // Asserts
+            var expectedT = Matrix.Scale(-1f, 1f, -1f);
+
+            Assert.True(expectedT.Equals(t));
+        }
+
+        [Fact]
+        [Trait("Category", "Translate")]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "ViewTransformation")]
+        public void GivenViewTransformation_WhenLookingInPositiveZDirection_ThenTranslatedIdentityMatrixIsReturned()
+        {
+            // Arrange
+            var from = new Point(0f, 0f, 8f);
+            var to = new Point(0f, 0f, 0f);
+            var up = new Vector(0f, 1f, 0f);
+
+            // Act
+            var t = Matrix.ViewTransformation(from, to, up);
+
+            // Asserts
+            var expectedT = Matrix.Translate(0f, 0f, -8f);
+
+            Assert.True(expectedT.Equals(t));
+        }
+
+        [Fact]
+        [Trait("Category", "Point")]
+        [Trait("Category", "Vector")]
+        [Trait("Category", "ViewTransformation")]
+        public void GivenViewTransformation_WhenLookingInArbitraryDirection_ThenViewTransformationIsReturned()
+        {
+            // Arrange
+            var from = new Point(1f, 3f, 2f);
+            var to = new Point(4f, -2f, 8f);
+            var up = new Vector(1f, 1f, 0f);
+
+            // Act
+            var t = Matrix.ViewTransformation(from, to, up);
+
+            // Asserts
+            var expectedT = new Matrix(4, 4)
+            {
+                [0, 0] = -0.50709f,
+                [0, 1] =  0.50709f,
+                [0, 2] =  0.67612f,
+                [0, 3] = -2.36643f,
+                [1, 0] =  0.76772f,
+                [1, 1] =  0.60609f,
+                [1, 2] =  0.12122f,
+                [1, 3] = -2.82843f,
+                [2, 0] = -0.35857f,
+                [2, 1] =  0.59761f,
+                [2, 2] = -0.71714f,
+                [2, 3] =  0.00000f,
+                [3, 0] =  0.00000f,
+                [3, 1] =  0.00000f,
+                [3, 2] =  0.00000f,
+                [3, 3] =  1.00000f
+            };
+
+            Assert.Equal(expectedT[0, 0], t[0, 0], ApproximateComparer.Default);
+            Assert.Equal(expectedT[0, 1], t[0, 1], ApproximateComparer.Default);
+            Assert.Equal(expectedT[0, 2], t[0, 2], ApproximateComparer.Default);
+            Assert.Equal(expectedT[0, 3], t[0, 3], ApproximateComparer.Default);
+            Assert.Equal(expectedT[1, 0], t[1, 0], ApproximateComparer.Default);
+            Assert.Equal(expectedT[1, 1], t[1, 1], ApproximateComparer.Default);
+            Assert.Equal(expectedT[1, 2], t[1, 2], ApproximateComparer.Default);
+            Assert.Equal(expectedT[1, 3], t[1, 3], ApproximateComparer.Default);
+            Assert.Equal(expectedT[2, 0], t[2, 0], ApproximateComparer.Default);
+            Assert.Equal(expectedT[2, 1], t[2, 1], ApproximateComparer.Default);
+            Assert.Equal(expectedT[2, 2], t[2, 2], ApproximateComparer.Default);
+            Assert.Equal(expectedT[2, 3], t[2, 3], ApproximateComparer.Default);
+            Assert.Equal(expectedT[3, 0], t[3, 0], ApproximateComparer.Default);
+            Assert.Equal(expectedT[3, 1], t[3, 1], ApproximateComparer.Default);
+            Assert.Equal(expectedT[3, 2], t[3, 2], ApproximateComparer.Default);
+            Assert.Equal(expectedT[3, 3], t[3, 3], ApproximateComparer.Default);
         }
     }
 }

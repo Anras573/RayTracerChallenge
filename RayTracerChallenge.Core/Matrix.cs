@@ -421,5 +421,35 @@ namespace RayTracerChallenge.Core
         {
             return Matrices.Sum(m => m.GetHashCode());
         }
+
+        public static Matrix ViewTransformation(Point from, Point to, Vector up)
+        {
+            var forward = (to - from).Normalize();
+            var upn = up.Normalize();
+            var left = forward.Cross(upn);
+            var trueUp = left.Cross(forward);
+
+            var orientation = new Matrix(4, 4)
+            {
+                [0, 0] = left.X,
+                [0, 1] = left.Y,
+                [0, 2] = left.Z,
+                [0, 3] = 0f,
+                [1, 0] = trueUp.X,
+                [1, 1] = trueUp.Y,
+                [1, 2] = trueUp.Z,
+                [1, 3] = 0f,
+                [2, 0] = -forward.X,
+                [2, 1] = -forward.Y,
+                [2, 2] = -forward.Z,
+                [2, 3] = 0f,
+                [3, 0] = 0f,
+                [3, 1] = 0f,
+                [3, 2] = 0f,
+                [3, 3] = 1f
+            };
+
+            return orientation * Translate(-from.X, -from.Y, -from.Z);
+        }
     }
 }

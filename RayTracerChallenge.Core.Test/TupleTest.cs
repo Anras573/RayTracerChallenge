@@ -7,7 +7,6 @@ namespace RayTracerChallenge.Core.Test
     [Trait("Category", "Tuple")]
     public class TupleTest
     {
-        private static ApproximateComparer DefaultComparer => new ApproximateComparer(.000001f);
 
         [Fact]
         [Trait("Category", "Vector")]
@@ -463,7 +462,7 @@ namespace RayTracerChallenge.Core.Test
             var magnitude = normalizedVector.Magnitude();
 
             // Assert
-            Assert.Equal(1f, magnitude, DefaultComparer);
+            Assert.Equal(1f, magnitude, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -537,9 +536,9 @@ namespace RayTracerChallenge.Core.Test
             var color = firstColor + secondColor;
 
             // Assert
-            Assert.Equal(1.6f, color.X, DefaultComparer);
-            Assert.Equal(.7f, color.Y, DefaultComparer);
-            Assert.Equal(1f, color.Z, DefaultComparer);
+            Assert.Equal(1.6f, color.X, ApproximateComparer.Default);
+            Assert.Equal(.7f, color.Y, ApproximateComparer.Default);
+            Assert.Equal(1f, color.Z, ApproximateComparer.Default);
             Assert.Equal(Tuple.VectorIndicator, color.W);
         }
 
@@ -556,9 +555,9 @@ namespace RayTracerChallenge.Core.Test
             var color = firstColor - secondColor;
 
             // Assert
-            Assert.Equal(.2f, color.X, DefaultComparer);
-            Assert.Equal(.5f, color.Y, DefaultComparer);
-            Assert.Equal(.5f, color.Z, DefaultComparer);
+            Assert.Equal(.2f, color.X, ApproximateComparer.Default);
+            Assert.Equal(.5f, color.Y, ApproximateComparer.Default);
+            Assert.Equal(.5f, color.Z, ApproximateComparer.Default);
             Assert.Equal(Tuple.VectorIndicator, color.W);
         }
 
@@ -596,7 +595,7 @@ namespace RayTracerChallenge.Core.Test
             // Assert
             Assert.Equal(.9f, newColor.X);
             Assert.Equal(.2f, newColor.Y);
-            Assert.Equal(.04f, newColor.Z, DefaultComparer);
+            Assert.Equal(.04f, newColor.Z, ApproximateComparer.Default);
             Assert.Equal(Tuple.VectorIndicator, newColor.W);
         }
 
@@ -629,9 +628,9 @@ namespace RayTracerChallenge.Core.Test
             var reflection = vector.Reflect(surface);
 
             // Assert
-            Assert.Equal(1f, reflection.X, DefaultComparer);
-            Assert.Equal(0f, reflection.Y, DefaultComparer);
-            Assert.Equal(0f, reflection.Z, DefaultComparer);
+            Assert.Equal(1f, reflection.X, ApproximateComparer.Default);
+            Assert.Equal(0f, reflection.Y, ApproximateComparer.Default);
+            Assert.Equal(0f, reflection.Z, ApproximateComparer.Default);
         }
     }
 }

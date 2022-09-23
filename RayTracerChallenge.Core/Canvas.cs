@@ -16,7 +16,7 @@ namespace RayTracerChallenge.Core
 
             for (var i = 0; i < Pixels.Length; i++)
             {
-                Pixels[i] = new Color(0f, 0f, 0f);
+                Pixels[i] = Color.Black;
             }
         }
 
@@ -34,6 +34,22 @@ namespace RayTracerChallenge.Core
 
             var index = (y * Width) + x;
             Pixels[index] = color;
+        }
+
+        public Color GetPixel(int x, int y)
+        {
+            if (x >= Width)
+            {
+                throw new ArgumentOutOfRangeException(nameof(x), $"x can't be greater than {Width - 1}");
+            }
+
+            if (y >= Height)
+            {
+                throw new ArgumentOutOfRangeException(nameof(y), $"y can't be greater than {Height - 1}");
+            }
+
+            var index = (y * Width) + x;
+            return Pixels[index];
         }
     }
 }

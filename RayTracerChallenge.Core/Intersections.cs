@@ -20,8 +20,7 @@ namespace RayTracerChallenge.Core
                 return null;
 
             return _sortedIntersections
-                .Where(i => i.TimeValue > 0f)
-                .FirstOrDefault();
+                .FirstOrDefault(i => i.TimeValue > 0f);
         }
 
         public int Length => _sortedIntersections.Length;

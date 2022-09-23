@@ -7,7 +7,6 @@ namespace RayTracerChallenge.Core.Test
     [Trait("Category", "Sphere")]
     public class SphereTest
     {
-        private static ApproximateComparer DefaultComparer => new ApproximateComparer(.0001f);
 
         [Fact]
         [Trait("Category", "Normal At")]
@@ -69,9 +68,9 @@ namespace RayTracerChallenge.Core.Test
             // Assert
             var expectedVector = new Vector(nonaxial, nonaxial, nonaxial);
 
-            Assert.Equal(expectedVector.X, normal.X, DefaultComparer);
-            Assert.Equal(expectedVector.Y, normal.Y, DefaultComparer);
-            Assert.Equal(expectedVector.Z, normal.Z, DefaultComparer);
+            Assert.Equal(expectedVector.X, normal.X, ApproximateComparer.Default);
+            Assert.Equal(expectedVector.Y, normal.Y, ApproximateComparer.Default);
+            Assert.Equal(expectedVector.Z, normal.Z, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -89,9 +88,9 @@ namespace RayTracerChallenge.Core.Test
             var normalizedNormal = normal.Normalize();
 
             // Assert
-            Assert.Equal(normalizedNormal.X, normal.X, DefaultComparer);
-            Assert.Equal(normalizedNormal.Y, normal.Y, DefaultComparer);
-            Assert.Equal(normalizedNormal.Z, normal.Z, DefaultComparer);
+            Assert.Equal(normalizedNormal.X, normal.X, ApproximateComparer.Default);
+            Assert.Equal(normalizedNormal.Y, normal.Y, ApproximateComparer.Default);
+            Assert.Equal(normalizedNormal.Z, normal.Z, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -109,9 +108,9 @@ namespace RayTracerChallenge.Core.Test
             var normal = sut.NormalAt(point);
 
             // Assert
-            Assert.Equal(0f, normal.X, DefaultComparer);
-            Assert.Equal(0.70711f, normal.Y, DefaultComparer);
-            Assert.Equal(-0.70711f, normal.Z, DefaultComparer);
+            Assert.Equal(0f, normal.X, ApproximateComparer.Default);
+            Assert.Equal(0.70711f, normal.Y, ApproximateComparer.Default);
+            Assert.Equal(-0.70711f, normal.Z, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -133,9 +132,9 @@ namespace RayTracerChallenge.Core.Test
             var normal = sut.NormalAt(point);
 
             // Assert
-            Assert.Equal(0f, normal.X, DefaultComparer);
-            Assert.Equal(0.97014f, normal.Y, DefaultComparer);
-            Assert.Equal(-0.24254f, normal.Z, DefaultComparer);
+            Assert.Equal(0f, normal.X, ApproximateComparer.Default);
+            Assert.Equal(0.97014f, normal.Y, ApproximateComparer.Default);
+            Assert.Equal(-0.24254f, normal.Z, ApproximateComparer.Default);
         }
 
         [Fact]
@@ -161,7 +160,7 @@ namespace RayTracerChallenge.Core.Test
         {
             // Arrange
             var sut = new Sphere();
-            var expectedMaterial = new Material(new Color(1f, 1f, 1f), 1f, 1f, 1f, 1f);
+            var expectedMaterial = new Material(Color.White, 1f, 1f, 1f, 1f);
 
             // Act
             sut.Material = expectedMaterial;

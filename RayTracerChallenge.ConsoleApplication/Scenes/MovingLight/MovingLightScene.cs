@@ -9,7 +9,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
 {
     public class MovingLightScene : IScene
     {
-        public string Name => "Draw Sphere With Moving Light";
+        public string Name => "Draw Sphere With Moving Lights";
 
         private const int CanvasPixels = 400;
         private const float WallZ = 10f;

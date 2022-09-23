@@ -27,5 +27,15 @@ namespace RayTracerChallenge.Core
 
         public static Vector operator -(Point left, Point right)
             => new Vector(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Point);
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
+        }
     }
 }

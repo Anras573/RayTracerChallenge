@@ -13,7 +13,7 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
             var width = 10;
             var height = 20;
-            var defaultColor = new Color(0f, 0f, 0f);
+            var defaultColor = Color.Black;
 
             // Act
             var canvas = new Canvas(width, height);
@@ -60,7 +60,7 @@ namespace RayTracerChallenge.Core.Test
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                canvas.WritePixel(width + 1, height - 1, new Color(1f, 1f, 1f));
+                canvas.WritePixel(width + 1, height - 1, Color.White);
             });
 
             // Assert
@@ -81,7 +81,7 @@ namespace RayTracerChallenge.Core.Test
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                canvas.WritePixel(width - 1, height + 1, new Color(1f, 1f, 1f));
+                canvas.WritePixel(width - 1, height + 1, Color.White);
             });
 
             // Assert

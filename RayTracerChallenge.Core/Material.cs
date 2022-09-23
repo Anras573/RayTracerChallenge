@@ -2,9 +2,9 @@
 
 namespace RayTracerChallenge.Core
 {
-    public class Material
+    public class Material :IEquatable<Material>
     {
-        public static Material Default => new(new Color(1f, 1f, 1f), 0.1f, 0.9f, 0.9f, 200.0f);
+        public static Material Default => new(Core.Color.White, 0.1f, 0.9f, 0.9f, 200.0f);
 
         public Material(Color color, float ambient, float diffuse, float specular, float shininess)
         {
@@ -46,6 +46,25 @@ namespace RayTracerChallenge.Core
             }
 
             return ambient + diffuse + specular;
+        }
+
+        public bool Equals(Material other)
+        {
+            return other.Ambient.Equals(Ambient)
+                && other.Color.Equals(Color)
+                && other.Diffuse.Equals(Diffuse)
+                && other.Shininess.Equals(Shininess)
+                && other.Specular.Equals(Specular);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Material);
+        }
+
+        public override int GetHashCode()
+        {
+            return Ambient.GetHashCode() ^ Color.GetHashCode() ^ Diffuse.GetHashCode() ^ Shininess.GetHashCode() ^ Specular.GetHashCode();
         }
     }
 }
