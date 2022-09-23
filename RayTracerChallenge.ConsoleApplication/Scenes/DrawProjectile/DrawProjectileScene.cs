@@ -7,12 +7,12 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile
 {
     public class DrawProjectileScene : IScene
     {
-        public string Name => "Draw Projectile";
+        public string Name => "Chapter 2 - Draw Projectile";
 
         public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "projectile";
+            var fileName = Name;
             var filePath = Path.Combine(path, fileName);
 
             var projectile = new Projectile

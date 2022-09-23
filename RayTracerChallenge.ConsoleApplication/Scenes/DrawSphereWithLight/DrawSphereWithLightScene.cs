@@ -8,7 +8,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
 {
     public class DrawSphereWithLightScene : IScene
     {
-        public string Name => "Draw Sphere With Lights";
+        public string Name => "Chapter 6 - Draw Sphere With Lights";
 
         private const int CanvasPixels = 400;
         private const float WallZ = 10f;
@@ -16,13 +16,18 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight
 
         public void Render(ICanvasRenderer canvasRenderer)
         {
-            var sphere = new Sphere();
-            sphere.Material.Color = new Color(1f, 0.2f, 1f);
+            var sphere = new Sphere
+            {
+                Material =
+                {
+                    Color = new Color(1f, 0.2f, 1f)
+                }
+            };
 
             var light = new Light(new Point(-10f, 10f, -10f), Colors.White);
 
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "sphere light";
+            var fileName = Name;
             var filePath = Path.Combine(path, fileName);
 
             var canvas = new Canvas(CanvasPixels, CanvasPixels);

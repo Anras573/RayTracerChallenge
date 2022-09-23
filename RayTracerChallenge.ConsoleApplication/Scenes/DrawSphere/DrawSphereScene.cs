@@ -1,14 +1,13 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
 {
     public  class DrawSphereScene : IScene
     {
-        public string Name => "Draw Sphere";
+        public string Name => "Chapter 5 - Draw Sphere";
 
         private const int CanvasPixels = 100;
         private const float WallZ = 10f;
@@ -17,7 +16,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
         public void Render(ICanvasRenderer canvasRenderer)
         {
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "sphere";
+            var fileName = Name;
             var filePath = Path.Combine(path, fileName);
 
             var canvas = new Canvas(CanvasPixels, CanvasPixels);

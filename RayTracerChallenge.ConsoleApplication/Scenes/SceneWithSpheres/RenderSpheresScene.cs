@@ -8,12 +8,12 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
 
 public class RenderSpheresScene : IScene
 {
-    public string Name => "Render scene with multiple spheres";
+    public string Name => "Chapter 7 - Render scene with multiple spheres";
 
     public void Render(ICanvasRenderer canvasRenderer)
     {
         var path = ConsoleHelper.GetPath("output file");
-        var fileName = "scene with multiple spheres";
+        var fileName = Name;
         var filePath = Path.Combine(path, fileName);
 
         var floor = new Sphere

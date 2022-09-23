@@ -9,7 +9,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
 {
     public class MovingLightScene : IScene
     {
-        public string Name => "Draw Sphere With Moving Lights";
+        public string Name => "Chapter 6 (gif) - Draw Sphere With Moving Lights";
 
         private const int CanvasPixels = 400;
         private const float WallZ = 10f;
@@ -20,7 +20,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
             var renderer = new ImageSharpGifRenderer(CanvasPixels, CanvasPixels, 8);
 
             var path = ConsoleHelper.GetPath("output file");
-            var fileName = "sphere light";
+            var fileName = Name;
             var filePath = Path.Combine(path, fileName);
 
             var sphere = new Sphere();
