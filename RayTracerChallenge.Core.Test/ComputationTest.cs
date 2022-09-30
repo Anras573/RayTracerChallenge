@@ -65,5 +65,27 @@ namespace RayTracerChallenge.Core.Test
             // Assert
             Assert.False(computation.Inside);
         }
+
+        [Fact]
+        [Trait("Category", nameof(Ray))]
+        [Trait("Category", nameof(Sphere))]
+        [Trait("Category", nameof(Intersection))]
+        public void TheHitShouldOffsetThePoint()
+        {
+            // Arrange
+            var ray = new Ray(new Point(0f, 0f, -5f), new Vector(0f, 0f, 1f));
+            var sphere = new Sphere
+            {
+                Transform = Matrix.Translate(0f, 0f, 1f)
+            };
+            var intersection = new Intersection(5f, sphere);
+
+            // Act
+            var computation = new Computation(intersection, ray);
+
+            // Assert
+            Assert.True(computation.OverPoint.Z < -float.Epsilon/2);
+            Assert.True(computation.Point.Z > computation.OverPoint.Z);
+        }
     }
 }

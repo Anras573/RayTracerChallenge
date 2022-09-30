@@ -45,4 +45,8 @@ Chapter 6 - Draw Sphere With Light
 
 Chapter 7 - Render Scene With Multiple Spheres
 
-![Chapter 7 - Render Scene With Multiple Spheres](Images/Chapter%207%20-%20Render%20scene%20with%20multiple%20spheres.png)
+![Chapter 7 - Render Scene With Multiple Spheres](Images/Chapter%207%20-%20Render%20Scene%20With%20Multiple%20Spheres.png)
+
+Chapter 8 - Render Scene With Shadows
+
+![Chapter 8 - Render Scene With Shadows](Images/Chapter%208%20-%20Render%20Scene%20With%20Shadows.png)

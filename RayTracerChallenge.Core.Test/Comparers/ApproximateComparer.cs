@@ -5,7 +5,7 @@ namespace RayTracerChallenge.Core.Test.Comparers
 {
     public class ApproximateComparer : IEqualityComparer<float>
     {
-        public static ApproximateComparer Default => new(0.0001f);
+        public static ApproximateComparer Default => new(Utilities.Epsilon);
 
         private readonly float _marginOfError;
 

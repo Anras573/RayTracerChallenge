@@ -21,11 +21,17 @@ namespace RayTracerChallenge.Core
         public float Specular;
         public float Shininess;
 
-        public Color Lightning(Light light, Point position, Vector eyeV, Vector normalV)
+        public Color Lightning(Light light, Point position, Vector eyeV, Vector normalV, bool inShadow = false)
         {
             var effectiveColor = Color * light.Intensity;
-            var lightV = (light.Position - position).Normalize();
             var ambient = effectiveColor * Ambient;
+
+            if (inShadow)
+            {
+                return ambient;
+            }
+
+            var lightV = (light.Position - position).Normalize();
             var diffuse = Color.Black;
             var specular = Color.Black;
 

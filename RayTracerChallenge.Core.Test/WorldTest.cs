@@ -1,5 +1,6 @@
 ﻿using RayTracerChallenge.Core.Test.Comparers;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Xunit;
 
@@ -211,6 +212,105 @@ namespace RayTracerChallenge.Core.Test
 
             // Assert
             Assert.Equal(world.Objects[1].Material.Color, color);
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void ThereIsNoShadowWhenNothingIsCollinearWithPointAndLight()
+        {
+            // Arrange
+            var world = World.Default();
+            var point = new Point(0f, 10f, 0f);
+
+            // Act
+            var result = world.IsShadowed(point);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void TheShadowWhenAnObjectIsBetweenThePointAndTheLight()
+        {
+            // Arrange
+            var world = World.Default();
+            var point = new Point(10f, -10f, 10f);
+
+            // Act
+            var result = world.IsShadowed(point);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void ThereIsNoShadowWhenAnObjectIsBehindTheLight()
+        {
+            // Arrange
+            var world = World.Default();
+            var point = new Point(-20f, 20f, -20f);
+
+            // Act
+            var result = world.IsShadowed(point);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void ThereIsNoShadowWhenAnObjectIsBehindThePoint()
+        {
+            // Arrange
+            var world = World.Default();
+            var point = new Point(-2f, 2f, -2f);
+
+            // Act
+            var result = world.IsShadowed(point);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void ShadeHitIsGivenAnIntersectionInShadow()
+        {
+            // Arrange
+            var sphere = new Sphere
+            {
+                Transform = Matrix.Translate(0f, 0f, 10f)
+            };
+
+            var world = new World
+            {
+                Lights = new()
+                {
+                    new Light(new Point(0f, 0f, -10f), Color.White)
+                },
+                Objects = new()
+                {
+                    new Sphere(),
+                    sphere
+                }
+            };
+            var ray = new Ray(new Point(0f, 0f, 5f), new Vector(0f, 0f, 1f));
+            var intersection = new Intersection(4, sphere);
+            var computations = new Computation(intersection, ray);
+
+            // Act
+            var result = world.ShadeHit(computations);
+
+            // Assert
+            var expectedColor = new Color(0.1f, 0.1f, 0.1f);
+            Assert.Equal(expectedColor, result);
         }
     }
 }

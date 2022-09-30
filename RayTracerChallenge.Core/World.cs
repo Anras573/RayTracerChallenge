@@ -62,7 +62,8 @@ namespace RayTracerChallenge.Core
 
             foreach (var light in Lights)
             {
-                color += computation.Object.Material.Lightning(light, computation.Point, computation.EyeVector, computation.NormalVector);
+                var isShadowed = IsShadowed(computation.OverPoint, light);
+                color += computation.Object.Material.Lightning(light, computation.OverPoint, computation.EyeVector, computation.NormalVector, isShadowed);
             }
 
             return color;
@@ -82,6 +83,25 @@ namespace RayTracerChallenge.Core
             var computation = new Computation(hit, ray);
 
             return ShadeHit(computation);
+        }
+
+        public bool IsShadowed(Point point)
+        {
+            return IsShadowed(point, Lights.First());
+        }
+
+        public bool IsShadowed(Point point, Light light)
+        {
+            var v = light.Position - point;
+            var distance = v.Magnitude();
+            var direction = v.Normalize();
+
+            var ray = new Ray(point, direction);
+            var intersections = Intersect(ray);
+
+            var hit = intersections.Hit();
+
+            return hit is { } && hit.TimeValue < distance;
         }
     }
 }

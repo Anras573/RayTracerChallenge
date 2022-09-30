@@ -4,7 +4,7 @@ using Xunit;
 
 namespace RayTracerChallenge.Core.Test
 {
-    [Trait("Category", "Material")]
+    [Trait("Category", nameof(Material))]
     public class MaterialTest
     {
         [Fact]
@@ -113,6 +113,26 @@ namespace RayTracerChallenge.Core.Test
 
             // Act
             var result = material.Lightning(light, position, eyeV, normalV);
+
+            // Assert
+            Assert.Equal(result, new Color(0.1f, 0.1f, 0.1f));
+        }
+
+        [Fact]
+        [Trait("Category", "Lights")]
+        [Trait("Category", "Shadow")]
+        public void LightingWithTheSurfaceInShadow()
+        {
+            // Arrange
+            var material = Material.Default;
+            var eyeV = new Vector(0f, 0f, -1f);
+            var normalV = new Vector(0f, 0f, -1f);
+            var position = new Point(0f, 0f, 0f);
+            var light = new Light(new Point(0f, 0f, -10f), Color.White);
+            var inShadow = true;
+
+            // Act
+            var result = material.Lightning(light, position, eyeV, normalV, inShadow);
 
             // Assert
             Assert.Equal(result, new Color(0.1f, 0.1f, 0.1f));

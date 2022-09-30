@@ -5,6 +5,7 @@
         public float TimeValue;
         public Sphere Object;
         public Point Point;
+        public Point OverPoint;
         public Vector EyeVector;
         public Vector NormalVector;
         public bool Inside;
@@ -24,6 +25,8 @@
             {
                 NormalVector = -NormalVector;
             }
+
+            OverPoint = Point + NormalVector * Utilities.Epsilon;
         }
     }
 }
