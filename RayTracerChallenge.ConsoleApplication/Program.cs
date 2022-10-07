@@ -5,6 +5,7 @@ using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.MovingLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithPlane;
 using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
@@ -28,7 +29,8 @@ namespace RayTracerChallenge.ConsoleApplication
             new DrawSphereScene(),
             new DrawSphereWithLightScene(),
             new MovingLightScene(),
-            new RenderSpheresScene()
+            new RenderSpheresScene(),
+            new SceneWithPlane()
         };
 
         public static void Main()

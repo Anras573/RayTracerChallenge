@@ -50,3 +50,7 @@ Chapter 7 - Render Scene With Multiple Spheres
 Chapter 8 - Render Scene With Shadows
 
 ![Chapter 8 - Render Scene With Shadows](Images/Chapter%208%20-%20Render%20Scene%20With%20Shadows.png)
+
+Chapter 9 - Render Scene With Plane
+
+![Chapter 9 - Render Scene With Plane](Images/Chapter%209%20-%20Scene%20With%20Plane.png.png)

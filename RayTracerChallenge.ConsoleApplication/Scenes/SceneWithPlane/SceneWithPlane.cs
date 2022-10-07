@@ -1,48 +1,28 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using RayTracerChallenge.Core.Shapes;
-using System;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
-namespace RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
+namespace RayTracerChallenge.ConsoleApplication.Scenes.SceneWithPlane;
 
-public class RenderSpheresScene : IScene
+public class SceneWithPlane : IScene
 {
-    public string Name => "Chapter 7 - Render scene with multiple spheres";
-
+    public string Name => "Chapter 9 - Scene With Plane";
     public void Render(ICanvasRenderer canvasRenderer)
     {
         var path = ConsoleHelper.GetPath("output file");
         var fileName = Name;
         var filePath = Path.Combine(path, fileName);
 
-        var floor = new Sphere
+        var floor = new Plane
         {
-            Transform = Matrix.Scale(10f, 0.01f, 10f),
             Material = Material.Default
         };
 
         floor.Material.Color = new Color(1f, 0.9f, 0.9f);
         floor.Material.Specular = 0f;
-
-        var leftWall = new Sphere
-        {
-            Transform = Matrix.Translate(0f, 0f, 5f)
-                        * Matrix.RotateY(-(MathF.PI/4))
-                        * Matrix.RotateX(MathF.PI / 2)
-                        * Matrix.Scale(10f, 0.01f, 10f),
-            Material = floor.Material
-        };
-
-        var rightWall = new Sphere
-        {
-            Transform = Matrix.Translate(0f, 0f, 5f)
-                        * Matrix.RotateY(MathF.PI / 4)
-                        * Matrix.RotateX(MathF.PI / 2)
-                        * Matrix.Scale(10f, 0.01f, 10f),
-            Material = floor.Material
-        };
 
         var middle = new Sphere
         {
@@ -79,7 +59,7 @@ public class RenderSpheresScene : IScene
             },
             Objects = new List<Shape>
             {
-                floor, leftWall, rightWall, middle, right, left
+                floor, middle, right, left
             }
         };
 

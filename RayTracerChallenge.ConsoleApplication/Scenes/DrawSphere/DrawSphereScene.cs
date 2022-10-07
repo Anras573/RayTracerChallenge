@@ -1,5 +1,6 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
+using RayTracerChallenge.Core.Shapes;
 using System;
 using System.IO;
 

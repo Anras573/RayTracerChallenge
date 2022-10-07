@@ -1,8 +1,9 @@
 ﻿using RayTracerChallenge.Core.Test.Comparers;
 using System;
+using RayTracerChallenge.Core.Shapes;
 using Xunit;
 
-namespace RayTracerChallenge.Core.Test
+namespace RayTracerChallenge.Core.Test.Shapes
 {
     [Trait("Category", "Sphere")]
     public class SphereTest
@@ -101,7 +102,7 @@ namespace RayTracerChallenge.Core.Test
             // Arrange
             var sut = new Sphere();
             var point = new Point(0f, 1.70711f, -0.70711f);
-            
+
             sut.Transform = Matrix.Translate(0f, 1f, 0f);
 
             // Act
@@ -135,42 +136,6 @@ namespace RayTracerChallenge.Core.Test
             Assert.Equal(0f, normal.X, ApproximateComparer.Default);
             Assert.Equal(0.97014f, normal.Y, ApproximateComparer.Default);
             Assert.Equal(-0.24254f, normal.Z, ApproximateComparer.Default);
-        }
-
-        [Fact]
-        [Trait("Category", "Material")]
-        public void GivenASphereWithDefaultMaterial_WhenGettingMaterial_ThenReturnMaterial()
-        {
-            // Arrange
-            var sut = new Sphere();
-
-            // Act
-
-            // Assert
-            Assert.Equal(Material.Default.Color, sut.Material.Color);
-            Assert.Equal(Material.Default.Ambient, sut.Material.Ambient);
-            Assert.Equal(Material.Default.Diffuse, sut.Material.Diffuse);
-            Assert.Equal(Material.Default.Specular, sut.Material.Specular);
-            Assert.Equal(Material.Default.Shininess, sut.Material.Shininess);
-        }
-
-        [Fact]
-        [Trait("Category", "Material")]
-        public void GivenASphereWithMaterial_WhenGettingMaterial_ThenReturnMaterial()
-        {
-            // Arrange
-            var sut = new Sphere();
-            var expectedMaterial = new Material(Color.White, 1f, 1f, 1f, 1f);
-
-            // Act
-            sut.Material = expectedMaterial;
-
-            // Assert
-            Assert.Equal(expectedMaterial.Color, sut.Material.Color);
-            Assert.Equal(expectedMaterial.Ambient, sut.Material.Ambient);
-            Assert.Equal(expectedMaterial.Diffuse, sut.Material.Diffuse);
-            Assert.Equal(expectedMaterial.Specular, sut.Material.Specular);
-            Assert.Equal(expectedMaterial.Shininess, sut.Material.Shininess);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace RayTracerChallenge.Core
 {
     public class Material :IEquatable<Material>
     {
-        public static Material Default => new(Core.Color.White, 0.1f, 0.9f, 0.9f, 200.0f);
+        public static Material Default => new(Color.White, 0.1f, 0.9f, 0.9f, 200.0f);
 
         public Material(Color color, float ambient, float diffuse, float specular, float shininess)
         {

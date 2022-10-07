@@ -1,9 +1,11 @@
-﻿namespace RayTracerChallenge.Core
+﻿using RayTracerChallenge.Core.Shapes;
+
+namespace RayTracerChallenge.Core
 {
     public class Computation
     {
         public float TimeValue;
-        public Sphere Object;
+        public Shape Object;
         public Point Point;
         public Point OverPoint;
         public Vector EyeVector;

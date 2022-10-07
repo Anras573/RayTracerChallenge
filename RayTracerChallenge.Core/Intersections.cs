@@ -24,12 +24,6 @@ namespace RayTracerChallenge.Core
         }
 
         public int Length => _sortedIntersections.Length;
-        public Intersection this[int index]
-        {
-            get
-            {
-                return _sortedIntersections[index];
-            }
-        }
+        public Intersection this[int index] => _sortedIntersections[index];
     }
 }

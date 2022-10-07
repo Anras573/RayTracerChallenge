@@ -1,5 +1,6 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
+using RayTracerChallenge.Core.Shapes;
 using RayTracerChallenge.Integration.ImageSharp;
 using System;
 using System.IO;
@@ -23,8 +24,13 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
             var fileName = Name;
             var filePath = Path.Combine(path, fileName);
 
-            var sphere = new Sphere();
-            sphere.Material.Color = new Color(1f, 0.2f, 1f);
+            var sphere = new Sphere
+            {
+                Material =
+                {
+                    Color = new Color(1f, 0.2f, 1f)
+                }
+            };
 
             var canvas = new Canvas(CanvasPixels, CanvasPixels);
             var rayOrigin = new Point(0f, 0f, -5f);

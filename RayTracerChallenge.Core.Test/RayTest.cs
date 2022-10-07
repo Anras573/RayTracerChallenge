@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using RayTracerChallenge.Core.Shapes;
+using Xunit;
 
 namespace RayTracerChallenge.Core.Test
 {
@@ -258,35 +259,6 @@ namespace RayTracerChallenge.Core.Test
             var expectedDirection = new Vector(0, 3, 0);
             Assert.Equal(expectedOrigin, scaledRay.Origin);
             Assert.Equal(expectedDirection, scaledRay.Direction);
-        }
-
-        [Fact]
-        [Trait("Category", "Sphere")]
-        public void GivenSphere_WhenGettingDefaultTransformation_ThenReturnIdentityMatrix()
-        {
-            // Arrange
-            var sphere = new Sphere();
-
-            // Act
-            var transform = sphere.Transform;
-
-            // Assert
-            Assert.Equal(Matrix.IdentityMatrix(), transform);
-        }
-
-        [Fact]
-        [Trait("Category", "Sphere")]
-        public void GivenSphere_WhenSettingTransformation_ThenDefaultTransformationIsOverwritten()
-        {
-            // Arrange
-            var sphere = new Sphere();
-            var translation = Matrix.Translate(2, 3, 4);
-
-            // Act
-            sphere.Transform = translation;
-
-            // Assert
-            Assert.Equal(translation, sphere.Transform);
         }
 
         [Fact]

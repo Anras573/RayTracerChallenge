@@ -1,6 +1,6 @@
-﻿using RayTracerChallenge.Core.Test.Comparers;
+﻿using RayTracerChallenge.Core.Shapes;
+using RayTracerChallenge.Core.Test.Comparers;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using Xunit;
 

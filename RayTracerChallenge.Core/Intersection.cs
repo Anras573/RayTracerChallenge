@@ -1,11 +1,13 @@
-﻿namespace RayTracerChallenge.Core
+﻿using RayTracerChallenge.Core.Shapes;
+
+namespace RayTracerChallenge.Core
 {
     public class Intersection
     {
         public float TimeValue;
-        public Sphere Object;
+        public Shape Object;
 
-        public Intersection(float timeValue, Sphere obj)
+        public Intersection(float timeValue, Shape obj)
         {
             TimeValue = timeValue;
             Object = obj;

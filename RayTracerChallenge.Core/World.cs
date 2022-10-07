@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RayTracerChallenge.Core.Shapes;
 
 namespace RayTracerChallenge.Core
 {
     public class World
     {
         public List<Light> Lights = new();
-        public List<Sphere> Objects = new();
+        public List<Shape> Objects = new();
 
         public static World Default()
         {
@@ -29,8 +30,8 @@ namespace RayTracerChallenge.Core
 
             return new World()
             {
-                Lights = new() { light },
-                Objects = new()
+                Lights = new List<Light> { light },
+                Objects = new List<Shape>
                 {
                     sphere1,
                     sphere2
@@ -45,11 +46,10 @@ namespace RayTracerChallenge.Core
             foreach (var worldObject in Objects)
             {
                 var temp = worldObject.Intersects(ray);
-                
-                if (temp.Length > 0)
+
+                for (var i = 0; i < temp.Length; i++)
                 {
-                    intersections.Add(temp[0]);
-                    intersections.Add(temp[1]);
+                    intersections.Add(temp[i]);
                 }
             }
 
