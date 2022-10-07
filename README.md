@@ -53,4 +53,4 @@ Chapter 8 - Render Scene With Shadows
 
 Chapter 9 - Render Scene With Plane
 
-![Chapter 9 - Render Scene With Plane](Images/Chapter%209%20-%20Scene%20With%20Plane.png.png)
+![Chapter 9 - Render Scene With Plane](Images/Chapter%209%20-%20Scene%20With%20Plane.png)
