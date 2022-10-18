@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Images\Chapter 6 - Draw Sphere With Lights.png = Images\Chapter 6 - Draw Sphere With Lights.png
 		Images\Chapter 7 - Render Scene With Multiple Spheres.png = Images\Chapter 7 - Render Scene With Multiple Spheres.png
 		Images\Chapter 8 - Render Scene With Shadows.png = Images\Chapter 8 - Render Scene With Shadows.png
+		Images\Chapter 9 - Scene With Plane.png = Images\Chapter 9 - Scene With Plane.png
 	EndProjectSection
 EndProject
 Global
