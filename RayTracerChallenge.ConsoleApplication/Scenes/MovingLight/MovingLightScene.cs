@@ -64,7 +64,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.MovingLight
                             var point = ray.Position(intersection.Hit().TimeValue);
                             var normal = intersection.Hit().Object.NormalAt(point);
                             var eye = ray.Direction;
-                            var color = sphere.Material.Lightning(light, point, eye, normal);
+                            var color = sphere.Material.Lightning(sphere, light, point, eye, normal);
 
                             canvas.WritePixel(x, y, color);
                         }

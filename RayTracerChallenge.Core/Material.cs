@@ -1,4 +1,6 @@
 ﻿using System;
+using RayTracerChallenge.Core.Patterns;
+using RayTracerChallenge.Core.Shapes;
 
 namespace RayTracerChallenge.Core
 {
@@ -6,23 +8,37 @@ namespace RayTracerChallenge.Core
     {
         public static Material Default => new(Color.White, 0.1f, 0.9f, 0.9f, 200.0f);
 
-        public Material(Color color, float ambient, float diffuse, float specular, float shininess)
+        private Material(float ambient, float diffuse, float specular, float shininess)
         {
-            Color = color;
             Ambient = ambient;
             Diffuse = diffuse;
             Specular = specular;
             Shininess = shininess;
         }
+        
+        public Material(Color color, float ambient = 0.1f, float diffuse = 0.9f, float specular = 0.9f, float shininess = 200f)
+            : this(ambient, diffuse, specular, shininess)
+        {
+            Color = color;
+        }
+        
+        public Material(Pattern pattern, float ambient = 0.1f, float diffuse = 0.9f, float specular = 0.9f, float shininess = 200f)
+            : this(ambient, diffuse, specular, shininess)
+        {
+            Pattern = pattern;
+        }
 
+        public Pattern Pattern;
         public Color Color;
         public float Ambient;
         public float Diffuse;
         public float Specular;
         public float Shininess;
 
-        public Color Lightning(Light light, Point position, Vector eyeV, Vector normalV, bool inShadow = false)
+        public Color Lightning(Shape shape, Light light, Point position, Vector eyeV, Vector normalV, bool inShadow = false)
         {
+            Color = Pattern != null ? Pattern.ColorAtShape(shape, position) : Color;
+
             var effectiveColor = Color * light.Intensity;
             var ambient = effectiveColor * Ambient;
 

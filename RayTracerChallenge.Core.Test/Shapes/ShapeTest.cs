@@ -144,7 +144,7 @@ namespace RayTracerChallenge.Core.Test.Shapes
 
     public class TestShape : Shape
     {
-        public Ray SavedRay { get; set; }
+        public Ray SavedRay { get; private set; }
         public override Intersections LocalIntersects(Ray localRay)
         {
             SavedRay = localRay;

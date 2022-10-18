@@ -63,7 +63,7 @@ namespace RayTracerChallenge.Core
             foreach (var light in Lights)
             {
                 var isShadowed = IsShadowed(computation.OverPoint, light);
-                color += computation.Object.Material.Lightning(light, computation.OverPoint, computation.EyeVector, computation.NormalVector, isShadowed);
+                color += computation.Object.Material.Lightning(computation.Object, light, computation.OverPoint, computation.EyeVector, computation.NormalVector, isShadowed);
             }
 
             return color;

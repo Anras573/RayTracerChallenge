@@ -17,18 +17,21 @@ namespace RayTracerChallenge.Core
         public Color(float r, float g, float b) : base(r, g, b, VectorIndicator) { }
 
         public static Color operator +(Color left, Color right)
-            => new Color(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            => new (left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
         public static Color operator -(Color left, Color right)
-            => new Color(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            => new (left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
         public static Color operator *(Color left, Color right)
-            => new Color(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            => new (left.X * right.X, left.Y * right.Y, left.Z * right.Z);
 
         public static Color operator *(Color c, float val)
-            => new Color(c.X * val, c.Y * val, c.Z * val);
+            => new (c.X * val, c.Y * val, c.Z * val);
+        
+        public static Color operator /(Color c, float val)
+            => new (c.X / val, c.Y / val, c.Z / val);
 
-        public Color HadamardProduct(Color other) => new Color(R * other.R, G * other.G, B * other.B);
+        public Color HadamardProduct(Color other) => new (R * other.R, G * other.G, B * other.B);
 
         public Color SchurProduct(Color other) => HadamardProduct(other);
 
