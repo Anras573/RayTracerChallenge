@@ -1,4 +1,5 @@
-﻿using RayTracerChallenge.Core.Shapes;
+﻿using System;
+using RayTracerChallenge.Core.Shapes;
 using Xunit;
 
 namespace RayTracerChallenge.Core.Test
@@ -87,6 +88,90 @@ namespace RayTracerChallenge.Core.Test
             // Assert
             Assert.True(computation.OverPoint.Z < -float.Epsilon/2);
             Assert.True(computation.Point.Z > computation.OverPoint.Z);
+        }
+        
+        [Fact]
+        [Trait("Category", nameof(Ray))]
+        [Trait("Category", nameof(Plane))]
+        [Trait("Category", nameof(Intersection))]
+        public void PrecomputingTheReflectionVector()
+        {
+            var shape = new Plane();
+            var ray = new Ray(new Point(0.0f, 1.0f, -1.0f),
+                new Vector(0.0f, -MathF.Sqrt(2.0f) / 2.0f, MathF.Sqrt(2.0f) / 2.0f));
+            var intersection = new Intersection(MathF.Sqrt(2.0f), shape);
+
+            var computations = new Computation(intersection, ray);
+
+            Assert.Equal(new Vector(0.0f, MathF.Sqrt(2.0f) / 2.0f, MathF.Sqrt(2.0f) / 2.0f),
+                computations.ReflectVector);
+        }
+
+        [Fact]
+        [Trait("Category", nameof(Sphere))]
+        [Trait("Category", nameof(Ray))]
+        [Trait("Category", nameof(Intersections))]
+        public void TheSchlickApproximationUnderTotalInternalReflection()
+        {
+            var shape = new Sphere
+            {
+                Material = Material.Glass
+            };
+            var ray = new Ray(
+                new Point(0.0f, 0.0f, MathF.Sqrt(2) / 2),
+                new Vector(0.0f, 1.0f, 0.0f));
+            var intersections = new Intersections(
+                new Intersection(-MathF.Sqrt(2) / 2, shape),
+                new Intersection(MathF.Sqrt(2) / 2, shape));
+
+            var computations = new Computation(intersections[1], ray, intersections);
+            var reflectance = computations.Schlick();
+            
+            Assert.Equal(1.0f, reflectance);
+        }
+        
+        [Fact]
+        [Trait("Category", nameof(Sphere))]
+        [Trait("Category", nameof(Ray))]
+        [Trait("Category", nameof(Intersections))]
+        public void TheSchlickApproximationWithAPerpendicularViewingAngle()
+        {
+            var shape = new Sphere
+            {
+                Material = Material.Glass
+            };
+            shape.Material.RefractiveIndex = 1.5f;
+            var ray = new Ray(
+                new Point(0.0f, 0.0f, 0.0f), new Vector(0.0f, 1.0f, 0.0f));
+            var intersections = new Intersections(
+                new Intersection(-1.0f, shape),
+                new Intersection(1.0f, shape));
+
+            var computations = new Computation(intersections[1], ray, intersections);
+            var reflectance = computations.Schlick();
+            
+            Assert.Equal(0.04f, reflectance, Utilities.Epsilon);
+        }
+        
+        [Fact]
+        [Trait("Category", nameof(Sphere))]
+        [Trait("Category", nameof(Ray))]
+        [Trait("Category", nameof(Intersections))]
+        public void TheSchlickApproximationWithSmallAngleAndN2GreaterThanN1()
+        {
+            var shape = new Sphere
+            {
+                Material = Material.Glass
+            };
+            shape.Material.RefractiveIndex = 1.5f;
+            var ray = new Ray(
+                new Point(0.0f, 0.99f, -2.0f), new Vector(0.0f, 0.0f, 1.0f));
+            var intersections = new Intersections(new Intersection(1.8589f, shape));
+
+            var computations = new Computation(intersections[0], ray, intersections);
+            var reflectance = computations.Schlick();
+            
+            Assert.Equal(0.48873f, reflectance, Utilities.Epsilon);
         }
     }
 }

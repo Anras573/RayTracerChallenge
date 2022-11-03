@@ -54,3 +54,8 @@ Chapter 8 - Render Scene With Shadows
 Chapter 9 - Render Scene With Plane
 
 ![Chapter 9 - Render Scene With Plane](Images/Chapter%209%20-%20Scene%20With%20Plane.png)
+
+Chapter 11 - Reflection and Refraction
+
+![Chapter 11 - Render Reflective Scene](Images/Chapter%2011%20-%20Reflective%20Scene.png)
+![Chapter 11 - Render Scene With Transparent Sphere](Images/Chapter%2011%20-%20Transparent%20Sphere%20Scene.png)

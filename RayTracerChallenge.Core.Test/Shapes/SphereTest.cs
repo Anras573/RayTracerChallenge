@@ -137,5 +137,23 @@ namespace RayTracerChallenge.Core.Test.Shapes
             Assert.Equal(0.97014f, normal.Y, ApproximateComparer.Default);
             Assert.Equal(-0.24254f, normal.Z, ApproximateComparer.Default);
         }
+        
+        [Fact]
+        [Trait("Category", nameof(Material))]
+        public void AHelperForProducingASphereWithAGlassyMaterial()
+        {
+            // Arrange
+            var sphere = new Sphere
+            {
+                Material = Material.Glass
+            };
+
+            // Act
+
+            // Assert
+            Assert.Equal(Matrix.IdentityMatrix(), sphere.Transform);
+            Assert.Equal(1.0f, sphere.Material.Transparency);
+            Assert.Equal(1.52f, sphere.Material.RefractiveIndex);
+        }
     }
 }

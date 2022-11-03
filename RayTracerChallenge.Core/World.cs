@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RayTracerChallenge.Core.Shapes;
 
@@ -56,21 +57,31 @@ namespace RayTracerChallenge.Core
             return new Intersections(intersections.ToArray());
         }
 
-        public Color ShadeHit(Computation computation)
+        public Color ShadeHit(Computation computation, int remainingCalls = 5)
         {
-            var color = Color.Black;
+            var surfaceColor = Color.Black;
 
             foreach (var light in Lights)
             {
                 var isShadowed = IsShadowed(computation.OverPoint, light);
-                color += computation.Object.Material.Lightning(computation.Object, light, computation.OverPoint, computation.EyeVector, computation.NormalVector, isShadowed);
+                surfaceColor += computation.Object.Material.Lightning(computation.Object, light, computation.OverPoint, computation.EyeVector, computation.NormalVector, isShadowed);
             }
 
-            return color;
+            var reflectedColor = ReflectedColor(computation, remainingCalls);
+            var refractedColor = RefractedColor(computation, remainingCalls);
+
+            if (computation.Object.Material.Reflective > 0.0f && computation.Object.Material.Transparency > 0.0f)
+            {
+                var reflectance = computation.Schlick();
+
+                return surfaceColor + reflectedColor * reflectance + refractedColor * (1.0f - reflectance);
+            }
+            
+            return surfaceColor + reflectedColor + refractedColor;
         }
 
-        public Color ColorAt(Ray ray)
-        {
+        public Color ColorAt(Ray ray, int remainingCalls = 5)
+        { 
             var intersections = Intersect(ray);
 
             var hit = intersections.Hit();
@@ -82,7 +93,7 @@ namespace RayTracerChallenge.Core
 
             var computation = new Computation(hit, ray);
 
-            return ShadeHit(computation);
+            return ShadeHit(computation, remainingCalls);
         }
 
         public bool IsShadowed(Point point)
@@ -102,6 +113,42 @@ namespace RayTracerChallenge.Core
             var hit = intersections.Hit();
 
             return hit is { } && hit.TimeValue < distance;
+        }
+
+        public Color ReflectedColor(Computation computations, int remainingCalls = 5)
+        {
+            if (computations.Object.Material.Reflective == 0 || remainingCalls == 0)
+                return Color.Black;
+
+            var reflectRay = new Ray(computations.OverPoint, computations.ReflectVector);
+            var color = ColorAt(reflectRay, --remainingCalls);
+            
+            return color * computations.Object.Material.Reflective;
+        }
+
+        public Color RefractedColor(Computation computation, int remainingCalls = 5)
+        {
+            if (computation.Object.Material.Transparency == 0.0f || remainingCalls == 0)
+            {
+                return Color.Black;
+            }
+
+            var nRatio = computation.N1 / computation.N2;
+            var cosI = computation.EyeVector.Dot(computation.NormalVector);
+            var sin2T = MathF.Pow(nRatio, 2) * (1.0f - MathF.Pow(cosI, 2));
+
+            if (sin2T > 1.0f)
+            {
+                return Color.Black;
+            }
+
+            var cosT = MathF.Sqrt(1.0f - sin2T);
+            var direction = computation.NormalVector * (nRatio * cosI - cosT) - computation.EyeVector * nRatio;
+            var refractRay = new Ray(computation.UnderPoint, direction);
+
+            var color = ColorAt(refractRay, --remainingCalls) * computation.Object.Material.Transparency;
+            
+            return color;
         }
     }
 }

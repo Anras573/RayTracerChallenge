@@ -10,7 +10,7 @@ public class Stripe : Pattern
     
     public override Color ColorAt(Point point)
     {
-        return MathF.Floor(point.X) % 2 == 0 ? First : Second;
+        return MathF.Floor(point.X) % 2.0f == 0.0f ? First : Second;
     }
 
 }

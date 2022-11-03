@@ -9,7 +9,7 @@ namespace RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
 
 public class RenderSpheresScene : IScene
 {
-    public string Name => "Chapter 7 - Render scene with multiple spheres";
+    public string Name => "Chapter 7 - Render Scene With Multiple Spheres";
 
     public void Render(ICanvasRenderer canvasRenderer)
     {

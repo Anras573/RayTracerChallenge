@@ -57,7 +57,13 @@ namespace RayTracerChallenge.Core.Test.Shapes
         {
             // Arrange
             var sut = new TestShape();
-            var expectedMaterial = new Material(Color.White, 1f, 1f, 1f, 1f);
+            var expectedMaterial = new Material(Color.White)
+            {
+                Ambient = 1.0f,
+                Diffuse = 1.0f,
+                Specular = 1.0f,
+                Shininess = 1.0f
+            };
 
             // Act
             sut.Material = expectedMaterial;

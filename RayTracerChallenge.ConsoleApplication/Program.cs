@@ -13,6 +13,8 @@ using RayTracerChallenge.Integration.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
+using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 
 namespace RayTracerChallenge.ConsoleApplication
 {
@@ -30,7 +32,9 @@ namespace RayTracerChallenge.ConsoleApplication
             new DrawSphereWithLightScene(),
             new MovingLightScene(),
             new RenderSpheresScene(),
-            new SceneWithPlane()
+            new SceneWithPlane(),
+            new ReflectiveScene(),
+            new TransparentSphereScene()
         };
 
         public static void Main()

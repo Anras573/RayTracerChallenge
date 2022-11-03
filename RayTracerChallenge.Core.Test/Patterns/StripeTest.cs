@@ -1,5 +1,4 @@
 ﻿using RayTracerChallenge.Core.Patterns;
-using RayTracerChallenge.Core.Shapes;
 using Xunit;
 
 namespace RayTracerChallenge.Core.Test.Patterns;

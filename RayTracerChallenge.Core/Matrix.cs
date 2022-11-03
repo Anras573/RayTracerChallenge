@@ -118,7 +118,7 @@ namespace RayTracerChallenge.Core
                 throw new ArithmeticException("This operation only supports 4x4 Matrices!");
             }
 
-             var x = matrix[0, 0] * tuple.X +
+            var x = matrix[0, 0] * tuple.X +
                     matrix[0, 1] * tuple.Y +
                     matrix[0, 2] * tuple.Z +
                     matrix[0, 3] * tuple.W;
