@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using RayTracerChallenge.Core.Shapes;
+﻿using RayTracerChallenge.Core.Shapes;
 using Xunit;
 
 namespace RayTracerChallenge.Core.Test;

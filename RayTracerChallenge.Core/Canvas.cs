@@ -1,55 +1,54 @@
 ﻿using System;
 
-namespace RayTracerChallenge.Core
+namespace RayTracerChallenge.Core;
+
+public class Canvas
 {
-    public class Canvas
+    public Color[] Pixels { get; }
+    public int Width { get; }
+    public int Height { get; }
+
+    public Canvas(int width, int height)
     {
-        public Color[] Pixels { get; }
-        public int Width { get; }
-        public int Height { get; }
+        Width = width;
+        Height = height;
+        Pixels = new Color[Width * Height];
 
-        public Canvas(int width, int height)
+        for (var i = 0; i < Pixels.Length; i++)
         {
-            Width = width;
-            Height = height;
-            Pixels = new Color[Width * Height];
+            Pixels[i] = Color.Black;
+        }
+    }
 
-            for (var i = 0; i < Pixels.Length; i++)
-            {
-                Pixels[i] = Color.Black;
-            }
+    public void WritePixel(int x, int y, Color color)
+    {
+        if (x >= Width)
+        {
+            throw new ArgumentOutOfRangeException(nameof(x), $"x can't be greater than {Width - 1}");
         }
 
-        public void WritePixel(int x, int y, Color color)
+        if (y >= Height)
         {
-            if (x >= Width)
-            {
-                throw new ArgumentOutOfRangeException(nameof(x), $"x can't be greater than {Width - 1}");
-            }
-
-            if (y >= Height)
-            {
-                throw new ArgumentOutOfRangeException(nameof(y), $"y can't be greater than {Height - 1}");
-            }
-
-            var index = (y * Width) + x;
-            Pixels[index] = color;
+            throw new ArgumentOutOfRangeException(nameof(y), $"y can't be greater than {Height - 1}");
         }
 
-        public Color GetPixel(int x, int y)
+        var index = (y * Width) + x;
+        Pixels[index] = color;
+    }
+
+    public Color GetPixel(int x, int y)
+    {
+        if (x >= Width)
         {
-            if (x >= Width)
-            {
-                throw new ArgumentOutOfRangeException(nameof(x), $"x can't be greater than {Width - 1}");
-            }
-
-            if (y >= Height)
-            {
-                throw new ArgumentOutOfRangeException(nameof(y), $"y can't be greater than {Height - 1}");
-            }
-
-            var index = (y * Width) + x;
-            return Pixels[index];
+            throw new ArgumentOutOfRangeException(nameof(x), $"x can't be greater than {Width - 1}");
         }
+
+        if (y >= Height)
+        {
+            throw new ArgumentOutOfRangeException(nameof(y), $"y can't be greater than {Height - 1}");
+        }
+
+        var index = (y * Width) + x;
+        return Pixels[index];
     }
 }

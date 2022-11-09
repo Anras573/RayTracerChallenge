@@ -1,51 +1,53 @@
 ﻿using System;
 
-namespace RayTracerChallenge.Core
+namespace RayTracerChallenge.Core;
+
+public class Tuple : IEquatable<Tuple>
 {
-    public class Tuple
+    public readonly float X;
+    public readonly float Y;
+    public readonly float Z;
+    public readonly float W;
+
+    public const float VectorIndicator = 0f;
+    public const float PointIndicator = 1f;
+
+    public Tuple(float x, float y, float z, float w)
     {
-        public float X;
-        public float Y;
-        public float Z;
-        public float W;
+        X = x;
+        Y = y;
+        Z = z;
+        W = w;
+    }
 
-        public static readonly float VectorIndicator = 0f;
-        public static readonly float PointIndicator = 1f;
+    public static Tuple operator !(Tuple t)
+        => new(-t.X, -t.Y, -t.Z, -t.W);
 
-        public Tuple(float x, float y, float z, float w)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-            W = w;
-        }
+    public static Tuple operator *(Tuple t, float val)
+        => new(t.X * val, t.Y * val, t.Z * val, t.W * val);
 
-        public bool Equals(Tuple tuple)
-        {
-            return MathF.Abs(X - tuple.X) < float.Epsilon
-                && MathF.Abs(Y - tuple.Y) < float.Epsilon
-                && MathF.Abs(Z - tuple.Z) < float.Epsilon
-                && MathF.Abs(W - tuple.W) < float.Epsilon;
-        }
+    public static Tuple operator *(Tuple left, Tuple right)
+        => new(left.X * right.X, left.Y * right.Y, left.Z * right.Z, VectorIndicator);
 
-        public bool Equals(Tuple tuple, int precision)
-        {
-            return Math.Round(X, precision) == Math.Round(tuple.X, precision) &&
-                   Math.Round(Y, precision) == Math.Round(tuple.Y, precision) &&
-                   Math.Round(Z, precision) == Math.Round(tuple.Z, precision) &&
-                   Math.Round(W, precision) == Math.Round(tuple.W, precision);
-        }
+    public static Tuple operator /(Tuple t, float val)
+        => new(t.X / val, t.Y / val, t.Z / val, t.W / val);
 
-        public static Tuple operator !(Tuple t)
-            => new Tuple(-t.X, -t.Y, -t.Z, -t.W);
+    public bool Equals(Tuple other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
+    }
 
-        public static Tuple operator *(Tuple t, float val)
-            => new Tuple(t.X * val, t.Y * val, t.Z * val, t.W * val);
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Tuple)obj);
+    }
 
-        public static Tuple operator *(Tuple left, Tuple right)
-            => new Tuple(left.X * right.X, left.Y * right.Y, left.Z * right.Z, VectorIndicator);
-
-        public static Tuple operator /(Tuple t, float val)
-            => new Tuple(t.X / val, t.Y / val, t.Z / val, t.W / val);
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y, Z, W);
     }
 }

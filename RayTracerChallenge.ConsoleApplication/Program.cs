@@ -16,33 +16,36 @@ using System.Linq;
 using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
 using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 
-namespace RayTracerChallenge.ConsoleApplication
+namespace RayTracerChallenge.ConsoleApplication;
+
+public static class Program
 {
-    public static class Program
+    //private static readonly ICanvasRenderer _canvasRenderer = new PpmCanvasRenderer();
+    private static readonly ICanvasRenderer _canvasRenderer = new ImageSharpCanvasRenderer(".png");
+
+    private static readonly List<IScene> _scenes = new()
     {
-        //private static readonly ICanvasRenderer _canvasRenderer = new PpmCanvasRenderer();
-        private static readonly ICanvasRenderer _canvasRenderer = new ImageSharpCanvasRenderer(".png");
+        new DrawProjectileScene(),
+        new PrintMatrixScene(),
+        new AnalogClockScene(),
+        new DrawSphereScene(),
+        new DrawSphereWithLightScene(),
+        new MovingLightScene(),
+        new RenderSpheresScene(),
+        new SceneWithPlane(),
+        new ReflectiveScene(),
+        new TransparentSphereScene()
+    };
 
-        private static readonly List<IScene> _scenes = new()
-        {
-            new DrawProjectileScene(),
-            new PrintMatrixScene(),
-            new AnalogClockScene(),
-            new DrawSphereScene(),
-            new DrawSphereWithLightScene(),
-            new MovingLightScene(),
-            new RenderSpheresScene(),
-            new SceneWithPlane(),
-            new ReflectiveScene(),
-            new TransparentSphereScene()
-        };
+    public static void Main()
+    {
+        ListOptions();
+    }
 
-        public static void Main()
-        {
-            ListOptions();
-        }
-
-        private static void ListOptions()
+    private static void ListOptions()
+    {
+        var keepGoing = true;
+        while (keepGoing)
         {
             Console.WriteLine("Choose option to run, or enter exit to exit program.");
 
@@ -55,17 +58,14 @@ namespace RayTracerChallenge.ConsoleApplication
 
             if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
             {
-                return;
+                keepGoing = false;
             }
-
-            if (int.TryParse(input, out var choice))
+            else if (int.TryParse(input, out var choice))
             {
                 var scene = _scenes.ElementAtOrDefault(choice);
 
                 scene?.Render(_canvasRenderer);
             }
-
-            ListOptions();
         }
     }
 }

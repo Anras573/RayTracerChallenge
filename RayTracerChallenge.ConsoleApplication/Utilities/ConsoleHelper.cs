@@ -1,28 +1,26 @@
 ﻿using System;
 using System.IO;
 
-namespace RayTracerChallenge.ConsoleApplication.Utilities
+namespace RayTracerChallenge.ConsoleApplication.Utilities;
+
+public static class ConsoleHelper
 {
-    public static class ConsoleHelper
+    public static string GetPath(string name)
     {
-        public static string GetPath(string name)
+        Console.WriteLine($"Enter path for {name}:");
+
+        var path = string.Empty;
+
+        while(string.IsNullOrWhiteSpace(path))
         {
-            Console.WriteLine($"Enter path for {name}:");
+            path = Console.ReadLine();
 
-            string path = string.Empty;
-
-            while(string.IsNullOrWhiteSpace(path))
-            {
-                path = Console.ReadLine();
-
-                if (!Directory.Exists(path))
-                {
-                    Console.WriteLine($"{path} does not exitst!");
-                    path = string.Empty;
-                }
-            }
-
-            return path;
+            if (Directory.Exists(path)) continue;
+            
+            Console.WriteLine($"{path} does not exist!");
+            path = string.Empty;
         }
+
+        return path;
     }
 }

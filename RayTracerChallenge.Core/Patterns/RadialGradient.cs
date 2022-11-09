@@ -4,13 +4,13 @@ namespace RayTracerChallenge.Core.Patterns;
 
 public class RadialGradient : Pattern
 {
-    public Pattern FirstPattern;
-    public Pattern SecondPattern;
+    private readonly Pattern _firstPattern;
+    private readonly Pattern _secondPattern;
 
     public RadialGradient(Pattern first, Pattern second) : base(first.First, second.First)
     {
-        FirstPattern = first;
-        SecondPattern = second;
+        _firstPattern = first;
+        _secondPattern = second;
     }
 
     public override Color ColorAt(Point point)
@@ -18,6 +18,6 @@ public class RadialGradient : Pattern
         var distance = MathF.Sqrt( MathF.Pow(point.X, 2f) + MathF.Pow(point.Z, 2f));
         var fraction = distance - MathF.Floor(distance);
            
-        return FirstPattern.ColorAt(point) + (SecondPattern.ColorAt(point) - FirstPattern.ColorAt(point)) * fraction;
+        return _firstPattern.ColorAt(point) + (_secondPattern.ColorAt(point) - _firstPattern.ColorAt(point)) * fraction;
     }
 }

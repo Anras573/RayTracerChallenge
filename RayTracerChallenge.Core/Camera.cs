@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace RayTracerChallenge.Core;
 
 public class Camera
 {
-    public int HorizontalSize;
-    public int VerticalSize;
-    public float FieldOfView;
+    public readonly int HorizontalSize;
+    public readonly int VerticalSize;
+    public readonly float FieldOfView;
     public Matrix Transform;
-    public float PixelSize;
-    public float HalfWidth;
-    public float HalfHeight;
+    public readonly float PixelSize;
+    private readonly float _halfWidth;
+    private readonly float _halfHeight;
 
     public Camera(int horizontalSize, int verticalSize, float fieldOfView)
     {
@@ -26,16 +25,16 @@ public class Camera
 
         if (aspect >= 1)
         {
-            HalfWidth = halfView;
-            HalfHeight = halfView / aspect;
+            _halfWidth = halfView;
+            _halfHeight = halfView / aspect;
         }
         else
         {
-            HalfWidth = halfView * aspect;
-            HalfHeight = halfView;
+            _halfWidth = halfView * aspect;
+            _halfHeight = halfView;
         }
 
-        PixelSize = (HalfWidth * 2) / horizontalSize;
+        PixelSize = _halfWidth * 2.0f / horizontalSize;
     }
 
     public Ray RayForPixel(int px, int py)
@@ -43,11 +42,11 @@ public class Camera
         var xOffset = (px + 0.5f) * PixelSize;
         var yOffset = (py + 0.5f) * PixelSize;
 
-        var worldX = HalfWidth - xOffset;
-        var worldY = HalfHeight - yOffset;
+        var worldX = _halfWidth - xOffset;
+        var worldY = _halfHeight - yOffset;
 
-        var pixel = Transform.Inverse() * new Point(worldX, worldY, -1);
-        var origin = Transform.Inverse() * new Point(0f, 0f, 0f);
+        var pixel = Transform.Inverse() * new Point(worldX, worldY, -1.0f);
+        var origin = Transform.Inverse() * new Point(0.0f, 0.0f, 0.0f);
         var direction = (pixel - origin).Normalize();
 
         return new Ray(origin, direction);
@@ -57,9 +56,9 @@ public class Camera
     {
         var canvas = new Canvas(HorizontalSize, VerticalSize);
 
-        for (int y = 0; y < VerticalSize; y++)
+        for (var y = 0; y < VerticalSize; y++)
         {
-            for (int x = 0; x < HorizontalSize; x++)
+            for (var x = 0; x < HorizontalSize; x++)
             {
                 var ray = RayForPixel(x, y);
                 var color = world.ColorAt(ray);
@@ -74,15 +73,15 @@ public class Camera
     {
         var canvas = new Canvas(HorizontalSize, VerticalSize);
 
-        Parallel.For(0, VerticalSize, (y =>
+        Parallel.For(0, VerticalSize, y =>
         {
-            for (int x = 0; x < HorizontalSize; x++)
+            for (var x = 0; x < HorizontalSize; x++)
             {
                 var ray = RayForPixel(x, y);
                 var color = world.ColorAt(ray);
                 canvas.WritePixel(x, y, color);
             }
-        }));
+        });
 
         return canvas;
     }

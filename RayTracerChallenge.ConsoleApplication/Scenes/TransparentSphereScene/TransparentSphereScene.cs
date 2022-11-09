@@ -28,9 +28,9 @@ public class TransparentSphereScene : IScene
 
         var leftWall = new Plane
         {
-            Transform = Matrix.Translate(0f, 0f, 5f)
-                        * Matrix.RotateY(-(MathF.PI / 4))
-                        * Matrix.RotateX(MathF.PI / 2)
+            Transform = Matrix.Translate(0.0f, 0.0f, 5.0f)
+                        * Matrix.RotateY(-(MathF.PI / 4.0f))
+                        * Matrix.RotateX(MathF.PI / 2.0f)
                         * Matrix.Scale(0.5f, 0.5f, 0.5f),
             Material =
             {
@@ -40,9 +40,9 @@ public class TransparentSphereScene : IScene
 
         var rightWall = new Plane
         {
-            Transform = Matrix.Translate(0f, 0f, 5f)
-                        * Matrix.RotateY(MathF.PI / 4)
-                        * Matrix.RotateX(MathF.PI / 2)
+            Transform = Matrix.Translate(0.0f, 0.0f, 5.0f)
+                        * Matrix.RotateY(MathF.PI / 4.0f)
+                        * Matrix.RotateX(MathF.PI / 2.0f)
                         * Matrix.Scale(0.5f, 0.5f, 0.5f),
             Material =
             {

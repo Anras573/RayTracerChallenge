@@ -4,57 +4,56 @@ using RayTracerChallenge.Core.Shapes;
 using System;
 using System.IO;
 
-namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere
+namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
+
+public  class DrawSphereScene : IScene
 {
-    public  class DrawSphereScene : IScene
+    public string Name => "Chapter 5 - Draw Sphere";
+
+    private const int CanvasPixels = 100;
+    private const float WallZ = 10f;
+    private const float WallSize = 7f;
+    private const float PixelSize = WallSize / CanvasPixels;
+    private const float Half = WallSize / 2;
+
+    public void Render(ICanvasRenderer canvasRenderer)
     {
-        public string Name => "Chapter 5 - Draw Sphere";
+        var path = ConsoleHelper.GetPath("output file");
+        var fileName = Name;
+        var filePath = Path.Combine(path, fileName);
 
-        private const int CanvasPixels = 100;
-        private const float WallZ = 10f;
-        private const float WallSize = 7f;
+        var canvas = new Canvas(CanvasPixels, CanvasPixels);
+        var rayOrigin = new Point(0f, 0f, -5f);
+        var color = Color.Red;
+        var sphere = new Sphere();
 
-        public void Render(ICanvasRenderer canvasRenderer)
+        //sphere.Transform = Matrix.Scale(1f, .5f, 1f);
+        //sphere.Transform = Matrix.Scale(.5f, 1f, 1f);
+        //sphere.Transform = Matrix.RotateZ(MathF.PI / 4f) * Matrix.Scale(.5f, 1f, 1f);
+        //sphere.Transform = Matrix.Shear(1f, 0f, 0f, 0f, 0f, 0f) * Matrix.Scale(.5f, 1f, 1f);
+
+        for (var y = 0; y < CanvasPixels; y++)
         {
-            var path = ConsoleHelper.GetPath("output file");
-            var fileName = Name;
-            var filePath = Path.Combine(path, fileName);
-
-            var canvas = new Canvas(CanvasPixels, CanvasPixels);
-            var rayOrigin = new Point(0f, 0f, -5f);
-            var pixelSize = WallSize / CanvasPixels;
-            var half = WallSize / 2;
-            var color = Colors.Red;
-            var sphere = new Sphere();
-
-            //sphere.Transform = Matrix.Scale(1f, .5f, 1f);
-            //sphere.Transform = Matrix.Scale(.5f, 1f, 1f);
-            //sphere.Transform = Matrix.RotateZ(MathF.PI / 4f) * Matrix.Scale(.5f, 1f, 1f);
-            //sphere.Transform = Matrix.Shear(1f, 0f, 0f, 0f, 0f, 0f) * Matrix.Scale(.5f, 1f, 1f);
-
-            for (int y = 0; y < CanvasPixels; y++)
+            var worldY = Half - PixelSize * y;
+            for (var x = 0; x < CanvasPixels; x++)
             {
-                var worldY = half - pixelSize * y;
-                for (int x = 0; x < CanvasPixels; x++)
+                var worldX = -Half + PixelSize * x;
+
+                var position = new Point(worldX, worldY, WallZ);
+                var direction = position - rayOrigin;
+
+                var ray = new Ray(rayOrigin, direction.Normalize());
+                var intersection = sphere.Intersects(ray);
+
+                if (intersection.Hit() != null)
                 {
-                    var worldX = -half + pixelSize * x;
-
-                    var position = new Point(worldX, worldY, WallZ);
-                    var direction = position - rayOrigin;
-
-                    var ray = new Ray(rayOrigin, direction.Normalize());
-                    var intersection = sphere.Intersects(ray);
-
-                    if (intersection.Hit() != null)
-                    {
-                        canvas.WritePixel(x, y, color);
-                    }
+                    canvas.WritePixel(x, y, color);
                 }
             }
-
-            canvasRenderer.Render(canvas, filePath);
-
-            Console.WriteLine($"Image saved as {filePath}");
         }
+
+        canvasRenderer.Render(canvas, filePath);
+
+        Console.WriteLine($"Image saved as {filePath}");
     }
 }

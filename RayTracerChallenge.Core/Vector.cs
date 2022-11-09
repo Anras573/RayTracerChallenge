@@ -1,54 +1,64 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
-namespace RayTracerChallenge.Core
+namespace RayTracerChallenge.Core;
+
+public class Vector : Tuple, IEquatable<Vector>
 {
-    public class Vector : Tuple, IEquatable<Vector>
+    public Vector(float x, float y, float z) : base(x, y, z, VectorIndicator)
     {
-        public Vector(float x, float y, float z) : base(x, y, z, VectorIndicator)
-        {
-        }
+    }
 
-        public float Dot(Vector other)
-            => (X * other.X) + (Y * other.Y) + (Z * other.Z);
+    public float Dot(Vector other)
+        => X * other.X + Y * other.Y + Z * other.Z;
 
-        public Vector Cross(Vector other)
-            => new Vector(x: Y * other.Z - Z * other.Y,
-                          y: Z * other.X - X * other.Z,
-                          z: X * other.Y - Y * other.X);
+    public Vector Cross(Vector other)
+        => new(x: Y * other.Z - Z * other.Y,
+            y: Z * other.X - X * other.Z,
+            z: X * other.Y - Y * other.X);
 
-        public Vector Normalize()
-        {
-            var magnitude = Magnitude();
+    public Vector Normalize()
+    {
+        var magnitude = Magnitude();
 
-            return new Vector(X / magnitude, Y / magnitude, Z / magnitude);
-        }
+        return new Vector(X / magnitude, Y / magnitude, Z / magnitude);
+    }
 
-        public float Magnitude()
-            => MathF.Sqrt(MathF.Pow(X, 2) + MathF.Pow(Y, 2) + MathF.Pow(Z, 2));
+    public float Magnitude()
+        => MathF.Sqrt(MathF.Pow(X, 2) + MathF.Pow(Y, 2) + MathF.Pow(Z, 2));
 
-        public bool Equals([AllowNull] Vector other)
-        {
-            if (other == null) return false;
+    public static Vector operator +(Vector left, Vector right)
+        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
-            return X == other.X && Y == other.Y && Z == other.Z;
-        }
+    public static Vector operator -(Vector left, Vector right)
+        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
-        public static Vector operator +(Vector left, Vector right)
-            => new Vector(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    public static Vector operator *(Vector vector, float scalar)
+        => new(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
 
-        public static Vector operator -(Vector left, Vector right)
-            => new Vector(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+    public static Vector operator -(Vector vector)
+        => new(-vector.X, -vector.Y, -vector.Z);
 
-        public static Vector operator *(Vector vector, float scalar)
-            => new Vector(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
+    public Vector Reflect(Vector surface)
+    {
+        return this - surface * 2 * Dot(surface);
+    }
 
-        public static Vector operator -(Vector vector)
-            => new Vector(-vector.X, -vector.Y, -vector.Z);
+    public bool Equals(Vector other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
+    }
 
-        public Vector Reflect(Vector surface)
-        {
-            return this - surface * 2 * Dot(surface);
-        }
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Vector)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y, Z, W);
     }
 }

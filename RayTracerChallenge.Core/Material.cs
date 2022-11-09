@@ -52,29 +52,34 @@ public class Material :IEquatable<Material>
 
         var lightDotNormal = lightV.Dot(normalV);
 
-        if (lightDotNormal >= 0f)
+        if (!(lightDotNormal >= 0f))
         {
-            diffuse = effectiveColor * Diffuse * lightDotNormal;
-
-            var reflectV = -lightV.Reflect(normalV);
-            var reflectDotEye = reflectV.Dot(eyeV);
-
-            if (reflectDotEye > 0f)
-            {
-                var factor = MathF.Pow(reflectDotEye, Shininess);
-                specular = light.Intensity * Specular * factor;
-            }
+            return ambient + diffuse + specular;
         }
+        
+        diffuse = effectiveColor * Diffuse * lightDotNormal;
+
+        var reflectV = -lightV.Reflect(normalV);
+        var reflectDotEye = reflectV.Dot(eyeV);
+
+        if (!(reflectDotEye > 0f))
+        {
+            return ambient + diffuse + specular;
+        }
+            
+        var factor = MathF.Pow(reflectDotEye, Shininess);
+        specular = light.Intensity * Specular * factor;
 
         return ambient + diffuse + specular;
     }
 
     public bool Equals(Material other)
     {
-        return other.Ambient.Equals(Ambient)
-               && other.Color.Equals(Color)
-               && other.Diffuse.Equals(Diffuse)
-               && other.Shininess.Equals(Shininess)
+        return other != null
+               && other.Ambient.Equals(Ambient) 
+               && other.Color.Equals(Color) 
+               && other.Diffuse.Equals(Diffuse) 
+               && other.Shininess.Equals(Shininess) 
                && other.Specular.Equals(Specular);
     }
 
@@ -85,11 +90,26 @@ public class Material :IEquatable<Material>
 
     public override int GetHashCode()
     {
-        return Ambient.GetHashCode()
-               ^ Color.GetHashCode()
-               ^ Diffuse.GetHashCode()
-               ^ Shininess.GetHashCode()
-               ^ Specular.GetHashCode()
-               ^ Reflective.GetHashCode();
+        var hash = new HashCode();
+        
+        hash.Add(Ambient);
+        hash.Add(Diffuse);
+        hash.Add(Shininess);
+        hash.Add(Specular);
+        hash.Add(Reflective);
+        hash.Add(Transparency);
+        hash.Add(RefractiveIndex);
+        
+        if (Color != null)
+        {
+            hash.Add(Color);
+        }
+
+        if (Pattern != null)
+        {
+            hash.Add(Pattern);
+        }
+
+        return hash.ToHashCode();
     }
 }

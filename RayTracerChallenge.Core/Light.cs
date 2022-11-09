@@ -1,6 +1,3 @@
-﻿using System;
+﻿namespace RayTracerChallenge.Core;
 
-namespace RayTracerChallenge.Core
-{
-    public record Light(Point Position, Color Intensity);
-}
+public record Light(Point Position, Color Intensity);

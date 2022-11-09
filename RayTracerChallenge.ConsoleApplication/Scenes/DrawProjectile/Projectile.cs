@@ -1,10 +1,9 @@
 ﻿using RayTracerChallenge.Core;
 
-namespace RayTracerChallenge.ConsoleApplication
-{
-    public class Projectile
-    {
-        public Point Position { get; set; }
-        public Vector Velocity { get; set; }
-    }
-}
+namespace RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile;
+
+public record Projectile(Point Position, Vector Velocity);
+// {
+//     public Point Position { get; init; }
+//     public Vector Velocity { get; init; }
+// }

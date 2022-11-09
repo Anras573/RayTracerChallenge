@@ -17,11 +17,11 @@ public class Intersections : IEnumerable<Intersection>
 
     public Intersection Hit()
     {
-        if (!_sortedIntersections.Any(i => i.TimeValue > 0f))
+        if (!_sortedIntersections.Any(i => i.TimeValue > 0.0f))
             return null;
 
         return _sortedIntersections
-            .FirstOrDefault(i => i.TimeValue > 0f);
+            .FirstOrDefault(i => i.TimeValue > 0.0f);
     }
 
     public int Length => _sortedIntersections.Count;

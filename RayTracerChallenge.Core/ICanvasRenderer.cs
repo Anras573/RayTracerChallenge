@@ -1,7 +1,6 @@
-﻿namespace RayTracerChallenge.Core
+﻿namespace RayTracerChallenge.Core;
+
+public interface ICanvasRenderer
 {
-    public interface ICanvasRenderer
-    {
-        void Render(Canvas canvas, string path);
-    }
+    void Render(Canvas canvas, string path);
 }

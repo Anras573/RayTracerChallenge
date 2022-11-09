@@ -1,24 +1,14 @@
-﻿namespace RayTracerChallenge.Core
+﻿namespace RayTracerChallenge.Core;
+
+public record Ray(Point Origin, Vector Direction)
 {
-    public class Ray
+    public Point Position(float time) => Origin + Direction * time;
+
+    public Ray Transform(Matrix translation)
     {
-        public Point Origin;
-        public Vector Direction;
+        var origin = Origin * translation;
+        var direction = Direction * translation;
 
-        public Ray(Point origin, Vector direction)
-        {
-            Origin = origin;
-            Direction = direction;
-        }
-
-        public Point Position(float time) => Origin + Direction * time;
-
-        public Ray Transform(Matrix translation)
-        {
-            var origin = Origin * translation;
-            var direction = Direction * translation;
-
-            return new Ray(origin, direction);
-        }
+        return new Ray(origin, direction);
     }
 }

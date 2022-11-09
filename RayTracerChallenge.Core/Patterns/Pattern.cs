@@ -6,10 +6,10 @@ public abstract class Pattern
 {
     public Matrix Transform = Matrix.IdentityMatrix();
 
-    public Color First;
-    public Color Second;
+    public readonly Color First;
+    public readonly Color Second;
 
-    public Pattern(Color first, Color second)
+    protected Pattern(Color first, Color second)
     {
         First = first;
         Second = second;

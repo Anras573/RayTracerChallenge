@@ -18,6 +18,6 @@ public class Plane : Shape
 
     public override Vector LocalNormalAt(Point localPoint)
     {
-        return new Vector(0f, 1f, 0f);
+        return new Vector(0.0f, 1.0f, 0.0f);
     }
 }
