@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Images\Chapter 11 - Reflective Scene.png = Images\Chapter 11 - Reflective Scene.png
 		README.md = README.md
 		Images\Chapter 11 - Transparent Sphere Scene.png = Images\Chapter 11 - Transparent Sphere Scene.png
+		Images\Chapter 12 - Cube Scene.png = Images\Chapter 12 - Cube Scene.png
 	EndProjectSection
 EndProject
 Global

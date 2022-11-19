@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithCube;
 using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 
 namespace RayTracerChallenge.ConsoleApplication;
@@ -34,7 +35,8 @@ public static class Program
         new RenderSpheresScene(),
         new SceneWithPlane(),
         new ReflectiveScene(),
-        new TransparentSphereScene()
+        new TransparentSphereScene(),
+        new SceneWithCube()
     };
 
     public static void Main()
@@ -51,7 +53,8 @@ public static class Program
 
             foreach (var (i, scene) in _scenes.AsIndexable())
             {
-                Console.WriteLine($"{i} - {scene.Name}");
+                var prepend = i < 10 ? " " : string.Empty;
+                Console.WriteLine($"{prepend}{i} - {scene.Name}");
             }
 
             var input = Console.ReadLine()?.Trim();

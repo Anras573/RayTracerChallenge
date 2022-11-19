@@ -59,3 +59,7 @@ Chapter 11 - Reflection and Refraction
 
 ![Chapter 11 - Render Reflective Scene](Images/Chapter%2011%20-%20Reflective%20Scene.png)
 ![Chapter 11 - Render Scene With Transparent Sphere](Images/Chapter%2011%20-%20Transparent%20Sphere%20Scene.png)
+
+Chapter 12 - Cubes
+
+![Chapter 11 - Render Scene With Cubes](Images/Chapter%2012%20-%20Cube%20Scene.png)
