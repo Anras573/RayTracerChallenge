@@ -15,6 +15,12 @@ public class Intersections : IEnumerable<Intersection>
         _sortedIntersections = new List<Intersection>(intersections);
     }
 
+    public void Add(Intersection intersection)
+    {
+        _sortedIntersections.Add(intersection);
+        _sortedIntersections.Sort((a, b) => Comparer<float>.Default.Compare(a.TimeValue, b.TimeValue));
+    }
+
     public Intersection Hit()
     {
         if (!_sortedIntersections.Any(i => i.TimeValue > 0.0f))

@@ -62,4 +62,10 @@ Chapter 11 - Reflection and Refraction
 
 Chapter 12 - Cubes
 
-![Chapter 11 - Render Scene With Cubes](Images/Chapter%2012%20-%20Cube%20Scene.png)
+![Chapter 12 - Render Scene With Cubes](Images/Chapter%2012%20-%20Cube%20Scene.png)
+
+If you want to see how I made the scene, then take a look [here](Images/Chapter%2012%20-%20Cube%20Scene%20-%20Process.gif).
+
+Chapter 13 - Cylinders
+
+![Chapter 13 - Render Cones and Cylinders](Images/Chapter%2013%20-%20Cones%20and%20Cylinders.png)

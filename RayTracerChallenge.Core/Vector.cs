@@ -47,7 +47,10 @@ public class Vector : Tuple, IEquatable<Vector>
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z) && W.Equals(other.W);
+
+        return MathF.Abs(X - other.X) < Utilities.Epsilon
+               && MathF.Abs(Y - other.Y) < Utilities.Epsilon
+               && MathF.Abs(Z - other.Z) < Utilities.Epsilon;
     }
 
     public override bool Equals(object obj)

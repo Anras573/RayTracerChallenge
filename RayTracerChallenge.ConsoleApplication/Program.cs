@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithConesAndCylinders;
 using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithCube;
 using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 
@@ -36,7 +37,8 @@ public static class Program
         new SceneWithPlane(),
         new ReflectiveScene(),
         new TransparentSphereScene(),
-        new SceneWithCube()
+        new SceneWithCube(),
+        new SceneWithConesAndCylinders()
     };
 
     public static void Main()
