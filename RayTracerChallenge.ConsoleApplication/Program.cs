@@ -1,22 +1,23 @@
 ﻿using RayTracerChallenge.ConsoleApplication.Scenes;
 using RayTracerChallenge.ConsoleApplication.Scenes.AnalogClock;
+using RayTracerChallenge.ConsoleApplication.Scenes.Cover;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawProjectile;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphere;
 using RayTracerChallenge.ConsoleApplication.Scenes.DrawSphereWithLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.MovingLight;
 using RayTracerChallenge.ConsoleApplication.Scenes.PrintMatrix;
+using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithConesAndCylinders;
+using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithCube;
 using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithPlane;
 using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithSpheres;
+using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 using RayTracerChallenge.ConsoleApplication.Utilities;
 using RayTracerChallenge.Core;
 using RayTracerChallenge.Integration.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RayTracerChallenge.ConsoleApplication.Scenes.ReflectiveScene;
-using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithConesAndCylinders;
-using RayTracerChallenge.ConsoleApplication.Scenes.SceneWithCube;
-using RayTracerChallenge.ConsoleApplication.Scenes.TransparentSphereScene;
 
 namespace RayTracerChallenge.ConsoleApplication;
 
@@ -38,7 +39,9 @@ public static class Program
         new ReflectiveScene(),
         new TransparentSphereScene(),
         new SceneWithCube(),
-        new SceneWithConesAndCylinders()
+        new SceneWithConesAndCylinders(),
+        
+        new CoverScene()
     };
 
     public static void Main()
