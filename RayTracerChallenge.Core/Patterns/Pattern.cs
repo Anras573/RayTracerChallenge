@@ -19,7 +19,7 @@ public abstract class Pattern
     
     public Color ColorAtShape(Shape shape, Point point)
     {
-        var objectPoint = shape.Transform.Inverse() * point;
+        var objectPoint = shape.WorldToObjectSpace(point);
         var patternPoint = Transform.Inverse() * objectPoint;
         
         return ColorAt(patternPoint);

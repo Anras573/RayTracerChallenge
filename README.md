@@ -71,6 +71,10 @@ If you want to see how I made the scene, then take a look [here](Images/Chapter%
 
 ![Chapter 13 - Render Cones and Cylinders](Images/Chapter%2013%20-%20Cones%20and%20Cylinders.png)
 
+### Chapter 14 - Groups
+
+![Chapter 14 - Render a Hexagon](Images/Chapter%2014%20-%20Render%20a%20Hexagon.png)
+
 ### Appendix 1 - Cover Image
 
 This was as close as I could get with the instructions from the book:

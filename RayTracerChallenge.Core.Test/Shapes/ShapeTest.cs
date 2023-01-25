@@ -146,6 +146,83 @@ public class ShapeTest
         Assert.Equal(expectedNormalAt.Y, normalAt.Y, ApproximateComparer.Default);
         Assert.Equal(expectedNormalAt.Z, normalAt.Z, ApproximateComparer.Default);
     }
+    
+    [Fact]
+    public void AShapeHasAParentAttribute()
+    {
+        var shape = new TestShape();
+
+        Assert.Null(shape.Parent);
+    }
+    
+    [Fact]
+    public void ConvertingAPointFromWorldToObjectSpace()
+    {
+        var g1 = new Group
+        {
+            Transform = Matrix.RotateY(MathF.PI / 2.0f)
+        };
+        var g2 = new Group
+        {
+            Transform = Matrix.Scale(2.0f, 2.0f, 2.0f)
+        };
+        g1.Add(g2);
+        var s = new Sphere
+        {
+            Transform = Matrix.Translate(5.0f, 0.0f, 0.0f)
+        };
+        g2.Add(s);
+        
+        var p = s.WorldToObjectSpace(new Point(-2.0f, 0.0f, -10.0f));
+
+        Assert.Equal(new Point(0.0f, 0.0f, -1.0f), p);
+    }
+
+    [Fact]
+    public void ConvertingANormalFromObjectToWorldSpace()
+    {
+        var g1 = new Group
+        {
+            Transform = Matrix.RotateY(MathF.PI / 2)
+        };
+        var g2 = new Group
+        {
+            Transform = Matrix.Scale(1.0f, 2.0f, 3.0f)
+        };
+        g1.Add(g2);
+        var s = new Sphere
+        {
+            Transform = Matrix.Translate(5.0f, 0.0f, 0.0f)
+        };
+        g2.Add(s);
+
+        var normal = s.NormalToWorldSpace(new Vector(MathF.Sqrt(3) / 3, MathF.Sqrt(3) / 3, MathF.Sqrt(3) / 3));
+        
+        Assert.Equal(new Vector(0.2857f, 0.4286f, -0.8571f), normal);
+    }
+
+    [Fact]
+    public void FindingTheNormalOnAChildObject()
+    {
+        var g1 = new Group
+        {
+            Transform = Matrix.RotateY(MathF.PI / 2)
+        };
+        var g2 = new Group
+        {
+            Transform = Matrix.Scale(1.0f, 2.0f, 3.0f)
+        };
+        g1.Add(g2);
+        var s = new Sphere
+        {
+            Transform = Matrix.Translate(5.0f, 0.0f, 0.0f)
+        };
+        g2.Add(s);
+
+        var normal = s.NormalAt(new Point(1.7321f, 1.1547f, -5.5774f));
+        
+        Assert.Equal(new Vector(0.2857f, 0.4286f, -0.8571f), normal);
+    }
 }
 
 public class TestShape : Shape
@@ -161,5 +238,10 @@ public class TestShape : Shape
     public override Vector LocalNormalAt(Point localPoint)
     {
         return new Vector(localPoint.X, localPoint.Y, localPoint.Z);
+    }
+
+    public override Bounds GetBounds()
+    {
+        return new Bounds(new Point(0.0f, 0.0f, 0.0f), new Point(0.0f, 0.0f, 0.0f));
     }
 }

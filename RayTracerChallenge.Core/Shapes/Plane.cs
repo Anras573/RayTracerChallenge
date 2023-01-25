@@ -20,4 +20,10 @@ public class Plane : Shape
     {
         return new Vector(0.0f, 1.0f, 0.0f);
     }
+
+    public override Bounds GetBounds()
+    {
+        return new Bounds(new Point(float.NegativeInfinity, 0.0f, float.NegativeInfinity),
+            new Point(float.PositiveInfinity, 0.0f, float.PositiveInfinity));
+    }
 }

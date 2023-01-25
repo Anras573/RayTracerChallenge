@@ -28,4 +28,9 @@ public class Sphere : Shape
     {
         return localPoint - Origin;
     }
+
+    public override Bounds GetBounds()
+    {
+        return new Bounds(new Point(-1.0f, -1.0f, -1.0f), new Point(1.0f, 1.0f, 1.0f));
+    }
 }

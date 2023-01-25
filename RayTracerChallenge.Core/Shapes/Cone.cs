@@ -124,4 +124,10 @@ public class Cone : Shape
         
         return new Vector(localPoint.X, y, localPoint.Z);
     }
+
+    public override Bounds GetBounds()
+    {
+        var radius = MathF.Max(MathF.Abs(Minimum), MathF.Abs(Maximum));
+        return new Bounds(new Point(-radius, Minimum, -radius), new Point(radius, Maximum, radius));
+    }
 }

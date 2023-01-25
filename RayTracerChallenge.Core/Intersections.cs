@@ -20,6 +20,16 @@ public class Intersections : IEnumerable<Intersection>
         _sortedIntersections.Add(intersection);
         _sortedIntersections.Sort((a, b) => Comparer<float>.Default.Compare(a.TimeValue, b.TimeValue));
     }
+    
+    public void AddRange(IEnumerable<Intersection> intersections)
+    {
+        foreach (var intersection in intersections)
+        {
+            _sortedIntersections.Add(intersection);
+        }
+        
+        _sortedIntersections.Sort((a, b) => Comparer<float>.Default.Compare(a.TimeValue, b.TimeValue));
+    }
 
     public Intersection Hit()
     {

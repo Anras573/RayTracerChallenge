@@ -57,11 +57,17 @@ public class Cube : Shape
         {
             return new Vector(localPoint.X, 0.0f, 0.0f);
         }
-        else if (max == MathF.Abs(localPoint.Y))
+        
+        if (max == MathF.Abs(localPoint.Y))
         {
             return new Vector(0.0f, localPoint.Y, 0.0f);
         }
 
         return new Vector(0.0f, 0.0f, localPoint.Z);
+    }
+
+    public override Bounds GetBounds()
+    {
+        return new Bounds(new Point(-1.0f, -1.0f, -1.0f), new Point(1.0f, 1.0f, 1.0f));
     }
 }

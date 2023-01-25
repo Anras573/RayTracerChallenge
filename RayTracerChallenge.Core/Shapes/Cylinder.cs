@@ -96,4 +96,9 @@ public class Cylinder : Shape
             _ => new Vector(localPoint.X, 0.0f, localPoint.Z)
         };
     }
+
+    public override Bounds GetBounds()
+    {
+        return new Bounds(new Point(-1.0f, Minimum, -1.0f), new Point(1.0f, Maximum, 1.0f));
+    }
 }
